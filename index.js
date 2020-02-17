@@ -6,7 +6,7 @@ app.get('/', (req, res) => {
    res.send('hello from server!')
 })
 
-app.get('/api/helloworld', (req, res) => {
+app.get('/a', (req, res) => {
   res.json({sayHi: 'hello from server, nice to meet you!'})
 })
 
