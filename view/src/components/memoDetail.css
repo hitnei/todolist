@@ -1,0 +1,6 @@
+.memoDetail {
+    max-width: calc(100vw - 300px - 450px);
+    width: calc(100vw - 300px - 450px);
+    max-height: calc(100vh);
+    height: calc(100vh);
+}

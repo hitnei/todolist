@@ -1,8 +1,20 @@
 @font-face {
-  font-family: futura1;
-  src: url('./../public/fonts/Futura.woff');
+  font-family: Futura PT;
+  src: url('/fonts/Futura.woff');
+  font-weight: medium;
+}
+
+@font-face {
+  font-family: SourceHanSans-Medium-Alphabetic;
+  src: url('/fonts/SourceHanSans-Medium-Alphabetic.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 * {
-  font-family: futura1;
+  font-family: Futura PT, sans-serif;
+}
+
+.wrapper {
+  display: flex;
 }

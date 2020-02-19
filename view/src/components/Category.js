@@ -44,7 +44,7 @@ export default class Category extends Component {
                         <span>10</span>
                     </div>
                 </div>
-                <div>
+                <div className="category-bottom">
                     <div className="">
                         <img className="category-image__delete" src="/images/delete.svg" alt="delete"/>
                         <input className="category-button category-clip" type="button" value='Delete'/>

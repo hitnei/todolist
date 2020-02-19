@@ -1,0 +1,44 @@
+.memoDetailcontent {
+    margin: 0px 33.5px 20px 40px;
+    box-sizing: border-box;
+}
+
+.memoDetailcontent .memoDetailcontent-header {
+    display: flex;
+    align-items: flex-end;
+    height: 50px;
+}
+
+.memoDetailcontent .memoDetailcontent-header div {
+    margin-right: 17px;
+    display: flex;
+}
+
+.memoDetailcontent .memoDetailcontent-header div img {
+    margin-right: 7px;
+    width: 14px;
+}
+
+.memoDetailcontent .memoDetailcontent-header div span {
+    color: #2B3137;
+    font-size: 14px;
+}
+
+.memoDetailcontent .memoDetailcontent-title {
+    height: 80px;
+    display: flex;
+    align-items: flex-end;
+    border-bottom: 1px solid #F0F0F0;
+    padding: 0px 0px 9.5px 10px;
+    box-sizing: border-box;
+    font-size: 36px;
+    color: #2B3137;
+}
+
+.memoDetailcontent .memoDetailcontent-content {
+    height: calc(100vh - 70px - 50px - 80px - 21.5px);
+    max-height: calc(100vh - 70px - 50px - 80px - 21.5px);
+    padding: 21.5px 255.5px 21.5px 0px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}

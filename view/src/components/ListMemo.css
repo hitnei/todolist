@@ -1,0 +1,150 @@
+@font-face {
+	font-family : 'Noto Sans Japanese' ,  sans-serif ;
+    src: url("http://fonts.googleapis.com/earlyaccess/notosansjapanese.css")
+}
+
+.listMemo {
+    max-width: 450px;
+    width: 450px;
+    max-height: 100vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid #DCDCDC;
+    box-sizing: border-box;
+}
+
+.listMemo .listMemoSearch {
+    padding: 15px 19px;
+    border-bottom: 1px solid #DCDCDC;
+    background-color: #F4F4F4;
+    box-sizing: border-box;
+    height: 70px;
+}
+
+.listMemo .listMemoSearch input {
+    width: 410px;
+    height: 40px;
+    max-width: 410px;
+    max-height: 40px;
+    border-radius: 120px;
+    background-color: #FFFFFF;
+    border: 1px solid #CDD6DD;
+    padding: 0px 60px 0px 20px;
+    box-sizing: border-box;
+}
+
+.listMemo .listMemoSearch input::placeholder {
+    color: #CDD6DD;
+    font-family: SourceHanSans-Medium-Alphabetic, sans-serif;
+}
+
+.listMemo .listMemoSearch img {
+    position: absolute;
+    margin: 10px 0px 0px -40px;
+}
+
+.listMemo .listMemoTitle {
+    max-height: 50px;
+    height: 50px;
+    max-width: 450px;
+    width: 449px;
+    border-bottom: 1px solid #DCDCDC;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 19px;
+    background: #F4F4F4 0% 0% no-repeat padding-box;
+    box-sizing: border-box;
+}
+
+.listMemo .listMemoTitle span {
+    text-align: left;
+    font-size: 18px;
+    letter-spacing: 0;
+    color: #2B3137;
+    opacity: 0.8;
+}
+
+.listMemo .listMemoItem {    
+    max-height: 80px;
+    height: 80px;
+    max-width: 450px;
+    width: 450px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #F0F0F0;
+    box-sizing: border-box;
+}
+
+.listMemo .listMemoItem .ItemSelected {
+    width: 5px;
+    height: 80px;
+    background-color: #FE6100;
+}
+
+.listMemo .listMemoItem .ItemUnselected {
+    width: 5px;
+    height: 80px;
+    background-color: unset;
+}
+
+.listMemo .listMemoShortcut .memoItem {
+    max-height: 80px;
+    height: 80px;
+    max-width: 450px;
+    width: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 20px 0px 15px;
+    box-sizing: border-box;
+}
+
+.listMemo .listMemoShortcut .memoItem > div {
+    line-height: 26px;
+}
+
+.listMemo .listMemoShortcut .memoItem .MemoItemClip {
+    padding: 8px 9px;
+    border-radius: 50%;
+    background: rgba(254,61,00,0.2) 0% 0% no-repeat padding-box;
+}
+
+.listMemo .listMemoShortcut .memoItem .memoItemTitle {
+    font-size: 20px;
+    letter-spacing: 0;
+    color: #2B3137;
+}
+
+.listMemo .memoItemCategoty img {
+    width: 12px;
+    opacity: 0.5;
+}
+
+.listMemo .memoItemDetail {
+    display: flex;
+}
+
+.listMemo .memoItemDetail img {
+    padding-right: 6px;
+}
+
+.listMemo .memoItemTime {
+    padding-right: 20px;
+}
+
+.listMemo .memoItemTime, .memoItemCategoty span {
+    font-size: 14px;
+    color: #313F46;
+    opacity: 0.5;
+}
+
+
+
+
+
+
+
+

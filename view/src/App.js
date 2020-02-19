@@ -1,27 +1,22 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 import Category from './components/Category'
+import ListMemo from './components/ListMemo'
+import MemoDetail from './components/MemoDetail'
+import './App.css'
 
 export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      a: ''
     }
-  }
-  componentDidMount() {
-    axios.get('/a')
-    .then(result => {
-      this.setState({
-        a: result.data.sayHi
-      })
-      console.log(result)
-    })
   }
   render() {
     return (
       <div className="wrapper">
         <Category/>
+        <ListMemo/>
+        <MemoDetail/>
       </div>
     )
   }

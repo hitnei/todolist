@@ -1,0 +1,54 @@
+.memoDetailHeader {
+    max-height: 70px;
+    height: 70px;
+    background-color: #F4F4F4;
+    border-bottom: 1px solid #DCDCDC;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 25px 0px 30px;
+    box-sizing: border-box;
+}
+
+.memoDetailHeader .actionButtonLeft {
+    display: flex;
+}
+
+.memoDetailHeader .actionButtonLeft > .actionButton {
+    margin-right: 15px;
+}
+
+.memoDetailHeader .actionButtonLeft .actionButton:last-child {
+    background-color: #FFF1E8;
+    color: #FE8033;
+
+}
+
+.memoDetailHeader .actionButton {
+    width: 80px;
+    height: 40px;
+    background-color: #FFFFFF;
+    border: 1px solid #CDD6DD;
+    border-radius: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.memoDetailHeader .actionButton span {
+    font-size: 14px;
+}
+
+.memoDetailHeader .actionButtonRight {
+    background-color: #313F46;
+    color: #FFFFFF;
+    width: 100px;
+    height: 40px;
+}
+
+.memoDetailHeader .actionButton img {
+    padding-right: 5px;
+}
+
+
+
