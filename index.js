@@ -1,10 +1,9 @@
 const express = require('express')
  
 const app = express()
- 
-app.get('/', (req, res) => {
-   res.send('hello from server!')
-})
+
+app.set('view engine', 'html')
+app.set('views', './view/public')
 
 app.get('/a', (req, res) => {
   res.json({sayHi: 'hello from server, nice to meet you!'})

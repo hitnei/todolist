@@ -1,0 +1,98 @@
+@font-face {
+    font-family: futura;
+    src: url('/fonts/Futura.woff');
+    font-weight: medium;
+}
+
+* {
+font-family: futura;
+}
+
+.category {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 300px;
+    height: 100vh;
+    background: #313F46 0% 0% no-repeat padding-box;
+}
+
+.category-item__top {
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+
+.category-item {
+    position: relative;
+}
+
+.category-category-item {
+    margin-left: 10px;
+}
+
+.category-button {
+    max-width: 270px;
+    max-height: 50px;
+    width: 270px;
+    height: 50px;
+    border: none;
+    border-radius: 50px;
+    opacity: 1;
+    font-size: 16px;
+}
+
+.category-button[value] {
+    text-align: left;
+    padding-left: 58px;
+}
+
+.category-button__categories[value] {
+    text-align: left;
+    padding-left: 92px;
+}
+
+.category-image {
+    position: absolute;
+    padding: 17px 0px 0px 25px;
+}
+
+.category-image__categories {
+    position: absolute;
+    padding: 17px 0px 0px 58px;
+}
+
+.category-image__delete {
+    position: absolute;
+    margin: 14px 0px 0px 25px;
+}
+
+.category-create__new {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+}
+
+.category-all__note {
+    background: #2B3137 0% 0% no-repeat padding-box;
+    color: #FFFFFF;
+}
+
+.category-category {
+    background: none;
+    color: #FFFFFF;
+}
+
+.category-clip {
+    background: none;
+    color: #FFFFFF;
+}
+
+.category-top div span {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #FFFFFF;
+    background-color: #454E55;
+    text-align: center;
+    padding: 6px 13px;
+    border-radius: 20px;
+}

@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Futura';
+    src: url('Futura.eot');
+    src: url('Futura.eot?#iefix') format('embedded-opentype'),
+        url('Futura.woff') format('woff'),
+        url('Futura.ttf') format('truetype'),
+        url('Futura.svg#Futura') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+
