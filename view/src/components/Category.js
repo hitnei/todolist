@@ -20,7 +20,7 @@ export default class Category extends Component {
                         <input className="category-button category-category" type="button" value='Category'/>
                     </div>
                     {/*  */}
-                    <div className="">
+                    <div className="category-list">
                         <div className="category-item">
                             <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
                             <input className="category-button category-button__categories category-category" type="button" value='Category-01'/>
@@ -29,6 +29,136 @@ export default class Category extends Component {
                         <div className="category-item">
                             <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
                             <input className="category-button category-button__categories category-category" type="button" value='Category-02'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
+                            <span>10</span>
+                        </div>
+                        <div className="category-item">
+                            <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
+                            <input className="category-button category-button__categories category-category" type="button" value='Category-03'/>
                             <span>10</span>
                         </div>
                         <div className="category-item">

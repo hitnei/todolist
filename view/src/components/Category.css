@@ -15,6 +15,24 @@
     margin-top: 20px;
 }
 
+.category .category-list {
+    overflow-y: scroll;
+    height: calc(100vh - 300px);
+}
+
+.category .category-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.category .category-list::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 1); 
+    border-radius: 10px;
+}
+
+.category .category-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 128, 128, 0.8); 
+}
+
 .category .category-item {
     position: relative;
 }

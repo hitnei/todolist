@@ -1,6 +1,11 @@
 .memoDetail {
-    max-width: calc(100vw - 300px - 450px);
     width: calc(100vw - 300px - 450px);
     max-height: calc(100vh);
     height: calc(100vh);
+}
+
+@media screen and (max-width: 1200px) {
+    .memoDetail {
+        width: calc(100vw - 300px - 350px);
+    }
 }
