@@ -63,7 +63,8 @@
     padding-right: 6px;
 }
 
-.listMemo .memoItemTime {
+.listMemo .memoItemTime, .memoItemCategoty {
+    display: flex;
     padding-right: 20px;
 }
 
