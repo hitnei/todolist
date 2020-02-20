@@ -6,11 +6,11 @@ export default class MemoDetailHeader extends Component {
         return (
             <div className="memoDetailHeader">
                 <div className="actionButtonLeft">
-                    <div className="actionButton">
+                    <div className="actionButton actionButtonEdit">
                         <img src="/images/pen-solid.svg" alt="pen"/>
                         <span>Edit</span>
                     </div>
-                    <div className="actionButton">
+                    <div className="actionButton actionButtonSave">
                         <img src="/images/save-solid.svg" alt="save"/>
                         <span>Save</span>
                     </div>

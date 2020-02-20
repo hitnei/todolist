@@ -41,6 +41,7 @@
     margin: 21.5px 0px;
     overflow-y: auto;
     box-sizing: border-box;
+    color: #2B3137;
 }
 
 .memoDetailcontent .memoDetailcontent-content::-webkit-scrollbar {
