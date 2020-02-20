@@ -3,24 +3,35 @@ import './ListMemoItem.css'
 
 export default class ListMemoItem extends Component {
     render() {
+        var {
+                // memoID,
+                // categoryID,
+                memoTitle,
+                // memoContent,
+                memoDateCreated,
+                // memoDeletDate,
+                isClipped,
+                // isDeleted
+            } = this.props.memoItem
+        var {categoryName, isSelected} = this.props
         return (
             <div className="listMemoItem">
-                <div className="ItemSelected"></div>
+                <div className={isSelected? "ItemSelected" : "ItemUnselected"}></div>
                 <div className="memoItem">
                     <div>
-                        <span className="memoItemTitle">Memo Title</span>
+                        <span className="memoItemTitle">{memoTitle}</span>
                         <div className="memoItemDetail">
                             <div className="memoItemTime">
                                 <img src="/images/clock-regular.svg" alt="clock"/>
-                                <span>2020/01/27</span>
+                                <span>{memoDateCreated.toDateString()}</span>
                             </div>
                             <div className="memoItemCategoty">
                                 <img src="/images/tag-solid.svg" alt="clock"/>
-                                <span>Category-01</span>
+                                <span>{categoryName}</span>
                             </div>
                         </div>
                     </div>
-                    <img className="MemoItemClip" src="/images/paperclip-solid-1.svg" alt="sticky orange"/>
+                    {isClipped? <img className="MemoItemClip" src="/images/paperclip-solid-1.svg" alt="sticky orange"/> : <div></div>}
                 </div>
             </div>
         )
