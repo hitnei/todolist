@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from "react-redux";
 import MemoDetailHeader from './memoDetail/MemoDetailHeader'
 import MemoDetailContent from './memoDetail/MemoDetailContent'
-import './memoDetail.css'
+import './MemoDetail.css'
 
 class MemoDetail extends Component {
     render() {
