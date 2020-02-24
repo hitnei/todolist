@@ -1,8 +1,8 @@
-import * as Types from '../constants/ActionTypes';
+import * as Types from './../constants/ActionTypes';
 
-export const changeAvatar = (urlAvatar) => {
+export const changeIslogin = (data) => {
     return {
-        type: Types.CHANGE_AVATAR,
-        urlAvatar
+        type: Types.CHANGE_ISLOGIN,
+        data
     }
 }
