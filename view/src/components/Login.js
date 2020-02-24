@@ -25,10 +25,10 @@ export default class Login extends Component {
                     <input id="signin" type="radio" name="action" value="signin" checked={true}/>
                     <label for="signin">Sign in</label>
 
-                    <input id="signup" type="radio" name="action" value="signup"/>
+                    <input id="signup" type="radio" name="action" value="signup" checked/>
                     <label for="signup">Sign up</label>
 
-                    <input id="reset" type="radio" name="action" value="reset"/>
+                    <input id="reset" type="radio" name="action" value="reset" checked/>
                     <label for="reset">Reset</label>
 
                     <div id="wrapper">

@@ -24,10 +24,6 @@
 
 .loginArea #wrapper { overflow: hidden; }
 
-.loginArea #signin:checked ~ #wrapper { height: 178px; }
-.loginArea #signin:checked ~ #wrapper #arrow { left: 32px; }
-.loginArea #signin:checked ~ button span { transform: translate3d(0,-72px,0); }
-
 .loginArea #signup:checked ~ #wrapper { height: 262px; }
 .loginArea #signup:checked ~ #wrapper #arrow { left: 137px; }
 .loginArea #signup:checked ~ button span { transform: translate3d(0,-144px,0); }
@@ -35,6 +31,10 @@
 .loginArea #reset:checked ~ #wrapper { height: 94px; }
 .loginArea #reset:checked ~ #wrapper #arrow { left: 404px; }
 .loginArea #reset:checked ~ button span { transform: translate3d(0,0,0); }
+
+.loginArea #signin:checked ~ #wrapper { height: 178px; }
+.loginArea #signin:checked ~ #wrapper #arrow { left: 32px; }
+.loginArea #signin:checked ~ button span { transform: translate3d(0,-72px,0); }
 
 .loginArea form {
   width: 450px;
