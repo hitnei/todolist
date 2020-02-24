@@ -9,7 +9,7 @@ const bodyParser = require('body-parser'),
 // routes
 login = require('./routes/login');
 user = require('./routes/user');
-// var category = require('./routes/category');
+var category = require('./routes/category');
 
 require('dotenv/config');
 
@@ -38,12 +38,12 @@ app.use(bodyParser.json());
 
 // connect mongodb
 var mongoDB = process.env.MONGODB_URL
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true);
 mongoose.connect(
   mongoDB,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
   () => {
       console.log("connect mongodb is a magic!");
   }
@@ -51,7 +51,7 @@ mongoose.connect(
 
 app.use('/login', login);
 app.use('/user', user);
-// app.use('/category', verifyToken.verifyToken, category);
+app.use('/category', category);
 
 app.get('/a', (req, res) => {
   res.json({sayHi: 'hello from server, nice to meet you!'})
