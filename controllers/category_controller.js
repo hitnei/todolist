@@ -2,6 +2,14 @@ const categoryModel = require('../models/category_model');
 
 mongoose = require('mongoose')
 
+exports.getAllCategory = (req, res) => {
+    var {idUser} = req.body
+    categoryModel.find({IDUser: idUser}, (err, categories) => {
+        if (err) res.status(400).json({err: err})
+        res.status(200).json(categories)
+    })
+}
+
 exports.createCategory = (req, res) => {
     categoryModel.create({
         IDUser: req.body.IDUser,
