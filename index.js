@@ -5,6 +5,10 @@ const bodyParser = require('body-parser')
 
 const cors = require('cors')
 
+require('dotenv/config');
+
+const app = express()
+
 // controller
 verifyToken = require('./controllers/verifyToken')
 
@@ -12,21 +16,7 @@ verifyToken = require('./controllers/verifyToken')
 login = require('./routes/login');
 user = require('./routes/user');
 category = require('./routes/category');
-
-require('dotenv/config');
-
-const app = express()
-
-// tim hieu them!!!
-// app.use((req, res, next) => { //doesn't send response just adjusts it
-//   res.header("Access-Control-Allow-Origin", "http://localhost:3000") //* to give access to any origin
-//   res.header(
-//       "Access-Control-Allow-Headers",
-//       "Origin, X-Requested-With, Content-Type, Accept, Authorization, language" //to give access to all the headers provided
-//   )
-//   res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET, OPTIONS'); //to give access to all the methods provided
-//   next(); //so that other routes can take over
-// })
+memo = require('./routes/memo');
 
 app.use(cors())
 
@@ -56,6 +46,7 @@ mongoose.connect(
 app.use('/login', login);
 app.use('/user', user);
 app.use('/category', category);
+app.use('/memo', memo);
 
 app.get('/a', (req, res) => {
   res.json({sayHi: 'hello from server, nice to meet you!'})
