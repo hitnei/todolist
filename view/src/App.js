@@ -32,6 +32,13 @@ class App extends Component {
       { headers: { Authorization: `bearer ${token}` } }
     ).then((res) => {
       if (res.status === 200) {
+        axios.post(
+          `${API_URL}/category/getAllCategory`, 
+          {},
+          { headers: { Authorization: `bearer ${token}` } }
+        ).then(dataCategory => {
+          this.props.changeAllCategory(dataCategory.data)
+        })
         this.props.changeIslogin(true)
       } else {
         this.props.changeIslogin(false)
@@ -73,6 +80,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     changeIslogin: (isLogin) => {
       dispatch(Actions.changeIslogin(isLogin))
+    },
+    changeAllCategory: (data) => {
+      dispatch(Actions.changeAllCategory(data))
     }
   }
 }

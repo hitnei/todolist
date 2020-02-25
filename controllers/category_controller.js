@@ -2,8 +2,8 @@ const categoryModel = require('../models/category_model');
 
 mongoose = require('mongoose')
 
-exports.getAllCategory = (req, res) => {
-    var {idUser} = req.body
+exports.getAllCategoryByUser = (req, res) => {
+    var {idUser} = req
     categoryModel.find({IDUser: idUser}, (err, categories) => {
         if (err) res.status(400).json({err: err})
         res.status(200).json(categories)

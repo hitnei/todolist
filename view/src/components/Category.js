@@ -7,10 +7,10 @@ class Category extends Component {
     showListCategory = (listCategory) => {
         return listCategory.map((category, index) => {
             return (
-                <div className="category-item" key={category.categoryID}>
+                <div className="category-item" key={category._id}>
                     <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
                     <input className="category-button category-button__categories category-category" type="button" value={category.categoryName}/>
-                    <span>{category.categoryAmount}</span>
+                    <span>{category.categoryAmount? category.categoryAmount : 0}</span>
                 </div>
             )
         })
@@ -20,7 +20,8 @@ class Category extends Component {
         var {allCategory, listMemo} = this.props
         var numberAllCategory = 0;
         allCategory.map((category, index) => {
-            return numberAllCategory += category.categoryAmount
+            var amount = (typeof category.categoryAmount && category.categoryAmount)? category.categoryAmount : 0
+            return numberAllCategory += parseInt(amount)
         })
         var numberClipped = 0;
         listMemo.map((memo, index) => {

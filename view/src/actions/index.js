@@ -6,3 +6,10 @@ export const changeIslogin = (data) => {
         data
     }
 }
+
+export const changeAllCategory = (data) => {
+    return {
+        type: Types.CHANGE_ALLCATEGORY,
+        data
+    }
+}

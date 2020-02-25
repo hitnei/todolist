@@ -61,7 +61,7 @@ app.get('/a', (req, res) => {
   res.json({sayHi: 'hello from server, nice to meet you!'})
 })
 
-app.post('/checkToken', verifyToken.verifyToken)
+app.post('/checkToken', verifyToken.checkToken)
 
 app.listen(5000, () => {
    console.log('App listening on port 5000')
