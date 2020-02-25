@@ -1,30 +1,34 @@
 const express = require('express')
 const mongoose = require('mongoose');
 const path = require('path');
-const bodyParser = require('body-parser'),
+const bodyParser = require('body-parser')
+
+const cors = require('cors')
 
 // controller
-// var verifyToken = require('./controllers/verifyToken')
+verifyToken = require('./controllers/verifyToken')
 
 // routes
 login = require('./routes/login');
 user = require('./routes/user');
-var category = require('./routes/category');
+category = require('./routes/category');
 
 require('dotenv/config');
 
 const app = express()
 
 // tim hieu them!!!
-app.use((req, res, next) => { //doesn't send response just adjusts it
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000") //* to give access to any origin
-  res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept, Authorization, language" //to give access to all the headers provided
-  )
-  res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET'); //to give access to all the methods provided
-  next(); //so that other routes can take over
-})
+// app.use((req, res, next) => { //doesn't send response just adjusts it
+//   res.header("Access-Control-Allow-Origin", "http://localhost:3000") //* to give access to any origin
+//   res.header(
+//       "Access-Control-Allow-Headers",
+//       "Origin, X-Requested-With, Content-Type, Accept, Authorization, language" //to give access to all the headers provided
+//   )
+//   res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET, OPTIONS'); //to give access to all the methods provided
+//   next(); //so that other routes can take over
+// })
+
+app.use(cors())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -56,6 +60,8 @@ app.use('/category', category);
 app.get('/a', (req, res) => {
   res.json({sayHi: 'hello from server, nice to meet you!'})
 })
+
+app.post('/checkToken', verifyToken.verifyToken)
 
 app.listen(5000, () => {
    console.log('App listening on port 5000')

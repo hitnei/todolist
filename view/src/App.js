@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
-// import axios from 'axios'
+import axios from 'axios'
+import { API_URL } from './Config'
+import * as Actions from './actions/index';
 import Category from './components/Category'
 import ListMemo from './components/ListMemo'
 import MemoDetail from './components/MemoDetail'
@@ -13,25 +15,49 @@ class App extends Component {
     this.state = {
     }
   }
+
+  componentDidMount() {
+    this.checkToken()
+  }
+
+  checkToken = () => {
+    let token = document.cookie.split(";").find(x => x.includes("authorization"));
+    if (token && token.split("=")[1]) {
+      token = token.split("=")[1]
+    }
+
+    axios.post(
+      `${API_URL}/checkToken`,
+      {},
+      { headers: { Authorization: `bearer ${token}` } }
+    ).then((res) => {
+      if (res.status === 200) {
+        this.props.changeIslogin(true)
+      } else {
+        this.props.changeIslogin(false)
+      }
+    })
+  }
+
   render() {
-    var {isLogin} = this.props
+    var { isLogin } = this.props
     return (
       <div>
-      {
-        isLogin? 
-        (
-          <div className="wrapper">
-            <Category/>
-            <ListMemo/>
-            <MemoDetail/>
-          </div>
-        ) 
-        : 
-        (
-          <Login/>
-        )
-      }
-        
+        {
+          isLogin ?
+            (
+              <div className="wrapper">
+                <Category />
+                <ListMemo />
+                <MemoDetail />
+              </div>
+            )
+            :
+            (
+              <Login />
+            )
+        }
+
       </div>
     )
   }
@@ -45,7 +71,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    changeIslogin: (isLogin) => {
+      dispatch(Actions.changeIslogin(isLogin))
+    }
   }
 }
 
