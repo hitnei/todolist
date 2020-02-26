@@ -22,6 +22,43 @@ class Login extends Component {
         })
     }
 
+    getToken = () => {
+        let token = document.cookie.split(";").find(x => x.includes("authorization"));
+        if (token && token.split("=")[1]) {
+          token = token.split("=")[1]
+          return token
+        }
+        return ""
+    }
+    
+    callAPIBegin = (token) => {
+        axios.post(
+          `${API_URL}/checkToken`,
+          {},
+          { headers: { Authorization: `bearer ${token}` } }
+        ).then((res) => {
+          if (res.status === 200) {
+            axios.post(
+              `${API_URL}/category/getAllCategory`, 
+              {},
+              { headers: { Authorization: `bearer ${token}` } }
+            ).then(dataCategory => {
+              this.props.changeAllCategory(dataCategory.data)
+            })
+            axios.post(
+              `${API_URL}/memo/getAllMemo`, 
+              {},
+              { headers: { Authorization: `bearer ${token}` } }
+            ).then(dataMemo => {
+              this.props.changeListMemo(dataMemo.data.memos)
+            })
+            this.props.changeIslogin(true)
+          } else {
+            this.props.changeIslogin(false)
+          }
+        })
+    }
+
     submitLogin = (e) => {
         e.preventDefault();
         var { username, password } = this.state;
@@ -34,6 +71,7 @@ class Login extends Component {
                         this.setState({
                             isOnSubmit: false
                         })
+                        this.callAPIBegin(this.getToken())
                         this.props.changeIslogin(true)
                     }
                 })
@@ -107,6 +145,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
         changeIslogin: (isLogin) => {
             dispatch(Actions.changeIslogin(isLogin))
+        },
+        changeAllCategory: (data) => {
+          dispatch(Actions.changeAllCategory(data))
+        },
+        changeListMemo: (data) => {
+            dispatch(Actions.changeListMemo(data))
         }
     }
 }

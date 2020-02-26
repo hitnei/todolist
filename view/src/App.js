@@ -19,13 +19,21 @@ class App extends Component {
   componentDidMount() {
     this.checkToken()
   }
-
+  
   checkToken = () => {
+    this.callAPIBegin(this.getToken())
+  }
+  
+  getToken = () => {
     let token = document.cookie.split(";").find(x => x.includes("authorization"));
     if (token && token.split("=")[1]) {
       token = token.split("=")[1]
+      return token
     }
+    return ""
+  }
 
+  callAPIBegin = (token) => {
     axios.post(
       `${API_URL}/checkToken`,
       {},
