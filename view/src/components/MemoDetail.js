@@ -10,7 +10,7 @@ class MemoDetail extends Component {
         var categoryName = ""
         var {allCategory} = this.props
         allCategory.map((category, index) => {
-            if (category.categoryID === memoSelected.categoryID) {
+            if (category._id === memoSelected.IDCategory) {
                 return categoryName = category.categoryName
             }
             return ""

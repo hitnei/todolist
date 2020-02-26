@@ -4,22 +4,30 @@ import './MemoDetailContent.css'
 export default class MemoDetailContent extends Component {
     render() {
         var {
-            // memoID,
-            // categoryID,
-            memoTitle,
-            memoContent,
-            memoDateCreated,
-            // memoDeleteDate,
-            // isClipped,
-            // isDeleted,
+            // _id,
+            // IDCategory,
+            // IDUser,
+            title,
+            content,
+            createDate,
+            // dateDelete,
+            // isClip,
+            // idDelete,
         } = this.props.memoSelected
         var {categoryName} = this.props
+        // create date
+        var created = new Date(createDate)
+        var createYear = created.getFullYear()
+        var createMonth = created.getMonth()
+        createMonth = (createMonth<10)? ("0" + createMonth) : (createMonth)
+        var createDay = created.getDate()
+        created = createYear + "/" + createMonth + "/" + createDay
         return (
             <div className="memoDetailcontent">
                 <div className="memoDetailcontent-header">
                     <div className="memoDetailcontent-time">
                         <img src="/images/clock-regular-black.svg" alt="clock regular black"/>
-                        <span>{memoDateCreated.toDateString()}</span>
+                        <span>{created}</span>
                     </div>
                     <div className="memoDetailcontent-category">
                         <img src="/images/tag-solid-black.svg" alt="clock regular black"/>
@@ -27,10 +35,10 @@ export default class MemoDetailContent extends Component {
                     </div>
                 </div>
                 <div className="memoDetailcontent-title">
-                    {memoTitle}
+                    {title}
                 </div>
                 <div className="memoDetailcontent-content">
-                    {memoContent}
+                    {content}
                 </div>
             </div>
         )

@@ -14,6 +14,7 @@ export default class ListMemoItem extends Component {
                 isClip,
                 // idDelete
             } = memoItem
+        // create date
         var created = new Date(createDate)
         var createYear = created.getFullYear()
         var createMonth = created.getMonth()

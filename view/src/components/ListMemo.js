@@ -7,10 +7,10 @@ import './ListMemo.css'
 class ListMemo extends Component {
     
     showListMemo = (listMemo) => {
-        var {idMemoSelected} = this.props
         return listMemo.map((memo, index) => {
-            if (index === 0) this.props.changeIdMemoSelected(memo._id)
-            var {allCategory} = this.props
+            if (index === 0) this.props.changeMemoSelected(memo)
+            var {memoSelected, allCategory} = this.props
+            console.log(memoSelected)
             var categoryName = ""
             allCategory.filter((category, index) => {
                 if (memo.IDCategory === category._id) {
@@ -19,7 +19,7 @@ class ListMemo extends Component {
                 return ""
             })
             return (
-                <ListMemoItem key={memo._id} memoItem={memo} categoryName={categoryName} isSelected={idMemoSelected === memo._id? true : false}/>
+                <ListMemoItem key={memo._id} memoItem={memo} categoryName={categoryName} isSelected={memoSelected._id === memo._id? true : false}/>
             )
         })
     }
@@ -48,14 +48,14 @@ const mapStateToProps = (state) => {
     return {
         listMemo: state.listMemo,
         allCategory: state.allCategory,
-        idMemoSelected: state.idMemoSelected,
+        memoSelected: state.memoSelected,
     }
 }
   
   const mapDispatchToProps = (dispatch) => {
     return {
-        changeIdMemoSelected: (id) => {
-            dispatch(Actions.changeIdMemoSelected(id))
+        changeMemoSelected: (id) => {
+            dispatch(Actions.changeMemoSelected(id))
         }
     }
 }

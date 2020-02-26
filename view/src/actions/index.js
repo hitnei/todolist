@@ -21,9 +21,9 @@ export const changeListMemo = (data) => {
     }
 }
 
-export const changeIdMemoSelected = (id) => {
+export const changeMemoSelected = (memo) => {
     return {
-        type: Types.CHANGE_IDMEMOSELECTED,
-        id
+        type: Types.CHANGE_MEMOSELECTED,
+        memo
     }
 }
