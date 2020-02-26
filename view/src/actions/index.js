@@ -13,3 +13,17 @@ export const changeAllCategory = (data) => {
         data
     }
 }
+
+export const changeListMemo = (data) => {
+    return {
+        type: Types.CHANGE_LISTMEMO,
+        data
+    }
+}
+
+export const changeIdMemoSelected = (id) => {
+    return {
+        type: Types.CHANGE_IDMEMOSELECTED,
+        id
+    }
+}

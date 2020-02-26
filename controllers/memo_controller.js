@@ -4,10 +4,12 @@ mongoose = require('mongoose')
 
 exports.getAllMemoByUser = (req, res) => {
     var {idUser} = req
-    memoModel.find({IDUser: idUser}, (err, categories) => {
-        if (err) res.status(400).json({err: err})
-        res.status(200).json(categories)
+    memoModel.find({IDUser: idUser})
+    .exec()
+    .then((memos) => {
+        return res.status(200).json({memos: memos})
     })
+    .catch(err => res.status(400).json({err: err}))
 }
 
 exports.createMemo = (req, res) => {

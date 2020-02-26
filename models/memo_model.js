@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 var memoModel = new Schema({
     IDCategory: {type: String, required: true},
+    IDUser: {type: String, required: true},
     createDate: {type: Date, default: Date.now},
     title: {type: String, required: true},
     content: {type: String, required: true},

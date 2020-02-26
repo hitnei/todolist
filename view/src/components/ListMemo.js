@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 import ListMemoItem from './listMemo/ListMemoItem'
+import * as Actions from './../actions/index';
 import './ListMemo.css'
 
 class ListMemo extends Component {
@@ -8,16 +9,17 @@ class ListMemo extends Component {
     showListMemo = (listMemo) => {
         var {idMemoSelected} = this.props
         return listMemo.map((memo, index) => {
+            if (index === 0) this.props.changeIdMemoSelected(memo._id)
             var {allCategory} = this.props
             var categoryName = ""
             allCategory.filter((category, index) => {
-                if (memo.categoryID === category.categoryID) {
+                if (memo.IDCategory === category._id) {
                     return categoryName = category.categoryName
                 }
                 return ""
             })
             return (
-                <ListMemoItem key={memo.memoID} memoItem={memo} categoryName={categoryName} isSelected={idMemoSelected === memo.memoID? true : false}/>
+                <ListMemoItem key={memo._id} memoItem={memo} categoryName={categoryName} isSelected={idMemoSelected === memo._id? true : false}/>
             )
         })
     }
@@ -52,7 +54,9 @@ const mapStateToProps = (state) => {
   
   const mapDispatchToProps = (dispatch) => {
     return {
-
+        changeIdMemoSelected: (id) => {
+            dispatch(Actions.changeIdMemoSelected(id))
+        }
     }
 }
   

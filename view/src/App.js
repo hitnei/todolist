@@ -39,6 +39,13 @@ class App extends Component {
         ).then(dataCategory => {
           this.props.changeAllCategory(dataCategory.data)
         })
+        axios.post(
+          `${API_URL}/memo/getAllMemo`, 
+          {},
+          { headers: { Authorization: `bearer ${token}` } }
+        ).then(dataMemo => {
+          this.props.changeListMemo(dataMemo.data.memos)
+        })
         this.props.changeIslogin(true)
       } else {
         this.props.changeIslogin(false)
@@ -83,6 +90,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     changeAllCategory: (data) => {
       dispatch(Actions.changeAllCategory(data))
+    },
+    changeListMemo: (data) => {
+        dispatch(Actions.changeListMemo(data))
     }
   }
 }

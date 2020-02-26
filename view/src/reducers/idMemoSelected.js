@@ -4,8 +4,8 @@ var InitialState = "1";
 
 const idMemoSelected = (state = InitialState, action) => {
     switch (action.type) {
-        case types.GET_QUESTIONS:
-            state = action.data;
+        case types.CHANGE_IDMEMOSELECTED:
+            state = action.id;
             return state;
         default:
             return state;

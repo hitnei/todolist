@@ -7,11 +7,13 @@ class Category extends Component {
     showListCategory = (listCategory) => {
         return listCategory.map((category, index) => {
             return (
-                <div className="category-item" key={category._id}>
+                category.categoryAmount? <div className="category-item" key={category._id}>
                     <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
                     <input className="category-button category-button__categories category-category" type="button" value={category.categoryName}/>
                     <span>{category.categoryAmount? category.categoryAmount : 0}</span>
                 </div>
+                :
+                <div key={category._id}></div>
             )
         })
     }

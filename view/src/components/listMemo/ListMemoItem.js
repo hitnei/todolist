@@ -3,27 +3,33 @@ import './ListMemoItem.css'
 
 export default class ListMemoItem extends Component {
     render() {
+        var {categoryName, isSelected, memoItem} = this.props
         var {
-                // memoID,
-                // categoryID,
-                memoTitle,
-                // memoContent,
-                memoDateCreated,
-                // memoDeletDate,
-                isClipped,
-                // isDeleted
-            } = this.props.memoItem
-        var {categoryName, isSelected} = this.props
+                // _id,
+                // IDCategory,
+                title,
+                // content,
+                createDate,
+                // dateDelete,
+                isClip,
+                // idDelete
+            } = memoItem
+        var created = new Date(createDate)
+        var createYear = created.getFullYear()
+        var createMonth = created.getMonth()
+        createMonth = (createMonth<10)? ("0" + createMonth) : (createMonth)
+        var createDay = created.getDate()
+        created = createYear + "/" + createMonth + "/" + createDay
         return (
             <div className="listMemoItem">
                 <div className={isSelected? "ItemSelected" : "ItemUnselected"}></div>
                 <div className="memoItem">
                     <div>
-                        <span className="memoItemTitle">{memoTitle}</span>
+                        <span className="memoItemTitle">{title}</span>
                         <div className="memoItemDetail">
                             <div className="memoItemTime">
                                 <img src="/images/clock-regular.svg" alt="clock"/>
-                                <span>{memoDateCreated.toDateString()}</span>
+                                <span>{created}</span>
                             </div>
                             <div className="memoItemCategoty">
                                 <img src="/images/tag-solid.svg" alt="clock"/>
@@ -31,7 +37,7 @@ export default class ListMemoItem extends Component {
                             </div>
                         </div>
                     </div>
-                    {isClipped? <img className="MemoItemClip" src="/images/paperclip-solid-1.svg" alt="sticky orange"/> : <div></div>}
+                    {isClip? <img className="MemoItemClip" src="/images/paperclip-solid-1.svg" alt="sticky orange"/> : <div></div>}
                 </div>
             </div>
         )
