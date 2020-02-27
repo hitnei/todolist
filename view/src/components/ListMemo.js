@@ -10,7 +10,6 @@ class ListMemo extends Component {
         return listMemo.map((memo, index) => {
             if (index === 0) this.props.changeMemoSelected(memo)
             var {memoSelected, allCategory} = this.props
-            console.log(memoSelected)
             var categoryName = ""
             allCategory.filter((category, index) => {
                 if (memo.IDCategory === category._id) {

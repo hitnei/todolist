@@ -3,23 +3,41 @@ import { connect } from "react-redux";
 import './Category.css'
 
 class Category extends Component {
-    
+    constructor(props) {
+        super(props)
+        this.state = {
+            selected: "all",
+            showListCategory: true
+        }
+    }
     showListCategory = (listCategory) => {
+        var {selected, showListCategory} = this.state
+        if (showListCategory) 
         return listCategory.map((category, index) => {
             return (
-                category.categoryAmount? <div className="category-item" key={category._id}>
+                category.categoryAmount? <div className={selected===index? "category-item category-selected" : "category-item"} key={category._id}  onClick={(name) => this.itemSelected(index)}>
                     <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid"/>
                     <input className="category-button category-button__categories category-category" type="button" value={category.categoryName}/>
                     <span>{category.categoryAmount? category.categoryAmount : 0}</span>
                 </div>
                 :
-                <div key={category._id}></div>
+                ""
             )
         })
+        return ""
+    }
+
+    itemSelected = (name) => {
+        this.setState({selected: name})
+        if (name === "category") {
+            var {showListCategory} = this.state
+            this.setState({showListCategory: !showListCategory})
+        }
     }
 
     render() {
         var {allCategory, listMemo} = this.props
+        var {selected} = this.state
         var numberAllCategory = 0;
         allCategory.map((category, index) => {
             var amount = (typeof category.categoryAmount && category.categoryAmount)? category.categoryAmount : 0
@@ -36,12 +54,12 @@ class Category extends Component {
                         <img className="category-image" src="/images/plus-solid.svg" alt="plus"/>
                         <input className="category-button category-create__new" type="button" value='Create New'/>
                     </div>
-                    <div className="category-item">
+                    <div className={selected==="all"? "category-item category-selected" : "category-item"} onClick={(name) => this.itemSelected("all")}>
                         <img className="category-image" src="/images/sticky-note-solid.svg" alt="plus"/>
                         <input className="category-button category-all__note" type="button" value='All Notes'/>
                         <span>{numberAllCategory}</span>
                     </div>
-                    <div className="">
+                    <div className={selected==="category"? "category-item category-selected" : "category-item"}  onClick={(name) => this.itemSelected("category")}>
                         <img className="category-image" src="/images/tags-solid.svg" alt="tags-solid"/>
                         <input className="category-button category-category" type="button" value='Category'/>
                     </div>
@@ -50,7 +68,7 @@ class Category extends Component {
                         {this.showListCategory(allCategory)}
                     </div>
                     {/*  */}
-                    <div className="category-item">
+                    <div className={selected==="clip"? "category-item category-selected" : "category-item"} onClick={(name) => this.itemSelected("clip")}>
                         <img className="category-image" src="/images/paperclip-solid.svg" alt="paperclip-solid"/>
                         <input className="category-button category-clip" type="button" value='Clip'/>
                         <span>{numberClipped}</span>

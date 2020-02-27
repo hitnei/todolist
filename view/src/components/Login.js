@@ -63,7 +63,7 @@ class Login extends Component {
         e.preventDefault();
         var { username, password } = this.state;
         this.setState({ isOnSubmit: true });
-        setTimeout(() => {
+        // setTimeout(() => {
             axios.post(`${API_URL}/login`, { username, password })
                 .then(res => {
                     if (res.status === 200) {
@@ -81,7 +81,7 @@ class Login extends Component {
                         isOnSubmit: false
                     })
                 })
-        }, 100)
+        // }, 100)
     }
 
     render() {
