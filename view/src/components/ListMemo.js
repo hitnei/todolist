@@ -18,8 +18,9 @@ class ListMemo extends Component {
         listMemoSelected = this.listMemoSearch(searchValue)
         listMemoSelected = this.listMemoSort(listMemoSelected)
         return listMemoSelected.map((memo, index) => {
-            if (index === 0) this.props.changeMemoSelected(memo)
             var {memoSelected, allCategory} = this.props
+            if (Object.entries(memoSelected).length === 0 && memoSelected.constructor === Object)
+                this.props.changeMemoSelected(listMemoSelected[0])
             var categoryName = ""
             allCategory.filter((category, index) => {
                 if (memo.IDCategory === category._id) {
@@ -29,8 +30,8 @@ class ListMemo extends Component {
             })
             return (
                 <ListMemoItem key={memo._id} memoItem={memo} categoryName={categoryName} isSelected={memoSelected._id === memo._id? true : false}/>
-            )
-        })
+                )
+            })
     }
 
     listMemoSort = (listMemoSelected) => {
@@ -112,8 +113,8 @@ const mapStateToProps = (state) => {
   
   const mapDispatchToProps = (dispatch) => {
     return {
-        changeMemoSelected: (id) => {
-            dispatch(Actions.changeMemoSelected(id))
+        changeMemoSelected: (memo) => {
+            dispatch(Actions.changeMemoSelected(memo))
         },
         changeListMemoSelected: (data) => {
             dispatch(Actions.changeListMemoSelected(data))

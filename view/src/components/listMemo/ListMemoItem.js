@@ -1,7 +1,15 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
+import * as Actions from './../../actions/index';
 import './ListMemoItem.css'
 
-export default class ListMemoItem extends Component {
+class ListMemoItem extends Component {
+
+    onChangeMemoSelected = (event, memo) => {
+        event.preventDefault()
+        this.props.changeMemoSelected(memo)
+    }
+
     render() {
         var {categoryName, isSelected, memoItem} = this.props
         var {
@@ -22,7 +30,7 @@ export default class ListMemoItem extends Component {
         var createDay = created.getDate()
         created = createYear + "/" + createMonth + "/" + createDay
         return (
-            <div className="listMemoItem">
+            <div className="listMemoItem" onClick={(event, memo) => this.onChangeMemoSelected(event, memoItem)}>
                 <div className={isSelected? "ItemSelected" : "ItemUnselected"}></div>
                 <div className="memoItem">
                     <div>
@@ -44,3 +52,19 @@ export default class ListMemoItem extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        
+    }
+}
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+        changeMemoSelected: (memo) => {
+            dispatch(Actions.changeMemoSelected(memo))
+        },
+    }
+}
+  
+export default connect(mapStateToProps, mapDispatchToProps)(ListMemoItem)

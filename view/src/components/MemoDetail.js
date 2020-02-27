@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
+import * as Actions from './../actions/index';
 import MemoDetailHeader from './memoDetail/MemoDetailHeader'
 import MemoDetailContent from './memoDetail/MemoDetailContent'
 import './MemoDetail.css'
@@ -33,7 +34,9 @@ const mapStateToProps = (state) => {
   
   const mapDispatchToProps = (dispatch) => {
     return {
-
+        changeMemoSelected: (id) => {
+            dispatch(Actions.changeMemoSelected(id))
+        },
     }
 }
   
