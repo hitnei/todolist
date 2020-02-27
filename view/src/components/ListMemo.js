@@ -6,8 +6,8 @@ import './ListMemo.css'
 
 class ListMemo extends Component {
     
-    showListMemo = (listMemo) => {
-        return listMemo.map((memo, index) => {
+    showListMemo = (listMemoSelected) => {
+        return listMemoSelected.map((memo, index) => {
             if (index === 0) this.props.changeMemoSelected(memo)
             var {memoSelected, allCategory} = this.props
             var categoryName = ""
@@ -24,7 +24,7 @@ class ListMemo extends Component {
     }
 
     render() {
-        var {listMemo} = this.props
+        var {listMemoSelected} = this.props
         return (
             <div className="listMemo">
                 <div className="listMemoSearch">
@@ -36,7 +36,7 @@ class ListMemo extends Component {
                     <img src="/images/sort-amount-up-alt-solid.svg" alt="sort"/>
                 </div>
                 <div className="listMemoShortcut">
-                    {this.showListMemo(listMemo)}
+                    {this.showListMemo(listMemoSelected)}
                 </div>
             </div>
         )
@@ -45,7 +45,7 @@ class ListMemo extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        listMemo: state.listMemo,
+        listMemoSelected: state.listMemoSelected,
         allCategory: state.allCategory,
         memoSelected: state.memoSelected,
     }

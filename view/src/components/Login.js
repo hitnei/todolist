@@ -51,6 +51,7 @@ class Login extends Component {
               { headers: { Authorization: `bearer ${token}` } }
             ).then(dataMemo => {
               this.props.changeListMemo(dataMemo.data.memos)
+              this.props.changeListMemoSelected(dataMemo.data.memos)
             })
             this.props.changeIslogin(true)
           } else {
@@ -151,6 +152,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         changeListMemo: (data) => {
             dispatch(Actions.changeListMemo(data))
+        },
+        changeListMemoSelected: (data) => {
+            dispatch(Actions.changeListMemoSelected(data))
         }
     }
 }
