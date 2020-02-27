@@ -16,7 +16,7 @@
 }
 
 .category .category-list {
-    overflow-y: auto;
+    overflow-y: overlay;
     max-height: calc(100vh - 300px);
 }
 

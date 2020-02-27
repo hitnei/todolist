@@ -16,13 +16,14 @@ class Category extends Component {
         if (isShowListCategory) {
             return listCategory.map((category, index) => {
                 return (
-                    category.categoryAmount ? <div className={selected === index ? "category-item category-selected" : "category-item"} key={category._id} onClick={(name) => this.itemSelected(index)}>
+                    // category.categoryAmount ? 
+                    <div className={selected === index ? "category-item category-selected" : "category-item"} key={category._id} onClick={(name) => this.itemSelected(index)}>
                         <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid" />
                         <input className="category-button category-button__categories category-category" type="button" value={category.categoryName} />
                         <span>{category.categoryAmount ? category.categoryAmount : 0}</span>
                     </div>
-                        :
-                        ""
+                        // :
+                        // ""
                 )
             })
         } else return ""
