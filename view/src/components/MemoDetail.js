@@ -18,7 +18,7 @@ class MemoDetail extends Component {
         })
         return (
             <div className="memoDetail">
-                <MemoDetailHeader/>
+                <MemoDetailHeader memoSelected={memoSelected}/>
                 <MemoDetailContent memoSelected={memoSelected} categoryName={categoryName}/>
             </div>
         )

@@ -3,6 +3,18 @@ import './MemoDetailHeader.css'
 
 export default class MemoDetailHeader extends Component {
     render() {
+        var {memoSelected} = this.props
+        var {
+            // _id,
+            // IDCategory,
+            // IDUser,
+            // title,
+            // content,
+            // createDate,
+            // dateDelete,
+            isClip,
+            // idDelete,
+        } = memoSelected
         return (
             <div className="memoDetailHeader">
                 <div className="actionButtonLeft">
@@ -14,7 +26,7 @@ export default class MemoDetailHeader extends Component {
                         <img src="/images/save-solid.svg" alt="save"/>
                         <span>Save</span>
                     </div>
-                    <div className="actionButton">
+                    <div className={isClip? "actionButton isClip" : "actionButton"} >
                         <img src="/images/paperclip-solid-vertical.svg" alt="paperclip orange"/>
                         <span>Clip</span>
                     </div>

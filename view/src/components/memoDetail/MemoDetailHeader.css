@@ -22,7 +22,7 @@
     color: #313F46;
 }
 
-.memoDetailHeader .actionButtonLeft .actionButton:last-child {
+.memoDetailHeader .actionButtonLeft .isClip {
     background-color: #FFF1E8;
     color: #FE8033;
 }
