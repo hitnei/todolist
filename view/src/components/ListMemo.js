@@ -5,8 +5,16 @@ import * as Actions from './../actions/index';
 import './ListMemo.css'
 
 class ListMemo extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            searchValue: ""
+        }
+    }
     
     showListMemo = (listMemoSelected) => {
+        var {searchValue} = this.state
+        listMemoSelected = this.listMemoSearch(searchValue)
         return listMemoSelected.map((memo, index) => {
             if (index === 0) this.props.changeMemoSelected(memo)
             var {memoSelected, allCategory} = this.props
@@ -23,12 +31,33 @@ class ListMemo extends Component {
         })
     }
 
+    listMemoSearch = (searchValue) => {
+        var {listMemoSelected} = this.props
+        if (searchValue === "") return listMemoSelected
+        return listMemoSelected.filter((memo) => {
+            var {title} = memo
+            title = title.toLowerCase()
+            searchValue = searchValue.toLowerCase()
+            return title.includes(searchValue)
+        })
+    }
+
+    onHandleChange = (event) => {
+        var target = event.target;
+        var name = target.name;
+        var value = target.value;
+        this.setState({
+          [name]: value,
+        });
+    }
+
     render() {
         var {listMemoSelected} = this.props
+        var {searchValue} = this.state
         return (
             <div className="listMemo">
                 <div className="listMemoSearch">
-                    <input type="text" placeholder="キーワードを入力"/>
+                    <input type="text" placeholder="キーワードを入力" name="searchValue" onChange={this.onHandleChange} value={searchValue} />
                     <img src="/images/search-solid.svg" alt="search"/>
                 </div>
                 <div className="listMemoTitle">
@@ -55,6 +84,9 @@ const mapStateToProps = (state) => {
     return {
         changeMemoSelected: (id) => {
             dispatch(Actions.changeMemoSelected(id))
+        },
+        changeListMemoSelected: (data) => {
+            dispatch(Actions.changeListMemoSelected(data))
         }
     }
 }
