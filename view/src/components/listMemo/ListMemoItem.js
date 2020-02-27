@@ -17,7 +17,7 @@ export default class ListMemoItem extends Component {
         // create date
         var created = new Date(createDate)
         var createYear = created.getFullYear()
-        var createMonth = created.getMonth()
+        var createMonth = created.getMonth() + 1
         createMonth = (createMonth<10)? ("0" + createMonth) : (createMonth)
         var createDay = created.getDate()
         created = createYear + "/" + createMonth + "/" + createDay
