@@ -6,7 +6,6 @@ import './ListMemoItem.css'
 class ListMemoItem extends Component {
 
     onChangeMemoSelected = (event, memo) => {
-        event.preventDefault()
         this.props.changeMemoSelected(memo)
     }
 

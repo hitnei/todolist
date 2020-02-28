@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
 import './MemoDetailContent.css'
 
-export default class MemoDetailContent extends Component {
+class MemoDetailContent extends Component {
     render() {
+        var {categoryName, memoSelected} = this.props
         var {
             // _id,
             // IDCategory,
@@ -13,8 +15,7 @@ export default class MemoDetailContent extends Component {
             // dateDelete,
             // isClip,
             // idDelete,
-        } = this.props.memoSelected
-        var {categoryName} = this.props
+        } = memoSelected
         // create date
         var created = new Date(createDate)
         var createYear = created.getFullYear()
@@ -44,3 +45,17 @@ export default class MemoDetailContent extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        
+    }
+}
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+        
+    }
+}
+  
+export default connect(mapStateToProps, mapDispatchToProps)(MemoDetailContent)

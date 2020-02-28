@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
 import './MemoDetailHeader.css'
 
-export default class MemoDetailHeader extends Component {
+class MemoDetailHeader extends Component {
     render() {
         var {memoSelected} = this.props
         var {
@@ -39,3 +40,17 @@ export default class MemoDetailHeader extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+
+    }
+}
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+        
+    }
+}
+  
+export default connect(mapStateToProps, mapDispatchToProps)(MemoDetailHeader)

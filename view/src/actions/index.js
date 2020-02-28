@@ -23,7 +23,7 @@ export const changeListMemo = (data) => {
 
 export const changeListMemoSelected = (data) => {
     return {
-        type: Types.CHANGE_LISTMEMOSELECTED,
+        type: Types.CHANGE_LISTMEMO_SELECTED,
         data
     }
 }
