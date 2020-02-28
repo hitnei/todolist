@@ -36,11 +36,11 @@ class Category extends Component {
             this.setState({isShowListCategory: !isShowListCategory})
         }
         // change listmemos when click
-        var listMemoTemp = this.props.listMemoSelected
+        var listMemoTemp = this.props.listMemo
         if (name === "all") {
             listMemoTemp = this.props.listMemo
         } else if (name === "clip") {
-            listMemoTemp = this.props.listMemoSelected.filter((memo, index) => {
+            listMemoTemp = this.props.listMemo.filter((memo, index) => {
                 return memo.isClip
             })
         } else if (typeof name === "number") {
