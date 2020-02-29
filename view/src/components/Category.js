@@ -13,7 +13,7 @@ class Category extends Component {
                     <span>{category.categoryAmount? category.categoryAmount : 0}</span>
                 </div>
                 :
-                <div key={category._id}></div>
+                ""
             )
         })
     }
