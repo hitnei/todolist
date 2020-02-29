@@ -6,9 +6,9 @@ const listMemoSelected = (state = InitialState, action) => {
     switch (action.type) {
         case types.CHANGE_LISTMEMO_SELECTED:
             state = action.data;
-            return state;
+            return [...state];
         default:
-            return state;
+            return [...state];
     }
 };
 export default listMemoSelected;
