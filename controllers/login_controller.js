@@ -5,9 +5,9 @@ const user_model = require('./../models/user_model')
 mongoose = require('mongoose')
 
 exports.login = (req, res) => {
-    var {username, password} = req.body
-    user_model.findOne({username: username}, (err, user) => {
-        if (err) res.status(400).json({err: err})
+    var { username, password } = req.body
+    user_model.findOne({ username: username }, (err, user) => {
+        if (err) res.status(400).json({ err: err })
         if (user) {
             if (user.password === password) {
                 payload = {
@@ -33,7 +33,7 @@ exports.login = (req, res) => {
 exports.getInfo = (req, res) => {
     jwt.verify(req.body.token, process.env.SECRET_TOKEN, (err, decoded) => {
         if (err)
-            res.status(400).json({"err": err})
-        res.status(200).json({"decoded" : decoded})
+            res.status(400).json({ "err": err })
+        res.status(200).json({ "decoded": decoded })
     })
 }

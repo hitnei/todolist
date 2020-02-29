@@ -16,7 +16,7 @@
 }
 
 .category .category-list {
-    overflow-y: scroll;
+    overflow-y: overlay;
     height: calc(100vh - 300px);
 }
 
@@ -25,12 +25,12 @@
 }
 
 .category .category-list::-webkit-scrollbar-thumb {
-    background: rgba(128, 128, 128, 1); 
+    background: rgba(128, 128, 128, 1);
     border-radius: 10px;
 }
 
 .category .category-list::-webkit-scrollbar-thumb:hover {
-    background: rgba(128, 128, 128, 0.8); 
+    background: rgba(128, 128, 128, 0.8);
 }
 
 .category .category-item {

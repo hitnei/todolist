@@ -6,9 +6,9 @@ import './MemoDetail.css'
 
 class MemoDetail extends Component {
     render() {
-        var {memoSelected} = this.props
+        var { memoSelected } = this.props
         var categoryName = ""
-        var {allCategory} = this.props
+        var { allCategory } = this.props
         allCategory.map((category, index) => {
             if (category._id === memoSelected.IDCategory) {
                 return categoryName = category.categoryName
@@ -17,8 +17,8 @@ class MemoDetail extends Component {
         })
         return (
             <div className="memoDetail">
-                <MemoDetailHeader/>
-                <MemoDetailContent memoSelected={memoSelected} categoryName={categoryName}/>
+                <MemoDetailHeader />
+                <MemoDetailContent memoSelected={memoSelected} categoryName={categoryName} />
             </div>
         )
     }
@@ -30,11 +30,11 @@ const mapStateToProps = (state) => {
         allCategory: state.allCategory,
     }
 }
-  
-  const mapDispatchToProps = (dispatch) => {
+
+const mapDispatchToProps = (dispatch) => {
     return {
 
     }
 }
-  
+
 export default connect(mapStateToProps, mapDispatchToProps)(MemoDetail)

@@ -14,7 +14,7 @@
     display: flex;
 }
 
-.memoDetailHeader .actionButtonLeft > .actionButton {
+.memoDetailHeader .actionButtonLeft>.actionButton {
     margin-right: 15px;
 }
 
@@ -52,6 +52,3 @@
 .memoDetailHeader .actionButton img {
     padding-right: 5px;
 }
-
-
-

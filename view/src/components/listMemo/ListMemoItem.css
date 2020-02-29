@@ -1,5 +1,4 @@
-
-.listMemo .listMemoItem {    
+.listMemo .listMemoItem {
     max-height: 80px;
     height: 80px;
     max-width: 100%;
@@ -34,14 +33,14 @@
     box-sizing: border-box;
 }
 
-.listMemo .memoItem > div {
+.listMemo .memoItem>div {
     line-height: 26px;
 }
 
 .listMemo .memoItem .MemoItemClip {
     padding: 8px 9px;
     border-radius: 50%;
-    background: rgba(254,61,00,0.2) 0% 0% no-repeat padding-box;
+    background: rgba(254, 61, 00, 0.2) 0% 0% no-repeat padding-box;
 }
 
 .listMemo .memoItem .memoItemTitle {

@@ -1,5 +1,5 @@
 @font-face {
-	font-family : 'Noto Sans Japanese' ,  sans-serif ;
+    font-family: 'Noto Sans Japanese', sans-serif;
     src: url("http://fonts.googleapis.com/earlyaccess/notosansjapanese.css")
 }
 
@@ -15,7 +15,7 @@
     box-sizing: border-box;
 }
 
-.listMemo > div {
+.listMemo>div {
     width: 100%;
 }
 
@@ -80,12 +80,12 @@
 }
 
 .listMemo .listMemoShortcut::-webkit-scrollbar-thumb {
-    background: rgba(128, 128, 128, 1); 
+    background: rgba(128, 128, 128, 1);
     border-radius: 10px;
 }
 
 .listMemo .listMemoShortcut::-webkit-scrollbar-thumb:hover {
-    background: rgba(128, 128, 128, 0.8); 
+    background: rgba(128, 128, 128, 0.8);
 }
 
 @media screen and (max-width: 1200px) {
@@ -99,10 +99,3 @@
         display: none;
     }
 }
-
-
-
-
-
-
-

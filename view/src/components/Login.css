@@ -1,12 +1,28 @@
 /* @import url(https://fonts.googleapis.com/css?family=Raleway:700,800); */
 
-.loginArea { margin: 0; }
+.loginArea {
+  margin: 0;
+}
 
-:focus { outline: none; }
-.loginArea input[placeholder]::-webkit-input-placeholder { color: #DEDFDF; }
-.loginArea input[placeholder]::-moz-placeholder { color: #DEDFDF; }
-.loginArea input[placeholder]:-moz-placeholder { color: #DEDFDF; }
-.loginArea input[placeholder]::-ms-input-placeholder { color: #DEDFDF; }
+:focus {
+  outline: none;
+}
+
+.loginArea input[placeholder]::-webkit-input-placeholder {
+  color: #DEDFDF;
+}
+
+.loginArea input[placeholder]::-moz-placeholder {
+  color: #DEDFDF;
+}
+
+.loginArea input[placeholder]:-moz-placeholder {
+  color: #DEDFDF;
+}
+
+.loginArea input[placeholder]::-ms-input-placeholder {
+  color: #DEDFDF;
+}
 
 .loginArea {
   background: rgba(49, 63, 70, 0.7);
@@ -17,24 +33,49 @@
   width: 100vw;
 }
 
-.loginArea #wrapper, 
-.loginArea label, 
-.loginArea #arrow, 
-.loginArea button span { transition: all .5s cubic-bezier(.6,0,.4,1); }
+.loginArea #wrapper, .loginArea label, .loginArea #arrow, .loginArea button span {
+  transition: all .5s cubic-bezier(.6, 0, .4, 1);
+}
 
-.loginArea #wrapper { overflow: hidden; }
+.loginArea #wrapper {
+  overflow: hidden;
+}
 
-.loginArea #signup:checked ~ #wrapper { height: 262px; }
-.loginArea #signup:checked ~ #wrapper #arrow { left: 137px; }
-.loginArea #signup:checked ~ button span { transform: translate3d(0,-144px,0); }
+.loginArea #signup:checked~#wrapper {
+  height: 262px;
+}
 
-.loginArea #reset:checked ~ #wrapper { height: 94px; }
-.loginArea #reset:checked ~ #wrapper #arrow { left: 404px; }
-.loginArea #reset:checked ~ button span { transform: translate3d(0,0,0); }
+.loginArea #signup:checked~#wrapper #arrow {
+  left: 137px;
+}
 
-.loginArea #signin:checked ~ #wrapper { height: 178px; }
-.loginArea #signin:checked ~ #wrapper #arrow { left: 32px; }
-.loginArea #signin:checked ~ button span { transform: translate3d(0,-72px,0); }
+.loginArea #signup:checked~button span {
+  transform: translate3d(0, -144px, 0);
+}
+
+.loginArea #reset:checked~#wrapper {
+  height: 94px;
+}
+
+.loginArea #reset:checked~#wrapper #arrow {
+  left: 404px;
+}
+
+.loginArea #reset:checked~button span {
+  transform: translate3d(0, 0, 0);
+}
+
+.loginArea #signin:checked~#wrapper {
+  height: 178px;
+}
+
+.loginArea #signin:checked~#wrapper #arrow {
+  left: 32px;
+}
+
+.loginArea #signin:checked~button span {
+  transform: translate3d(0, -72px, 0);
+}
 
 .loginArea form {
   width: 450px;
@@ -45,7 +86,9 @@
   top: 50%;
 }
 
-.loginArea input[type=radio] { display: none; }
+.loginArea input[type=radio] {
+  display: none;
+}
 
 .loginArea label {
   cursor: pointer;
@@ -58,15 +101,23 @@
 }
 
 .loginArea label:hover {
-  transition: all .3s cubic-bezier(.6,0,.4,1);
+  transition: all .3s cubic-bezier(.6, 0, .4, 1);
   opacity: 1;
 }
-.loginArea label[for="signin"] { margin-right: 20px;}
-.loginArea label[for="reset"] { float: right; }
-.loginArea input[type=radio]:checked + label { opacity: 1; }
 
-.loginArea input[type=text],
-.loginArea input[type=password] {
+.loginArea label[for="signin"] {
+  margin-right: 20px;
+}
+
+.loginArea label[for="reset"] {
+  float: right;
+}
+
+.loginArea input[type=radio]:checked+label {
+  opacity: 1;
+}
+
+.loginArea input[type=text], .loginArea input[type=password] {
   background: #fff;
   border: none;
   border-radius: 8px;
@@ -79,8 +130,10 @@
   text-indent: 20px;
   transition: all .2s ease-in-out;
 }
+
 .loginArea button {
-  background: rgba(49, 63, 70, 1);;
+  background: rgba(49, 63, 70, 1);
+  ;
   border: none;
   border-radius: 8px;
   color: #fff;
@@ -91,15 +144,17 @@
   width: 100%;
   margin-bottom: 10px;
   overflow: hidden;
-  transition: all .3s cubic-bezier(.6,0,.4,1);
+  transition: all .3s cubic-bezier(.6, 0, .4, 1);
 }
+
 .loginArea button span {
   display: block;
   line-height: 72px;
   position: relative;
   top: -2px;
-  transform: translate3d(0,0,0);
+  transform: translate3d(0, 0, 0);
 }
+
 .loginArea button:hover {
   background: rgba(49, 63, 70, 0.7);
 }
@@ -113,7 +168,6 @@
   position: relative;
   left: 32px;
 }
-
 
 .loginArea #hint {
   width: 100%;

@@ -5,12 +5,11 @@ import * as Actions from './../actions/index';
 import './ListMemo.css'
 
 class ListMemo extends Component {
-    
+
     showListMemo = (listMemo) => {
         return listMemo.map((memo, index) => {
             if (index === 0) this.props.changeMemoSelected(memo)
-            var {memoSelected, allCategory} = this.props
-            console.log(memoSelected)
+            var { memoSelected, allCategory } = this.props
             var categoryName = ""
             allCategory.filter((category, index) => {
                 if (memo.IDCategory === category._id) {
@@ -19,22 +18,22 @@ class ListMemo extends Component {
                 return ""
             })
             return (
-                <ListMemoItem key={memo._id} memoItem={memo} categoryName={categoryName} isSelected={memoSelected._id === memo._id? true : false}/>
+                <ListMemoItem key={memo._id} memoItem={memo} categoryName={categoryName} isSelected={memoSelected._id === memo._id ? true : false} />
             )
         })
     }
 
     render() {
-        var {listMemo} = this.props
+        var { listMemo } = this.props
         return (
             <div className="listMemo">
                 <div className="listMemoSearch">
-                    <input type="text" placeholder="キーワードを入力"/>
-                    <img src="/images/search-solid.svg" alt="search"/>
+                    <input type="text" placeholder="キーワードを入力" />
+                    <img src="/images/search-solid.svg" alt="search" />
                 </div>
                 <div className="listMemoTitle">
                     <span>Title</span>
-                    <img src="/images/sort-amount-up-alt-solid.svg" alt="sort"/>
+                    <img src="/images/sort-amount-up-alt-solid.svg" alt="sort" />
                 </div>
                 <div className="listMemoShortcut">
                     {this.showListMemo(listMemo)}
@@ -51,13 +50,13 @@ const mapStateToProps = (state) => {
         memoSelected: state.memoSelected,
     }
 }
-  
-  const mapDispatchToProps = (dispatch) => {
+
+const mapDispatchToProps = (dispatch) => {
     return {
         changeMemoSelected: (id) => {
             dispatch(Actions.changeMemoSelected(id))
         }
     }
 }
-  
+
 export default connect(mapStateToProps, mapDispatchToProps)(ListMemo)

@@ -19,11 +19,11 @@ class App extends Component {
   componentDidMount() {
     this.checkToken()
   }
-  
+
   checkToken = () => {
     this.callAPIBegin(this.getToken())
   }
-  
+
   getToken = () => {
     let token = document.cookie.split(";").find(x => x.includes("authorization"));
     if (token && token.split("=")[1]) {
@@ -41,14 +41,14 @@ class App extends Component {
     ).then((res) => {
       if (res.status === 200) {
         axios.post(
-          `${API_URL}/category/getAllCategory`, 
+          `${API_URL}/category/getAllCategory`,
           {},
           { headers: { Authorization: `bearer ${token}` } }
         ).then(dataCategory => {
           this.props.changeAllCategory(dataCategory.data)
         })
         axios.post(
-          `${API_URL}/memo/getAllMemo`, 
+          `${API_URL}/memo/getAllMemo`,
           {},
           { headers: { Authorization: `bearer ${token}` } }
         ).then(dataMemo => {
@@ -100,7 +100,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(Actions.changeAllCategory(data))
     },
     changeListMemo: (data) => {
-        dispatch(Actions.changeListMemo(data))
+      dispatch(Actions.changeListMemo(data))
     }
   }
 }
