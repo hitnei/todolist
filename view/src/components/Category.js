@@ -37,7 +37,6 @@ class Category extends Component {
 
     render() {
         var { allCategory, listMemo, categorySelect } = this.props
-        var {showListCategory} = this.state
         var numberAllCategory = 0;
         allCategory.map((category, index) => {
             var amount = (typeof category.categoryAmount && category.categoryAmount) ? category.categoryAmount : 0

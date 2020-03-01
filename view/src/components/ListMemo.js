@@ -11,7 +11,7 @@ class ListMemo extends Component {
         var listMemoSelect = categorySelect === 'all'? listMemo 
         : categorySelect === 'clip'? listMemo.filter(memo => memo.isClip)
         : listMemo.filter(memo => memo.IDCategory === categorySelect)
-
+        
         // var categoryName = ""
         // allCategory.filter((category) => {
         //     if (categorySelect === category._id) {
@@ -20,7 +20,9 @@ class ListMemo extends Component {
         //     return ""
         // })
         
-        return listMemoSelect.map(memo => {
+        return listMemoSelect.map((memo, index) => {
+            //set memo selected default
+            if (index === 0) this.props.changeMemoSelected(listMemoSelect[0])
             return <ListMemoItem key={memo._id} memoItem={memo} isSelected={memoSelected._id === memo._id ? true : false} />
         })
 
@@ -70,8 +72,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changeMemoSelected: (id) => {
-            dispatch(Actions.changeMemoSelected(id))
+        changeMemoSelected: (memo) => {
+            dispatch(Actions.changeMemoSelected(memo))
         }
     }
 }
