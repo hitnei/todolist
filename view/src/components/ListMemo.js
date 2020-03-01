@@ -12,34 +12,12 @@ class ListMemo extends Component {
         : categorySelect === 'clip'? listMemo.filter(memo => memo.isClip)
         : listMemo.filter(memo => memo.IDCategory === categorySelect)
         
-        // var categoryName = ""
-        // allCategory.filter((category) => {
-        //     if (categorySelect === category._id) {
-        //         return categoryName = category.categoryName
-        //     }
-        //     return ""
-        // })
+        //set memo selected default
+        if (!memoSelected._id) this.props.changeMemoSelected(listMemoSelect[0])
         
         return listMemoSelect.map((memo, index) => {
-            //set memo selected default
-            if (index === 0) this.props.changeMemoSelected(listMemoSelect[0])
             return <ListMemoItem key={memo._id} memoItem={memo} isSelected={memoSelected._id === memo._id ? true : false} />
         })
-
-        // return listMemo.map((memo, index) => {
-        //     if (index === 0) this.props.changeMemoSelected(memo)
-        //     var { memoSelected, allCategory } = this.props
-        //     var categoryName = ""
-        //     allCategory.filter((category, index) => {
-        //         if (memo.IDCategory === category._id) {
-        //             return categoryName = category.categoryName
-        //         }
-        //         return ""
-        //     })
-        //     return (
-        //         <ListMemoItem key={memo._id} memoItem={memo} categoryName={categoryName} isSelected={memoSelected._id === memo._id ? true : false} />
-        //     )
-        // })
     }
 
     render() {

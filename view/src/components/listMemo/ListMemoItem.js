@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
+import * as Actions from './../../actions/index';
 import './ListMemoItem.css'
 
 class ListMemoItem extends Component {
@@ -13,6 +14,10 @@ class ListMemoItem extends Component {
             return ""
         })
         return categoryName
+    }
+
+    onChangeMemoSelected = (event, memo) => {
+        this.props.changeMemoSelected(memo)
     }
 
     render() {
@@ -35,7 +40,7 @@ class ListMemoItem extends Component {
         var createDay = created.getDate()
         created = createYear + "/" + createMonth + "/" + createDay
         return (
-            <div className="listMemoItem">
+            <div className="listMemoItem" onClick={(event, memo) => this.onChangeMemoSelected(event, memoItem)}>
                 <div className={isSelected ? "ItemSelected" : "ItemUnselected"}></div>
                 <div className="memoItem">
                     <div>
@@ -66,7 +71,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        
+        changeMemoSelected: (memo) => {
+            dispatch(Actions.changeMemoSelected(memo))
+        }
     }
 }
 
