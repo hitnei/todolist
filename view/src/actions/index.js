@@ -34,3 +34,10 @@ export const changeCategorySelect = (data) => {
         data
     }
 }
+
+export const changeMemoIsClip = (id) => {
+    return {
+        type: Types.CHANGE_MEMO_ISCLIP,
+        id
+    }
+}

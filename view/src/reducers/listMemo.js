@@ -6,9 +6,19 @@ const listMemo = (state = InitialState, action) => {
     switch (action.type) {
         case types.CHANGE_LISTMEMO:
             state = action.data;
-            return state;
+            return [...state];
+        case types.CHANGE_MEMO_ISCLIP:
+            var {id} = action
+            state = state.map((memo) => {
+                if (memo._id === id) {
+                    memo.isClip = !memo.isClip
+                }
+                return memo
+            })
+            console.log(state)
+            return [...state];
         default:
-            return state;
+            return state
     }
 };
 export default listMemo;

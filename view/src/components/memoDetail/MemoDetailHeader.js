@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
+import * as Actions from './../../actions/index';
 import './MemoDetailHeader.css'
 
-export default class MemoDetailHeader extends Component {
+class MemoDetailHeader extends Component {
+
+    onchangeMemoIsClip = (event, id) => {
+        this.props.changeMemoIsClip(id)
+    }
+
     render() {
         var { memoSelected } = this.props
         var {
-            // _id,
+            _id,
             // IDCategory,
             // IDUser,
             // title,
@@ -26,7 +33,7 @@ export default class MemoDetailHeader extends Component {
                         <img src="/images/save-solid.svg" alt="save" />
                         <span>Save</span>
                     </div>
-                    <div className={isClip? "actionButton isClip" : "actionButton"} >
+                    <div className={isClip? "actionButton isClip" : "actionButton"} onClick={(event, id) => this.onchangeMemoIsClip(event, _id)}>
                         <img src="/images/paperclip-solid-vertical.svg" alt="paperclip orange" />
                         <span>Clip</span>
                     </div>
@@ -39,3 +46,19 @@ export default class MemoDetailHeader extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+      
+    }
+}
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      changeMemoIsClip: (id) => {
+        dispatch(Actions.changeMemoIsClip(id))
+      },
+    }
+}
+  
+export default connect(mapStateToProps, mapDispatchToProps)(MemoDetailHeader)
