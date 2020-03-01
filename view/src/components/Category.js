@@ -4,11 +4,21 @@ import * as Actions from './../actions/index';
 import './Category.css'
 
 class Category extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            selected: "all",
+            showListCategory: true
+        }
+    }
 
     showListCategory = (listCategory) => {
+        var {categorySelect} = this.props
+        var {showListCategory} = this.state
+        if (!showListCategory) return ""
         return listCategory.map((category, index) => {
             return (
-                category.categoryAmount ? <div className="category-item" key={category._id} onClick={(event, data) => this.onChangeCategorySelect(event, index)}>
+                category.categoryAmount ? <div className={categorySelect!=='all' && categorySelect!=='clip' && categorySelect===category._id? "category-item category-selected" : "category-item"} key={category._id} onClick={(event, data) => this.onChangeCategorySelect(event, category._id)}>
                     <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid" />
                     <input className="category-button category-button__categories category-category" type="button" value={category.categoryName} />
                     <span>{category.categoryAmount ? category.categoryAmount : 0}</span>
@@ -20,11 +30,14 @@ class Category extends Component {
     }
 
     onChangeCategorySelect = (event, data) => {
-        this.props.changeCategorySelect(data)
+        if (data === 'category')
+            this.setState({showListCategory: !this.state.showListCategory})
+        else this.props.changeCategorySelect(data)
     }
 
     render() {
-        var { allCategory, listMemo } = this.props
+        var { allCategory, listMemo, categorySelect } = this.props
+        var {showListCategory} = this.state
         var numberAllCategory = 0;
         allCategory.map((category, index) => {
             var amount = (typeof category.categoryAmount && category.categoryAmount) ? category.categoryAmount : 0
@@ -41,12 +54,12 @@ class Category extends Component {
                         <img className="category-image" src="/images/plus-solid.svg" alt="plus" />
                         <input className="category-button category-create__new" type="button" value='Create New' />
                     </div>
-                    <div className="category-item" onClick={(event, data) => this.onChangeCategorySelect(event, 'all')}>
+                    <div className={categorySelect==='all'? "category-item category-selected" : "category-item"} onClick={(event, data) => this.onChangeCategorySelect(event, 'all')}>
                         <img className="category-image" src="/images/sticky-note-solid.svg" alt="plus" />
                         <input className="category-button category-all__note" type="button" value='All Notes' />
                         <span>{numberAllCategory}</span>
                     </div>
-                    <div className="">
+                    <div onClick={(event, name) => this.onChangeCategorySelect(event, "category")}>
                         <img className="category-image" src="/images/tags-solid.svg" alt="tags-solid" />
                         <input className="category-button category-category" type="button" value='Category' />
                     </div>
@@ -55,7 +68,7 @@ class Category extends Component {
                         {this.showListCategory(allCategory)}
                     </div>
                     {/*  */}
-                    <div className="category-item" onClick={(event, data) => this.onChangeCategorySelect(event, 'clip')}>
+                    <div className={categorySelect==='clip'? "category-item category-selected" : "category-item"} onClick={(event, data) => this.onChangeCategorySelect(event, 'clip')}>
                         <img className="category-image" src="/images/paperclip-solid.svg" alt="paperclip-solid" />
                         <input className="category-button category-clip" type="button" value='Clip' />
                         <span>{numberClipped}</span>
@@ -76,6 +89,7 @@ const mapStateToProps = (state) => {
     return {
         allCategory: state.allCategory,
         listMemo: state.listMemo,
+        categorySelect: state.categorySelect,
     }
 }
 

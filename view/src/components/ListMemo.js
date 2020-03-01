@@ -7,20 +7,37 @@ import './ListMemo.css'
 class ListMemo extends Component {
 
     showListMemo = (listMemo) => {
-        return listMemo.map((memo, index) => {
-            if (index === 0) this.props.changeMemoSelected(memo)
-            var { memoSelected, allCategory } = this.props
-            var categoryName = ""
-            allCategory.filter((category, index) => {
-                if (memo.IDCategory === category._id) {
-                    return categoryName = category.categoryName
-                }
-                return ""
-            })
-            return (
-                <ListMemoItem key={memo._id} memoItem={memo} categoryName={categoryName} isSelected={memoSelected._id === memo._id ? true : false} />
-            )
+        var {categorySelect, memoSelected} = this.props
+        var listMemoSelect = categorySelect === 'all'? listMemo 
+        : categorySelect === 'clip'? listMemo.filter(memo => memo.isClip)
+        : listMemo.filter(memo => memo.IDCategory === categorySelect)
+
+        // var categoryName = ""
+        // allCategory.filter((category) => {
+        //     if (categorySelect === category._id) {
+        //         return categoryName = category.categoryName
+        //     }
+        //     return ""
+        // })
+        
+        return listMemoSelect.map(memo => {
+            return <ListMemoItem key={memo._id} memoItem={memo} isSelected={memoSelected._id === memo._id ? true : false} />
         })
+
+        // return listMemo.map((memo, index) => {
+        //     if (index === 0) this.props.changeMemoSelected(memo)
+        //     var { memoSelected, allCategory } = this.props
+        //     var categoryName = ""
+        //     allCategory.filter((category, index) => {
+        //         if (memo.IDCategory === category._id) {
+        //             return categoryName = category.categoryName
+        //         }
+        //         return ""
+        //     })
+        //     return (
+        //         <ListMemoItem key={memo._id} memoItem={memo} categoryName={categoryName} isSelected={memoSelected._id === memo._id ? true : false} />
+        //     )
+        // })
     }
 
     render() {
@@ -46,8 +63,8 @@ class ListMemo extends Component {
 const mapStateToProps = (state) => {
     return {
         listMemo: state.listMemo,
-        allCategory: state.allCategory,
         memoSelected: state.memoSelected,
+        categorySelect: state.categorySelect,
     }
 }
 

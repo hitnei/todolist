@@ -1,9 +1,22 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
 import './ListMemoItem.css'
 
-export default class ListMemoItem extends Component {
+class ListMemoItem extends Component {
+
+    getCategoryName = () => {
+        var {allCategory, memoItem} = this.props
+        var {IDCategory} = memoItem
+        var categoryName = ""
+        allCategory.filter(category => {
+            if (category._id === IDCategory) return categoryName = category.categoryName
+            return ""
+        })
+        return categoryName
+    }
+
     render() {
-        var { categoryName, isSelected, memoItem } = this.props
+        var { isSelected, memoItem } = this.props
         var {
             // _id,
             // IDCategory,
@@ -34,7 +47,7 @@ export default class ListMemoItem extends Component {
                             </div>
                             <div className="memoItemCategoty">
                                 <img src="/images/tag-solid.svg" alt="clock" />
-                                <span>{categoryName}</span>
+                                <span>{this.getCategoryName()}</span>
                             </div>
                         </div>
                     </div>
@@ -44,3 +57,17 @@ export default class ListMemoItem extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        allCategory: state.allCategory,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListMemoItem)

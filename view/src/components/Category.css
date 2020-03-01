@@ -17,7 +17,7 @@
 
 .category .category-list {
     overflow-y: overlay;
-    height: calc(100vh - 300px);
+    max-height: calc(100vh - 300px);
 }
 
 .category .category-list::-webkit-scrollbar {
@@ -35,6 +35,7 @@
 
 .category .category-item {
     position: relative;
+    border-radius: 50px;
 }
 
 .category .category-category-item {
@@ -82,7 +83,7 @@
 }
 
 .category .category-all__note {
-    background: #2B3137 0% 0% no-repeat padding-box;
+    background: none;
     color: #FFFFFF;
 }
 
@@ -94,6 +95,10 @@
 .category .category-clip {
     background: none;
     color: #FFFFFF;
+}
+
+.category .category-selected {
+    background-color: #2B3137;
 }
 
 .category .category-top div span {
