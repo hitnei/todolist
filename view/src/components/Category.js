@@ -27,7 +27,7 @@ class Category extends Component {
         })
         var numberClipped = 0;
         listMemo.map((memo, index) => {
-            return memo.isClipped ? numberClipped++ : numberClipped
+            return memo.isClip ? numberClipped++ : numberClipped
         })
         return (
             <div className="category">
