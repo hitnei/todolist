@@ -27,3 +27,10 @@ export const changeMemoSelected = (memo) => {
         memo
     }
 }
+
+export const changeCategorySelect = (data) => {
+    return {
+        type: Types.CHANGE_CATEGORY_SELECT,
+        data
+    }
+}

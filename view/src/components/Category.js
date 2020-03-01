@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
+import * as Actions from './../actions/index';
 import './Category.css'
 
 class Category extends Component {
@@ -7,7 +8,7 @@ class Category extends Component {
     showListCategory = (listCategory) => {
         return listCategory.map((category, index) => {
             return (
-                category.categoryAmount ? <div className="category-item" key={category._id}>
+                category.categoryAmount ? <div className="category-item" key={category._id} onClick={(event, data) => this.onChangeCategorySelect(event, index)}>
                     <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid" />
                     <input className="category-button category-button__categories category-category" type="button" value={category.categoryName} />
                     <span>{category.categoryAmount ? category.categoryAmount : 0}</span>
@@ -16,6 +17,10 @@ class Category extends Component {
                     ""
             )
         })
+    }
+
+    onChangeCategorySelect = (event, data) => {
+        this.props.changeCategorySelect(data)
     }
 
     render() {
@@ -36,7 +41,7 @@ class Category extends Component {
                         <img className="category-image" src="/images/plus-solid.svg" alt="plus" />
                         <input className="category-button category-create__new" type="button" value='Create New' />
                     </div>
-                    <div className="category-item">
+                    <div className="category-item" onClick={(event, data) => this.onChangeCategorySelect(event, 'all')}>
                         <img className="category-image" src="/images/sticky-note-solid.svg" alt="plus" />
                         <input className="category-button category-all__note" type="button" value='All Notes' />
                         <span>{numberAllCategory}</span>
@@ -50,13 +55,13 @@ class Category extends Component {
                         {this.showListCategory(allCategory)}
                     </div>
                     {/*  */}
-                    <div className="category-item">
+                    <div className="category-item" onClick={(event, data) => this.onChangeCategorySelect(event, 'clip')}>
                         <img className="category-image" src="/images/paperclip-solid.svg" alt="paperclip-solid" />
                         <input className="category-button category-clip" type="button" value='Clip' />
                         <span>{numberClipped}</span>
                     </div>
                 </div>
-                <div className="category-bottom">
+                <div className="category-bottom"    >
                     <div className="">
                         <img className="category-image__delete" src="/images/delete.svg" alt="delete" />
                         <input className="category-button category-clip" type="button" value='Delete' />
@@ -76,7 +81,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        changeCategorySelect: (data) => {
+            dispatch(Actions.changeCategorySelect(data))
+        }
     }
 }
 
