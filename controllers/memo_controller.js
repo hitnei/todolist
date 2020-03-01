@@ -42,3 +42,20 @@ exports.deleteMemo = (req, res) => {
         res.status(200).json(doc)
     })
 }
+
+exports.changeMemoClipByIdMemo = (req, res) => {
+    var { id } = req.body
+    var { idUser } = req
+    memoModel.findOne({ _id: id, IDUser: idUser })
+        .then(memo => {
+            memo.isClip = !memo.isClip
+            memo.save()
+                .then(() => {
+                    res.status(200).json({ mess: 'success' })
+                })
+                .catch((err) => {
+                    res.status(400).json({ err: err })
+                })
+        })
+        .catch(err => res.status(401).json({ err: err }))
+}
