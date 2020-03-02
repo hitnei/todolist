@@ -9,13 +9,14 @@ const listMemo = (state = InitialState, action) => {
             return [...state];
         case types.CHANGE_MEMO_ISCLIP:
             var {id} = action
-            state = state.map((memo) => {
+            state = state.map((memo, index) => {
                 if (memo._id === id) {
-                    memo.isClip = !memo.isClip
+                    var cloneMemo = {...memo}
+                    cloneMemo.isClip = !cloneMemo.isClip
+                    return cloneMemo
                 }
                 return memo
             })
-            console.log(state)
             return [...state];
         default:
             return state
