@@ -34,10 +34,18 @@ class ListMemo extends Component {
         var {listMemo} = this.props
         if (searchValue === "") return listMemo
         return listMemo.filter((memo) => {
-            var {title} = memo
+            var {title, createDate} = memo
+            // format create date
+            var created = new Date(createDate)
+            var createYear = created.getFullYear()
+            var createMonth = created.getMonth()
+            createMonth = (createMonth<10)? ("0" + createMonth) : (createMonth)
+            var createDay = created.getDate()
+            created = createYear + "/" + createMonth + "/" + createDay
+            // end
             title = title.toLowerCase()
             searchValue = searchValue.toLowerCase()
-            return title.includes(searchValue)
+            return title.includes(searchValue) || created.includes(searchValue)
         })
     }
 
