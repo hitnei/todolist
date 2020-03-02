@@ -4,6 +4,7 @@ import listMemo from './listMemo'
 import memoSelected from './memoSelected'
 import isLogin from './isLogin'
 import categorySelect from './categorySelect'
+import isDisableEditContent from './isDisableEditContent'
 
 const Reducers = combineReducers({
     allCategory,
@@ -11,6 +12,7 @@ const Reducers = combineReducers({
     memoSelected,
     isLogin,
     categorySelect,
+    isDisableEditContent,
 });
 
 export default Reducers;

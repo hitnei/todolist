@@ -41,3 +41,10 @@ export const changeMemoIsClip = (id) => {
         id
     }
 }
+
+export const changeIsDisableEditContent = () => {
+    return {
+        type: Types.CHANGE_IS_DISABLE_EDIT_CONTENT,
+        
+    }
+}

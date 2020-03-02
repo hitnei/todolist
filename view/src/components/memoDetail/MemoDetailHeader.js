@@ -22,8 +22,12 @@ class MemoDetailHeader extends Component {
 
     }
 
+    onChangeIsDisableEditContent = () => {
+        this.props.changeIsDisableEditContent()
+    }
+
     render() {
-        var { memoSelected } = this.props
+        var { memoSelected, isDisableEditContent } = this.props
         var {
             // _id,
             // IDCategory,
@@ -38,9 +42,9 @@ class MemoDetailHeader extends Component {
         return (
             <div className="memoDetailHeader">
                 <div className="actionButtonLeft">
-                    <div className="actionButton actionButtonEdit">
+                    <div className={isDisableEditContent ? 'actionButton actionButtonEdit' : 'actionButton actionButtonEdit activeEditDiv'} onClick={this.onChangeIsDisableEditContent}>
                         <img src="/images/pen-solid.svg" alt="pen" />
-                        <span>Edit</span>
+                        <span className={isDisableEditContent ? '' : 'activeEditSpan'}>Edit</span>
                     </div>
                     <div className="actionButton actionButtonSave">
                         <img src="/images/save-solid.svg" alt="save" />
@@ -62,7 +66,7 @@ class MemoDetailHeader extends Component {
 
 const mapStateToProps = (state) => {
     return {
-
+        isDisableEditContent: state.isDisableEditContent
     }
 }
 
@@ -73,6 +77,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         changeMemoSelected: (memo) => {
             dispatch(Actions.changeMemoSelected(memo))
+        },
+        changeIsDisableEditContent: () => {
+            dispatch(Actions.changeIsDisableEditContent())
         },
     }
 }

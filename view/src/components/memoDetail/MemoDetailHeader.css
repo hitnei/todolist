@@ -18,6 +18,10 @@
     margin-right: 15px;
 }
 
+.memoDetailHeader .actionButtonLeft .activeEditDiv {
+    background-color: rgba(49, 63, 70, 0.7);
+}
+
 .memoDetailHeader .actionButtonLeft .actionButtonEdit, .actionButtonSave span {
     color: #313F46;
 }
@@ -40,6 +44,10 @@
 
 .memoDetailHeader .actionButton span {
     font-size: 14px;
+}
+
+.memoDetailHeader .actionButton .activeEditSpan {
+    color: #FFFFFF;
 }
 
 .memoDetailHeader .actionButtonRight {
