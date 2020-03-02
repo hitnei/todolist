@@ -1,16 +1,25 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 import * as Actions from './../../actions/index';
+import { CALLAPI } from './../../Config'
 import './MemoDetailHeader.css'
 
 class MemoDetailHeader extends Component {
 
     onchangeMemoIsClip = (event, memo) => {
-        var cloneMemo = {...memo}
-        cloneMemo.isClip = !cloneMemo.isClip
-        
-        this.props.changeMemoIsClip(memo._id)
-        this.props.changeMemoSelected(cloneMemo)
+        CALLAPI('post', 'memo/changeMemoClip', { id: memo._id }, true)
+            .then(data => {
+                if (data.status === 200) {
+                    var cloneMemo = { ...memo }
+                    cloneMemo.isClip = !cloneMemo.isClip
+
+                    this.props.changeMemoIsClip(memo._id)
+                    this.props.changeMemoSelected(cloneMemo)
+                } else {
+                    console.log('err')
+                }
+            })
+
     }
 
     render() {
@@ -37,7 +46,7 @@ class MemoDetailHeader extends Component {
                         <img src="/images/save-solid.svg" alt="save" />
                         <span>Save</span>
                     </div>
-                    <div className={isClip? "actionButton isClip" : "actionButton"} onClick={(event, memo) => this.onchangeMemoIsClip(event, memoSelected)}>
+                    <div className={isClip ? "actionButton isClip" : "actionButton"} onClick={(event, memo) => this.onchangeMemoIsClip(event, memoSelected)}>
                         <img src="/images/paperclip-solid-vertical.svg" alt="paperclip orange" />
                         <span>Clip</span>
                     </div>
@@ -53,19 +62,19 @@ class MemoDetailHeader extends Component {
 
 const mapStateToProps = (state) => {
     return {
-      
+
     }
 }
-  
-  const mapDispatchToProps = (dispatch) => {
+
+const mapDispatchToProps = (dispatch) => {
     return {
-      changeMemoIsClip: (id) => {
-        dispatch(Actions.changeMemoIsClip(id))
-      },
-      changeMemoSelected: (memo) => {
-        dispatch(Actions.changeMemoSelected(memo))
-      },
+        changeMemoIsClip: (id) => {
+            dispatch(Actions.changeMemoIsClip(id))
+        },
+        changeMemoSelected: (memo) => {
+            dispatch(Actions.changeMemoSelected(memo))
+        },
     }
 }
-  
+
 export default connect(mapStateToProps, mapDispatchToProps)(MemoDetailHeader)
