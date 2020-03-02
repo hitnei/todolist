@@ -20,6 +20,16 @@ class ListMemoItem extends Component {
         this.props.changeMemoSelected(memo)
     }
 
+    formatDate = (createDate) => {
+        var created = new Date(createDate)
+        var createYear = created.getFullYear()
+        var createMonth = created.getMonth() + 1
+        createMonth = (createMonth < 10) ? ("0" + createMonth) : (createMonth)
+        var createDay = created.getDate()
+        created = createYear + "/" + createMonth + "/" + createDay
+        return created
+    }
+
     render() {
         var { isSelected, memoItem } = this.props
         var {
@@ -33,12 +43,7 @@ class ListMemoItem extends Component {
             // idDelete
         } = memoItem
         // create date
-        var created = new Date(createDate)
-        var createYear = created.getFullYear()
-        var createMonth = created.getMonth()
-        createMonth = (createMonth < 10) ? ("0" + createMonth) : (createMonth)
-        var createDay = created.getDate()
-        created = createYear + "/" + createMonth + "/" + createDay
+        var created = this.formatDate(createDate)
         return (
             <div className="listMemoItem" onClick={(event, memo) => this.onChangeMemoSelected(event, memoItem)}>
                 <div className={isSelected ? "ItemSelected" : "ItemUnselected"}></div>

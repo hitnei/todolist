@@ -2,7 +2,19 @@ import React, { Component } from 'react'
 import './MemoDetailContent.css'
 
 export default class MemoDetailContent extends Component {
+
+    formatDate = (createDate) => {
+        var created = new Date(createDate)
+        var createYear = created.getFullYear()
+        var createMonth = created.getMonth() + 1
+        createMonth = (createMonth < 10) ? ("0" + createMonth) : (createMonth)
+        var createDay = created.getDate()
+        created = createYear + "/" + createMonth + "/" + createDay
+        return created
+    }
+
     render() {
+        var { categoryName, memoSelected } = this.props
         var {
             // _id,
             // IDCategory,
@@ -13,15 +25,9 @@ export default class MemoDetailContent extends Component {
             // dateDelete,
             // isClip,
             // idDelete,
-        } = this.props.memoSelected
-        var { categoryName } = this.props
+        } = memoSelected
         // create date
-        var created = new Date(createDate)
-        var createYear = created.getFullYear()
-        var createMonth = created.getMonth()
-        createMonth = (createMonth < 10) ? ("0" + createMonth) : (createMonth)
-        var createDay = created.getDate()
-        created = createYear + "/" + createMonth + "/" + createDay
+        var created = this.formatDate(createDate)
         return (
             <div className="memoDetailcontent">
                 <div className="memoDetailcontent-header">
