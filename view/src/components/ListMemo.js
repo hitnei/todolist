@@ -8,40 +8,39 @@ class ListMemo extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            searchValue: ""
+            searchValue: "",
+            desort: -1
         }
     }
-    
+
     showListMemo = (listMemo) => {
-        var {categorySelect, memoSelected} = this.props
+        var { categorySelect, memoSelected } = this.props
 
-        var {searchValue} = this.state
+        //search and sort
+        var { searchValue } = this.state
         listMemo = this.listMemoSearch(searchValue)
+        listMemo = this.listMemoSort(listMemo)
+        //end
 
-        var listMemoSelect = categorySelect === 'all'? listMemo 
-        : categorySelect === 'clip'? listMemo.filter(memo => memo.isClip)
-        : listMemo.filter(memo => memo.IDCategory === categorySelect)
-        
+        var listMemoSelect = categorySelect === 'all' ? listMemo
+            : categorySelect === 'clip' ? listMemo.filter(memo => memo.isClip)
+                : listMemo.filter(memo => memo.IDCategory === categorySelect)
+
         //set memo selected default
         if (!memoSelected._id) this.props.changeMemoSelected(listMemoSelect[0])
-        
+
         return listMemoSelect.map((memo, index) => {
             return <ListMemoItem key={memo._id} memoItem={memo} isSelected={memoSelected._id === memo._id ? true : false} />
         })
     }
 
     listMemoSearch = (searchValue) => {
-        var {listMemo} = this.props
+        var { listMemo } = this.props
         if (searchValue === "") return listMemo
         return listMemo.filter((memo) => {
-            var {title, createDate} = memo
+            var { title, createDate } = memo
             // format create date
-            var created = new Date(createDate)
-            var createYear = created.getFullYear()
-            var createMonth = created.getMonth()
-            createMonth = (createMonth<10)? ("0" + createMonth) : (createMonth)
-            var createDay = created.getDate()
-            created = createYear + "/" + createMonth + "/" + createDay
+            var created = this.formatDate(createDate)
             // end
             title = title.toLowerCase()
             searchValue = searchValue.toLowerCase()
@@ -49,18 +48,46 @@ class ListMemo extends Component {
         })
     }
 
+    listMemoSort = (listMemo) => {
+        // sort and desort by title and dateCreate as the same
+        var { desort } = this.state
+        listMemo = listMemo.sort((memo1, memo2) => {
+            var title1 = memo1.title.toLowerCase()
+            var title2 = memo2.title.toLowerCase()
+            var date1 = this.formatDate(new Date(memo1.createDate))
+            var date2 = this.formatDate(new Date(memo2.createDate))
+            return (title1 < title2) ? desort : (title1 > title2) ? -desort : (date1 < date2) ? desort : (date1 > date2) ? -desort : 0;
+        })
+        return listMemo
+    }
+
+    onChangeDesort = () => {
+        var { desort } = this.state
+        this.setState({ desort: -desort })
+    }
+
+    formatDate = (createDate) => {
+        var created = new Date(createDate)
+        var createYear = created.getFullYear()
+        var createMonth = created.getMonth() + 1
+        createMonth = (createMonth < 10) ? ("0" + createMonth) : (createMonth)
+        var createDay = created.getDate()
+        created = createYear + "/" + createMonth + "/" + createDay
+        return created
+    }
+
     onHandleChange = (event) => {
         var target = event.target;
         var name = target.name;
         var value = target.value;
         this.setState({
-          [name]: value,
+            [name]: value,
         });
     }
 
     render() {
         var { listMemo } = this.props
-        var {searchValue} = this.state
+        var { searchValue } = this.state
         return (
             <div className="listMemo">
                 <div className="listMemoSearch">
@@ -69,7 +96,7 @@ class ListMemo extends Component {
                 </div>
                 <div className="listMemoTitle">
                     <span>Title</span>
-                    <img src="/images/sort-amount-up-alt-solid.svg" alt="sort" />
+                    <img src="/images/sort-amount-up-alt-solid.svg" alt="sort" onClick={this.onChangeDesort} />
                 </div>
                 <div className="listMemoShortcut">
                     {this.showListMemo(listMemo)}
