@@ -5,9 +5,19 @@ import * as Actions from './../actions/index';
 import './ListMemo.css'
 
 class ListMemo extends Component {
-
+    constructor(props) {
+        super(props)
+        this.state = {
+            searchValue: ""
+        }
+    }
+    
     showListMemo = (listMemo) => {
         var {categorySelect, memoSelected} = this.props
+
+        var {searchValue} = this.state
+        listMemo = this.listMemoSearch(searchValue)
+
         var listMemoSelect = categorySelect === 'all'? listMemo 
         : categorySelect === 'clip'? listMemo.filter(memo => memo.isClip)
         : listMemo.filter(memo => memo.IDCategory === categorySelect)
@@ -20,12 +30,33 @@ class ListMemo extends Component {
         })
     }
 
+    listMemoSearch = (searchValue) => {
+        var {listMemo} = this.props
+        if (searchValue === "") return listMemo
+        return listMemo.filter((memo) => {
+            var {title} = memo
+            title = title.toLowerCase()
+            searchValue = searchValue.toLowerCase()
+            return title.includes(searchValue)
+        })
+    }
+
+    onHandleChange = (event) => {
+        var target = event.target;
+        var name = target.name;
+        var value = target.value;
+        this.setState({
+          [name]: value,
+        });
+    }
+
     render() {
         var { listMemo } = this.props
+        var {searchValue} = this.state
         return (
             <div className="listMemo">
                 <div className="listMemoSearch">
-                    <input type="text" placeholder="キーワードを入力" />
+                    <input type="text" placeholder="キーワードを入力" name="searchValue" onChange={this.onHandleChange} value={searchValue} />
                     <img src="/images/search-solid.svg" alt="search" />
                 </div>
                 <div className="listMemoTitle">
