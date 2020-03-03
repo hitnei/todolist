@@ -8,7 +8,7 @@ var memoModel = new Schema({
     title: { type: String, required: true },
     content: { type: String, required: true },
     isClip: { type: Boolean, default: false },
-    idDelete: { type: Boolean, default: false },
+    isDelete: { type: Boolean, default: false },
     dateDelete: { type: Date, default: null },
 });
 

@@ -112,6 +112,17 @@
     border-radius: 20px;
 }
 
+.category .category-bottom div span {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #FFFFFF;
+    background-color: #454E55;
+    text-align: center;
+    padding: 6px 13px;
+    border-radius: 20px;
+}
+
 .category .category-bottom {
     margin-bottom: 15px;
 }

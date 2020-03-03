@@ -22,9 +22,10 @@ class ListMemo extends Component {
         listMemo = this.listMemoSort(listMemo)
         //end
 
-        var listMemoSelect = categorySelect === 'all' ? listMemo
-            : categorySelect === 'clip' ? listMemo.filter(memo => memo.isClip)
-                : listMemo.filter(memo => memo.IDCategory === categorySelect)
+        var listMemoSelect = categorySelect === 'all' ? listMemo.filter(memo => !memo.isDelete)
+            : categorySelect === 'clip' ? listMemo.filter(memo => memo.isClip && !memo.isDelete)
+                : categorySelect === 'delete' ? listMemo.filter(memo => memo.isDelete)
+                    : listMemo.filter(memo => memo.IDCategory === categorySelect && !memo.isDelete)
 
         //set memo selected default
         if (!memoSelected._id) {

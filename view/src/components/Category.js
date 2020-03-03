@@ -44,7 +44,11 @@ class Category extends Component {
         })
         var numberClipped = 0;
         listMemo.map((memo, index) => {
-            return memo.isClip ? numberClipped++ : numberClipped
+            return memo.isClip && !memo.isDelete? numberClipped++ : numberClipped
+        })
+        var numberDeleted = 0;
+        listMemo.map((memo, index) => {
+            return memo.isDelete? numberDeleted++ : numberDeleted
         })
         return (
             <div className="category">
@@ -73,10 +77,11 @@ class Category extends Component {
                         <span>{numberClipped}</span>
                     </div>
                 </div>
-                <div className="category-bottom"    >
-                    <div className="">
+                <div className="category-bottom">
+                    <div className={categorySelect==='delete'? "category-item category-selected" : "category-item"} onClick={(event, data) => this.onChangeCategorySelect(event, 'delete')}>
                         <img className="category-image__delete" src="/images/delete.svg" alt="delete" />
                         <input className="category-button category-clip" type="button" value='Delete' />
+                        {numberDeleted? <span>{numberDeleted <= 0? "" : numberDeleted}</span> : ''}
                     </div>
                 </div>
             </div>
