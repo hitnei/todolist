@@ -30,7 +30,7 @@ exports.createMemo = (req, res) => {
 exports.editMemo = (req, res) => {
     var { memo } = req.body
     var { idUser } = req
-    memoModel.findOneAndUpdate({ _id: memo._id, IDUser: idUser }, {title: memo.title, content: memo.content})
+    memoModel.findOneAndUpdate({ _id: memo._id, IDUser: idUser }, {title: memo.title, content: memo.content, isDelete: memo.isDelete})
         .then(newMemo => {
             res.status(200).json({ memo: memo })
         })
