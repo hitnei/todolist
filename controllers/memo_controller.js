@@ -32,7 +32,7 @@ exports.editMemo = (req, res) => {
     var { idUser } = req
     memoModel.findOneAndUpdate({ _id: memo._id, IDUser: idUser }, {title: memo.title, content: memo.content})
         .then(newMemo => {
-            res.status(200).json({ memo: newMemo })
+            res.status(200).json({ memo: memo })
         })
         .catch(err => res.status(401).json({ err: err }))
 }

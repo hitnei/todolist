@@ -18,6 +18,15 @@ const listMemo = (state = InitialState, action) => {
                 return memo
             })
             return [...state];
+        case types.CHANGE_LISTMEMO_BY_ID:
+            var { memo } = action
+            state = state.map(val => {
+                if (val._id === memo._id) {
+                    return memo
+                }
+                return val
+            })
+            return [...state];
         default:
             return state
     }

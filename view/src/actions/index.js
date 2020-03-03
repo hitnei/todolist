@@ -21,6 +21,13 @@ export const changeListMemo = (data) => {
     }
 }
 
+export const changeListMemoById = (memo) => {
+    return {
+        type: Types.CHANGE_LISTMEMO_BY_ID,
+        memo
+    }
+}
+
 export const changeMemoSelected = (memo) => {
     return {
         type: Types.CHANGE_MEMOSELECTED,

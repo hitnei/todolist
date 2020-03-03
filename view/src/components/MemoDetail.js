@@ -20,7 +20,7 @@ class MemoDetail extends Component {
             .then(data => {
                 this.props.disableEditContent()
                 if(data.status === 200) {
-                    // success
+                    this.props.changeListMemoById(data.data.memo)
                 } else {
                     // failure
                 }
@@ -61,6 +61,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         disableEditContent: () => {
             dispatch(Actions.disableEditContent())
+        },
+        changeListMemoById: (memo) => {
+          dispatch(Actions.changeListMemoById(memo))
         },
     }
 }
