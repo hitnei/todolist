@@ -27,6 +27,7 @@ class ListMemoItem extends Component {
         var createMonth = created.getMonth() + 1
         createMonth = (createMonth < 10) ? ("0" + createMonth) : (createMonth)
         var createDay = created.getDate()
+        createDay = (createDay < 10) ? ("0" + createDay) : (createDay)
         created = createYear + "/" + createMonth + "/" + createDay
         return created
     }
