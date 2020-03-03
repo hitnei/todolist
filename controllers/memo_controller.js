@@ -28,11 +28,13 @@ exports.createMemo = (req, res) => {
 }
 
 exports.editMemo = (req, res) => {
-    var { idCategory, categoryName } = req.body
-    memoModel.findOneAndUpdate({ _id: idCategory }, { categoryName: categoryName }, (err, doc) => {
-        if (err) res.status(400).json({ err: err })
-        res.status(200).json(doc)
-    })
+    var { memo } = req.body
+    var { idUser } = req
+    memoModel.findOneAndUpdate({ _id: memo._id, IDUser: idUser }, {title: memo.title, content: memo.content})
+        .then(newMemo => {
+            res.status(200).json({ memo: newMemo })
+        })
+        .catch(err => res.status(401).json({ err: err }))
 }
 
 exports.deleteMemo = (req, res) => {

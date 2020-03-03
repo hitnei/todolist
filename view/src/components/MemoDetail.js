@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { CALLAPI } from './../Config'
 import { connect } from "react-redux";
+import * as Actions from './../actions/index';
 import MemoDetailHeader from './memoDetail/MemoDetailHeader'
 import MemoDetailContent from './memoDetail/MemoDetailContent'
 import './MemoDetail.css'
@@ -12,12 +14,21 @@ class MemoDetail extends Component {
         }
     }
 
-    onSaveMemo = (data) => {
-        
+    onSaveMemo = () => {
+        var { memo } = this.state
+        CALLAPI('post', 'memo/editMemo', { memo: memo }, true)
+            .then(data => {
+                this.props.disableEditContent()
+                if(data.status === 200) {
+                    // success
+                } else {
+                    // failure
+                }
+            })
     }
 
     onChangeMemo = (memo) => {
-        this.setState({memo: memo})
+        this.setState({ memo: memo })
     }
 
     render() {
@@ -32,8 +43,8 @@ class MemoDetail extends Component {
         })
         return (
             <div className="memoDetail">
-                <MemoDetailHeader memoSelected={memoSelected} onSaveMemo={(data) => this.onSaveMemo(data)}/>
-                <MemoDetailContent categoryName={categoryName} onChangeMemo={(memo) => this.onChangeMemo(memo)}/>
+                <MemoDetailHeader memoSelected={memoSelected} onSaveMemo={this.onSaveMemo} />
+                <MemoDetailContent categoryName={categoryName} onChangeMemo={(memo) => this.onChangeMemo(memo)} />
             </div>
         )
     }
@@ -48,7 +59,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        disableEditContent: () => {
+            dispatch(Actions.disableEditContent())
+        },
     }
 }
 

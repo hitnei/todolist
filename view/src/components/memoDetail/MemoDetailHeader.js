@@ -23,7 +23,7 @@ class MemoDetailHeader extends Component {
     }
 
     onSaveMemo = () => {
-        this.props.onSaveMemo("asd")
+        this.props.onSaveMemo()
     }
 
     onChangeIsDisableEditContent = () => {

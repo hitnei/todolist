@@ -10,7 +10,7 @@ class MemoDetailContent extends Component {
         super(props)
         this.contentEditable = React.createRef();
         this.state = {
-
+            memo: this.props.memoSelected
         }
     };
 
