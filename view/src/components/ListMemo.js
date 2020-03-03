@@ -45,6 +45,7 @@ class ListMemo extends Component {
             var { title, createDate } = memo
             // format create date
             var created = this.formatDate(createDate)
+            console.log(created)
             // end
             title = title.toLowerCase()
             searchValue = searchValue.toLowerCase()
@@ -76,6 +77,7 @@ class ListMemo extends Component {
         var createMonth = created.getMonth() + 1
         createMonth = (createMonth < 10) ? ("0" + createMonth) : (createMonth)
         var createDay = created.getDate()
+        createDay = (createDay < 10) ? ("0" + createDay) : (createDay)
         created = createYear + "/" + createMonth + "/" + createDay
         return created
     }
