@@ -14,6 +14,13 @@ export const changeAllCategory = (data) => {
     }
 }
 
+export const decreaseCategoryAmountById = (id) => {
+    return {
+        type: Types.DECREASE_CATEGORY_AMOUNT_BY_ID,
+        id
+    }
+}
+
 export const changeListMemo = (data) => {
     return {
         type: Types.CHANGE_LISTMEMO,

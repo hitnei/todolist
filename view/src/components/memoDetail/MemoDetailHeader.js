@@ -30,6 +30,12 @@ class MemoDetailHeader extends Component {
         this.props.changeIsDisableEditContent()
     }
 
+    onDeleteMemo = (event, memo) => {
+        memo.isDelete = true
+        this.props.changeListMemoById(memo)
+        this.props.decreaseCategoryAmountById(memo.IDCategory)
+    }
+
     render() {
         var { memoSelected, isDisableEditContent } = this.props
         var {
@@ -59,7 +65,7 @@ class MemoDetailHeader extends Component {
                         <span>Clip</span>
                     </div>
                 </div>
-                <div className="actionButton actionButtonRight">
+                <div className="actionButton actionButtonRight" onClick={(event, memo) => this.onDeleteMemo(event, memoSelected)}>
                     <img src="/images/trash-solid.svg" alt="trash" />
                     <span>Delete</span>
                 </div>
@@ -84,6 +90,12 @@ const mapDispatchToProps = (dispatch) => {
         },
         changeIsDisableEditContent: () => {
             dispatch(Actions.changeIsDisableEditContent())
+        },
+        changeListMemoById: (memo) => {
+            dispatch(Actions.changeListMemoById(memo))
+        },
+        decreaseCategoryAmountById: (id) => {
+            dispatch(Actions.decreaseCategoryAmountById(id))
         },
     }
 }
