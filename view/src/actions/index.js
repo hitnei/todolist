@@ -48,3 +48,10 @@ export const changeIsDisableEditContent = () => {
         
     }
 }
+
+export const disableEditContent = () => {
+    return {
+        type: Types.DISABLE_EDIT_CONTENT,
+        
+    }
+}

@@ -6,8 +6,8 @@ import './ListMemoItem.css'
 class ListMemoItem extends Component {
 
     getCategoryName = () => {
-        var {allCategory, memoItem} = this.props
-        var {IDCategory} = memoItem
+        var { allCategory, memoItem } = this.props
+        var { IDCategory } = memoItem
         var categoryName = ""
         allCategory.filter(category => {
             if (category._id === IDCategory) return categoryName = category.categoryName
@@ -18,6 +18,7 @@ class ListMemoItem extends Component {
 
     onChangeMemoSelected = (event, memo) => {
         this.props.changeMemoSelected(memo)
+        this.props.disableEditContent()
     }
 
     formatDate = (createDate) => {
@@ -78,7 +79,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         changeMemoSelected: (memo) => {
             dispatch(Actions.changeMemoSelected(memo))
-        }
+        },
+        disableEditContent: () => {
+            dispatch(Actions.disableEditContent())
+        },
     }
 }
 

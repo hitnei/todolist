@@ -27,7 +27,10 @@ class ListMemo extends Component {
                 : listMemo.filter(memo => memo.IDCategory === categorySelect)
 
         //set memo selected default
-        if (!memoSelected._id) this.props.changeMemoSelected(listMemoSelect[0])
+        if (!memoSelected._id) {
+            this.props.changeMemoSelected(listMemoSelect[0])
+            this.props.disableEditContent()
+        }
 
         return listMemoSelect.map((memo, index) => {
             return <ListMemoItem key={memo._id} memoItem={memo} isSelected={memoSelected._id === memo._id ? true : false} />
@@ -118,7 +121,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         changeMemoSelected: (memo) => {
             dispatch(Actions.changeMemoSelected(memo))
-        }
+        },
+        disableEditContent: () => {
+            dispatch(Actions.disableEditContent())
+        },
     }
 }
 

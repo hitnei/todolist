@@ -8,7 +8,7 @@ const memoSelected = (state = InitialState, action) => {
             state = action.memo? action.memo : state;
             return state;
         default:
-            return {state};
+            return state;
     }
 };
 export default memoSelected;

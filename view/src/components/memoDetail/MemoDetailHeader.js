@@ -22,6 +22,10 @@ class MemoDetailHeader extends Component {
 
     }
 
+    onSaveMemo = () => {
+        this.props.onSaveMemo("asd")
+    }
+
     onChangeIsDisableEditContent = () => {
         this.props.changeIsDisableEditContent()
     }
@@ -46,7 +50,7 @@ class MemoDetailHeader extends Component {
                         <img src="/images/pen-solid.svg" alt="pen" />
                         <span className={isDisableEditContent ? '' : 'activeEditSpan'}>Edit</span>
                     </div>
-                    <div className="actionButton actionButtonSave">
+                    <div className="actionButton actionButtonSave" onClick={this.onSaveMemo}>
                         <img src="/images/save-solid.svg" alt="save" />
                         <span>Save</span>
                     </div>

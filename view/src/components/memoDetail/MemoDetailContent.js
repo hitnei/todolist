@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ContentEditable from 'react-contenteditable'
 import { connect } from "react-redux";
+import * as Actions from './../../actions/index';
 // import * as Actions from './../../actions/index';
 import './MemoDetailContent.css'
 
@@ -13,15 +14,13 @@ class MemoDetailContent extends Component {
         }
     };
 
-    onHandleChange = (e) => {
-        // console.log(e._targetInst.stateNode.title)
-        // var { target } = e;
-        // var { stateNode } = e._targetInst;
-        // var name = stateNode.title;
-        // var value = target.value;
-        // this.setState({
-        //     [name]: value,
-        // });
+    onHandleChangeMemo = (e) => {
+        var { value } = e.target
+        var name = e._targetInst.pendingProps.id
+        var { memoSelected } = this.props
+        memoSelected[name] = value
+        // this.props.changeMemoSelected(memoSelected)
+        this.props.onChangeMemo(memoSelected)
     }
 
     formatDate = (createDate) => {
@@ -62,20 +61,22 @@ class MemoDetailContent extends Component {
                     </div>
                 </div>
                 <ContentEditable
+                    id="title"
                     className="memoDetailcontent-title"
-                    innerRef={this.contentEditable}
+                    // innerRef={this.contentEditable}
                     html={title ? title : ''} // innerHTML of the editable div
                     disabled={isDisableEditContent}       // use true to disable editing
-                    onChange={this.onHandleChange} // handle innerHTML change
+                    onChange={this.onHandleChangeMemo} // handle innerHTML change
                     tagName='article' // Use a custom HTML tag (uses a div by default)
                     onBlur={''} // when selected (add late)
                 />
                 <ContentEditable
+                    id="content"
                     className="memoDetailcontent-content"
-                    innerRef={this.contentEditable}
+                    // innerRef={this.contentEditable}
                     html={content ? content : ''} // innerHTML of the editable div
                     disabled={isDisableEditContent}       // use true to disable editing
-                    onChange={this.onHandleChange} // handle innerHTML change
+                    onChange={this.onHandleChangeMemo} // handle innerHTML change
                     tagName='article' // Use a custom HTML tag (uses a div by default)
                     onBlur={''} // when selected (add late)
                 />
@@ -86,13 +87,16 @@ class MemoDetailContent extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isDisableEditContent: state.isDisableEditContent
+        isDisableEditContent: state.isDisableEditContent,
+        memoSelected: state.memoSelected
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        changeMemoSelected: (memo) => {
+            dispatch(Actions.changeMemoSelected(memo))
+        },
     }
 }
 

@@ -5,6 +5,21 @@ import MemoDetailContent from './memoDetail/MemoDetailContent'
 import './MemoDetail.css'
 
 class MemoDetail extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            memo: {}
+        }
+    }
+
+    onSaveMemo = (data) => {
+        
+    }
+
+    onChangeMemo = (memo) => {
+        this.setState({memo: memo})
+    }
+
     render() {
         var { memoSelected } = this.props
         var categoryName = ""
@@ -17,8 +32,8 @@ class MemoDetail extends Component {
         })
         return (
             <div className="memoDetail">
-                <MemoDetailHeader memoSelected={memoSelected}/>
-                <MemoDetailContent memoSelected={memoSelected} categoryName={categoryName} />
+                <MemoDetailHeader memoSelected={memoSelected} onSaveMemo={(data) => this.onSaveMemo(data)}/>
+                <MemoDetailContent categoryName={categoryName} onChangeMemo={(memo) => this.onChangeMemo(memo)}/>
             </div>
         )
     }
