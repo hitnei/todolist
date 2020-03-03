@@ -31,9 +31,17 @@ class MemoDetailHeader extends Component {
     }
 
     onDeleteMemo = (event, memo) => {
-        memo.isDelete = true
-        this.props.changeListMemoById(memo)
-        this.props.decreaseCategoryAmountById(memo.IDCategory)
+        CALLAPI('post', 'memo/editMemo', { memo: memo }, true)
+            .then(data => {
+                this.props.disableEditContent()
+                if (data.status === 200) {
+                    memo.isDelete = true
+                    this.props.changeListMemoById(memo)
+                    this.props.decreaseCategoryAmountById(memo.IDCategory)
+                } else {
+                    // failure
+                }
+            })
     }
 
     render() {
@@ -96,6 +104,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         decreaseCategoryAmountById: (id) => {
             dispatch(Actions.decreaseCategoryAmountById(id))
+        },
+        disableEditContent: () => {
+            dispatch(Actions.disableEditContent())
         },
     }
 }
