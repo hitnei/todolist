@@ -36,12 +36,29 @@ exports.createMemo = (req, res) => {
 }
 
 exports.editMemo = (req, res) => {
-    var { memo } = req.body
+    var { memo, oldIdCategory } = req.body
     memo.createDate = Date.now()
     var { idUser } = req
-    memoModel.findOneAndUpdate({ _id: memo._id, IDUser: idUser }, { title: memo.title, content: memo.content, isDelete: memo.isDelete, createDate: memo.createDate })
+    memoModel.findOneAndUpdate({ _id: memo._id, IDUser: idUser }, { title: memo.title, content: memo.content, isDelete: memo.isDelete, createDate: memo.createDate, IDCategory: memo.IDCategory })
         .then(newMemo => {
-            res.status(200).json({ memo: memo })
+            var newIdCategory = memo.IDCategory
+            if (oldIdCategory !== newIdCategory) {
+                categoryModel.findOne({ _id: oldIdCategory })
+                    .then(category => {
+                        category.categoryAmount = --category.categoryAmount
+                        category.save(err => {
+                            if (err) res.status(402).json({ err: err })
+                        })
+                    })
+                categoryModel.findOne({ _id: newIdCategory })
+                    .then(category => {
+                        category.categoryAmount = ++category.categoryAmount
+                        category.save(err => {
+                            if (err) res.status(403).json({ err: err })
+                        })
+                    })
+            }
+            res.status(200).json({ memo: memo, oldIdCategory: oldIdCategory, newIdCategory: newIdCategory })
         })
         .catch(err => res.status(401).json({ err: err }))
 }

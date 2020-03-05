@@ -10,42 +10,38 @@ class MemoDetail extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            memo: {}
+            memo: {},
+            oldIdCategory: ""
         }
     }
 
     onSaveMemo = () => {
-        var { memo } = this.state
-        CALLAPI('post', 'memo/editMemo', { memo: memo }, true)
+        var { memo, oldIdCategory } = this.state
+        CALLAPI('post', 'memo/editMemo', { memo: memo, oldIdCategory: oldIdCategory }, true)
             .then(data => {
                 this.props.disableEditContent()
-                if(data.status === 200) {
+                if (data.status === 200) {
                     this.props.changeListMemoById(data.data.memo)
                     this.props.changeMemoSelected(data.data.memo)
+                    var { oldIdCategory, newIdCategory } = data.data
+                    this.props.decreaseCategoryAmountById(oldIdCategory)
+                    this.props.increaseCategoryAmountById(newIdCategory)
                 } else {
                     // failure
                 }
             })
     }
 
-    onChangeMemo = (memo) => {
-        this.setState({ memo: memo })
+    onChangeMemo = (memo, oldIdCategory) => {
+        this.setState({ memo: memo, oldIdCategory: oldIdCategory })
     }
 
     render() {
         var { memoSelected } = this.props
-        var categoryName = ""
-        var { allCategory } = this.props
-        allCategory.map((category, index) => {
-            if (category._id === memoSelected.IDCategory) {
-                return categoryName = category.categoryName
-            }
-            return ""
-        })
         return (
             <div className="memoDetail">
                 <MemoDetailHeader memoSelected={memoSelected} onSaveMemo={this.onSaveMemo} />
-                <MemoDetailContent categoryName={categoryName} onChangeMemo={(memo) => this.onChangeMemo(memo)} />
+                <MemoDetailContent onChangeMemo={(memo, oldIdCategory) => this.onChangeMemo(memo, oldIdCategory)} />
             </div>
         )
     }
@@ -64,10 +60,16 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(Actions.disableEditContent())
         },
         changeListMemoById: (memo) => {
-          dispatch(Actions.changeListMemoById(memo))
+            dispatch(Actions.changeListMemoById(memo))
         },
         changeMemoSelected: (memo) => {
             dispatch(Actions.changeMemoSelected(memo))
+        },
+        decreaseCategoryAmountById: (id) => {
+            dispatch(Actions.decreaseCategoryAmountById(id))
+        },
+        increaseCategoryAmountById: (id) => {
+            dispatch(Actions.increaseCategoryAmountById(id))
         },
     }
 }

@@ -24,6 +24,15 @@
     font-size: 14px;
 }
 
+.memoDetailcontent .memoDetailcontent-header div .listdata input {
+    border: none;
+    padding: 0px;
+}
+
+.memoDetailcontent .memoDetailcontent-header div .listdata input[value] {
+    font-size: 14px;
+}
+
 .memoDetailcontent .memoDetailcontent-title {
     height: 80px;
     display: flex;

@@ -10,7 +10,8 @@ class MemoDetailContent extends Component {
         super(props)
         this.contentEditable = React.createRef();
         this.state = {
-            memo: this.props.memoSelected
+            memo: this.props.memoSelected,
+            idCategory: null
         }
     };
 
@@ -18,9 +19,21 @@ class MemoDetailContent extends Component {
         var { value } = e.target
         var name = e._targetInst.pendingProps.id
         var { memoSelected } = this.props
-        memoSelected[name] = value
+        if (e.target.name === 'categoryName') {
+            var { allCategory } = this.props
+            var oldIdCategory = memoSelected['IDCategory']
+            allCategory.forEach((cate) => {
+                if (cate.categoryName === value) {
+                    memoSelected['IDCategory'] = cate._id
+                    return;
+                }
+            })
+        }
+        else {
+            memoSelected[name] = value
+        }
         // this.props.changeMemoSelected(memoSelected)
-        this.props.onChangeMemo(memoSelected)
+        this.props.onChangeMemo(memoSelected, oldIdCategory)
     }
 
     formatDate = (createDate) => {
@@ -34,8 +47,25 @@ class MemoDetailContent extends Component {
         return created
     }
 
+    showListCategoryOption = (listCategory) => {
+        return listCategory.map((category) => {
+            return <option value={category.categoryName} />
+        })
+    }
+
+    onHandleChange = (e) => {
+        var { name, value } = e.target
+        this.setState({
+            [name]: value
+        })
+    }
+
+    onHandleChangeMemoCategory = (e, id) => {
+        this.props.decreaseCategoryAmountById(id)
+    }
+
     render() {
-        var { categoryName, memoSelected, isDisableEditContent } = this.props
+        var { memoSelected, isDisableEditContent, allCategory } = this.props
         var {
             // _id,
             // IDCategory,
@@ -49,6 +79,15 @@ class MemoDetailContent extends Component {
         } = memoSelected
         // create date
         var created = this.formatDate(createDate)
+
+        var categoryName = ""
+        allCategory.map((category, index) => {
+            if (category._id === memoSelected.IDCategory) {
+                return categoryName = category.categoryName
+            }
+            return ""
+        })
+
         return (
             <div className="memoDetailcontent">
                 <div className="memoDetailcontent-header">
@@ -58,7 +97,17 @@ class MemoDetailContent extends Component {
                     </div>
                     <div className="memoDetailcontent-category">
                         <img src="/images/tag-solid-black.svg" alt="clock regular black" />
-                        <span>{categoryName}</span>
+                        {
+                            isDisableEditContent ?
+                                <span>{categoryName}</span>
+                                :
+                                <div className="listdata">
+                                    <input type="text" list="dataCategory" name="categoryName" defaultValue={categoryName} onChange={this.onHandleChangeMemo} />
+                                    <datalist id="dataCategory">
+                                        {this.showListCategoryOption(allCategory)}
+                                    </datalist>
+                                </div>
+                        }
                     </div>
                 </div>
                 <ContentEditable
@@ -89,7 +138,8 @@ class MemoDetailContent extends Component {
 const mapStateToProps = (state) => {
     return {
         isDisableEditContent: state.isDisableEditContent,
-        memoSelected: state.memoSelected
+        memoSelected: state.memoSelected,
+        allCategory: state.allCategory
     }
 }
 
@@ -97,6 +147,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         changeMemoSelected: (memo) => {
             dispatch(Actions.changeMemoSelected(memo))
+        },
+        decreaseCategoryAmountById: (id) => {
+            dispatch(Actions.decreaseCategoryAmountById(id))
         },
     }
 }

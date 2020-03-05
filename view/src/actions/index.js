@@ -21,6 +21,13 @@ export const decreaseCategoryAmountById = (id) => {
     }
 }
 
+export const increaseCategoryAmountById = (id) => {
+    return {
+        type: Types.INCREASE_CATEGORY_AMOUNT_BY_ID,
+        id
+    }
+}
+
 export const changeOrAddCategory = (category) => {
     return {
         type: Types.CHANGE_OR_ADD_CATEGORY,
@@ -73,13 +80,13 @@ export const changeMemoIsClip = (id) => {
 export const changeIsDisableEditContent = () => {
     return {
         type: Types.CHANGE_IS_DISABLE_EDIT_CONTENT,
-        
+
     }
 }
 
 export const disableEditContent = () => {
     return {
         type: Types.DISABLE_EDIT_CONTENT,
-        
+
     }
 }
