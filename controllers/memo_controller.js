@@ -1,4 +1,5 @@
 const memoModel = require('../models/memo_model');
+const categoryModel = require('../models/category_model');
 
 mongoose = require('mongoose')
 
@@ -14,16 +15,23 @@ exports.getAllMemoByUser = (req, res) => {
 
 exports.createMemo = (req, res) => {
     var { IDCategory, title, content } = req.body
-    memoModel.create({
+    var { idUser } = req
+    var newMemo = new memoModel({
+        IDUser: idUser,
         IDCategory: IDCategory,
         title: title,
         content: content,
-    }).then((memo) => {
-        res.status(200).json(memo)
-    }).catch((err) => {
-        res.status(400).json({
-            err: err
-        })
+    })
+    newMemo.save((err, doc) => {
+        if (err) return res.status(400).json({ err: err })
+        categoryModel.findOne({ _id: doc.IDCategory })
+            .then(category => {
+                category.categoryAmount++
+                category.save((err) => {
+                    if (err) res.status(400).json({ err: err })
+                })
+            })
+        return res.status(200).json({ memo: doc })
     })
 }
 
@@ -31,7 +39,7 @@ exports.editMemo = (req, res) => {
     var { memo } = req.body
     memo.createDate = Date.now()
     var { idUser } = req
-    memoModel.findOneAndUpdate({ _id: memo._id, IDUser: idUser }, {title: memo.title, content: memo.content, isDelete: memo.isDelete, createDate: memo.createDate})
+    memoModel.findOneAndUpdate({ _id: memo._id, IDUser: idUser }, { title: memo.title, content: memo.content, isDelete: memo.isDelete, createDate: memo.createDate })
         .then(newMemo => {
             res.status(200).json({ memo: memo })
         })
