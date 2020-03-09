@@ -49,7 +49,7 @@ class MemoDetailContent extends Component {
 
     showListCategoryOption = (listCategory) => {
         return listCategory.map((category) => {
-            return <option value={category.categoryName} />
+            return <option key={category._id} value={category.categoryName} />
         })
     }
 

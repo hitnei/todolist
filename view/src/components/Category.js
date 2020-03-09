@@ -23,21 +23,21 @@ class Category extends Component {
         if (!showListCategory) return ""
         return listCategory.map((category, index) => {
             return (
-                // category.categoryAmount ? 
+                category.categoryAmount ? 
                 <div className={categorySelect !== 'all' && categorySelect !== 'clip' && categorySelect === category._id ? "category-item category-selected" : "category-item"} key={category._id} onClick={(event, data) => this.onChangeCategorySelect(event, category._id)}>
                     <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid" />
                     <input className="category-button category-button__categories category-category" type="button" value={category.categoryName} />
                     <span>{category.categoryAmount ? category.categoryAmount : 0}</span>
                 </div>
-                // :
-                // ""
+                :
+                ""
             )
         })
     }
 
     showListCategoryOption = (listCategory) => {
         return listCategory.map((category) => {
-            return <option value={category.categoryName} />
+            return <option key={category._id} value={category.categoryName} />
         })
     }
 
