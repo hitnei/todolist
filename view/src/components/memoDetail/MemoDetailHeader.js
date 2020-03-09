@@ -37,7 +37,6 @@ class MemoDetailHeader extends Component {
                 if (data.status === 200) {
                     memo.isDelete = true
                     this.props.changeListMemoById(memo)
-                    this.props.decreaseCategoryAmountById(memo.IDCategory)
                 } else {
                     // failure
                 }
@@ -101,9 +100,6 @@ const mapDispatchToProps = (dispatch) => {
         },
         changeListMemoById: (memo) => {
             dispatch(Actions.changeListMemoById(memo))
-        },
-        decreaseCategoryAmountById: (id) => {
-            dispatch(Actions.decreaseCategoryAmountById(id))
         },
         disableEditContent: () => {
             dispatch(Actions.disableEditContent())

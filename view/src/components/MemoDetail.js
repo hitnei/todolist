@@ -11,29 +11,25 @@ class MemoDetail extends Component {
         super(props)
         this.state = {
             memo: {},
-            oldIdCategory: ""
         }
     }
 
     onSaveMemo = () => {
-        var { memo, oldIdCategory } = this.state
-        CALLAPI('post', 'memo/editMemo', { memo: memo, oldIdCategory: oldIdCategory }, true)
+        var { memo } = this.state
+        CALLAPI('post', 'memo/editMemo', { memo: memo }, true)
             .then(data => {
-                this.props.disableEditContent()
                 if (data.status === 200) {
-                    this.props.changeListMemoById(data.data.memo)
-                    this.props.changeMemoSelected(data.data.memo)
-                    var { oldIdCategory, newIdCategory } = data.data
-                    this.props.decreaseCategoryAmountById(oldIdCategory)
-                    this.props.increaseCategoryAmountById(newIdCategory)
+                    var newMemo = data.data.memo
+                    this.props.disableEditContent()
+                    this.props.changeListMemoById(newMemo)
                 } else {
                     // failure
                 }
             })
     }
 
-    onChangeMemo = (memo, oldIdCategory) => {
-        this.setState({ memo: memo, oldIdCategory: oldIdCategory })
+    onChangeMemo = (memo) => {
+        this.setState({ memo: memo })
     }
 
     render() {
@@ -41,7 +37,7 @@ class MemoDetail extends Component {
         return (
             <div className="memoDetail">
                 <MemoDetailHeader memoSelected={memoSelected} onSaveMemo={this.onSaveMemo} />
-                <MemoDetailContent onChangeMemo={(memo, oldIdCategory) => this.onChangeMemo(memo, oldIdCategory)} />
+                <MemoDetailContent onChangeMemo={(memo) => this.onChangeMemo(memo)} />
             </div>
         )
     }
@@ -64,12 +60,6 @@ const mapDispatchToProps = (dispatch) => {
         },
         changeMemoSelected: (memo) => {
             dispatch(Actions.changeMemoSelected(memo))
-        },
-        decreaseCategoryAmountById: (id) => {
-            dispatch(Actions.decreaseCategoryAmountById(id))
-        },
-        increaseCategoryAmountById: (id) => {
-            dispatch(Actions.increaseCategoryAmountById(id))
         },
     }
 }

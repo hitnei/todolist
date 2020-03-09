@@ -14,20 +14,6 @@ export const changeAllCategory = (data) => {
     }
 }
 
-export const decreaseCategoryAmountById = (id) => {
-    return {
-        type: Types.DECREASE_CATEGORY_AMOUNT_BY_ID,
-        id
-    }
-}
-
-export const increaseCategoryAmountById = (id) => {
-    return {
-        type: Types.INCREASE_CATEGORY_AMOUNT_BY_ID,
-        id
-    }
-}
-
 export const changeOrAddCategory = (category) => {
     return {
         type: Types.CHANGE_OR_ADD_CATEGORY,
@@ -43,6 +29,7 @@ export const changeListMemo = (data) => {
 }
 
 export const changeListMemoById = (memo) => {
+    memo = memo? memo : null
     return {
         type: Types.CHANGE_LISTMEMO_BY_ID,
         memo

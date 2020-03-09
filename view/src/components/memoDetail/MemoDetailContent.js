@@ -21,7 +21,6 @@ class MemoDetailContent extends Component {
         var { memoSelected } = this.props
         if (e.target.name === 'categoryName') {
             var { allCategory } = this.props
-            var oldIdCategory = memoSelected['IDCategory']
             allCategory.forEach((cate) => {
                 if (cate.categoryName === value) {
                     memoSelected['IDCategory'] = cate._id
@@ -32,8 +31,7 @@ class MemoDetailContent extends Component {
         else {
             memoSelected[name] = value
         }
-        // this.props.changeMemoSelected(memoSelected)
-        this.props.onChangeMemo(memoSelected, oldIdCategory)
+        this.props.onChangeMemo(memoSelected)
     }
 
     formatDate = (createDate) => {
@@ -58,10 +56,6 @@ class MemoDetailContent extends Component {
         this.setState({
             [name]: value
         })
-    }
-
-    onHandleChangeMemoCategory = (e, id) => {
-        this.props.decreaseCategoryAmountById(id)
     }
 
     render() {
@@ -147,9 +141,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         changeMemoSelected: (memo) => {
             dispatch(Actions.changeMemoSelected(memo))
-        },
-        decreaseCategoryAmountById: (id) => {
-            dispatch(Actions.decreaseCategoryAmountById(id))
         },
     }
 }
