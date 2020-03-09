@@ -16,16 +16,19 @@ class MemoDetail extends Component {
 
     onSaveMemo = () => {
         var { memo } = this.state
-        CALLAPI('post', 'memo/editMemo', { memo: memo }, true)
-            .then(data => {
-                if (data.status === 200) {
-                    var newMemo = data.data.memo
-                    this.props.disableEditContent()
-                    this.props.changeListMemoById(newMemo)
-                } else {
-                    // failure
-                }
-            })
+        if (memo.title) {
+            CALLAPI('post', 'memo/editMemo', { memo: memo }, true)
+                .then(data => {
+                    if (data.status === 200) {
+                        var newMemo = data.data.memo
+                        this.props.disableEditContent()
+                        this.props.changeListMemoById(newMemo)
+                        this.setState({memo: {}})
+                    } else {
+                        // failure
+                    }
+                })
+        }
     }
 
     onChangeMemo = (memo) => {
