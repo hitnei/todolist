@@ -18,16 +18,22 @@ class Category extends Component {
     }
 
     showListCategory = (listCategory) => {
-        var { categorySelect } = this.props
+        var { categorySelect, listMemo } = this.props
         var { showListCategory } = this.state
         if (!showListCategory) return ""
         return listCategory.map((category, index) => {
+            var categoryAmount = 0;
+            listMemo.forEach(memo => {
+                if (memo.IDCategory === category._id && !memo.isDelete) {
+                    categoryAmount++
+                }
+            });
             return (
-                category.categoryAmount ? 
+                categoryAmount ? 
                 <div className={categorySelect !== 'all' && categorySelect !== 'clip' && categorySelect === category._id ? "category-item category-selected" : "category-item"} key={category._id} onClick={(event, data) => this.onChangeCategorySelect(event, category._id)}>
                     <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid" />
                     <input className="category-button category-button__categories category-category" type="button" value={category.categoryName} />
-                    <span>{category.categoryAmount ? category.categoryAmount : 0}</span>
+                    <span>{categoryAmount}</span>
                 </div>
                 :
                 ""
@@ -94,10 +100,11 @@ class Category extends Component {
     render() {
         var { allCategory, listMemo, categorySelect } = this.props
         var { onCreate, categoryName, title, content } = this.state
-        var numberAllCategory = 0;
-        allCategory.map((category, index) => {
-            var amount = (typeof category.categoryAmount && category.categoryAmount) ? category.categoryAmount : 0
-            return numberAllCategory += parseInt(amount)
+        var numberAllCategory = 0
+        listMemo.forEach(memo => {
+            if (!memo.isDelete) {
+                numberAllCategory++
+            }
         })
         var numberClipped = 0;
         listMemo.map((memo, index) => {
