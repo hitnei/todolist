@@ -37,7 +37,7 @@ class MemoDetail extends Component {
         return (
             <div className="memoDetail">
                 <MemoDetailHeader memoSelected={memoSelected} onSaveMemo={this.onSaveMemo} />
-                <MemoDetailContent onChangeMemo={(memo) => this.onChangeMemo(memo)} />
+                <MemoDetailContent onChangeMemo={(memo) => this.onChangeMemo(memo)} onSaveMemo={this.onSaveMemo} />
             </div>
         )
     }
