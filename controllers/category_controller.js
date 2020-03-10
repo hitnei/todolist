@@ -20,7 +20,6 @@ exports.createCategory = (req, res) => {
                 var newCategory = new categoryModel({
                     IDUser: idUser,
                     categoryName: categoryName,
-                    categoryAmount: 1,
                 })
                 newCategory.save((err, doc) => {
                     if (err) res.status(400).json({ err: err })

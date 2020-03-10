@@ -6,26 +6,6 @@ const allCategory = (state = InitialState, action) => {
         case types.CHANGE_ALLCATEGORY:
             state = action.data;
             return [...state];
-        case types.DECREASE_CATEGORY_AMOUNT_BY_ID:
-            var { id } = action
-            state = state.map(category => {
-                if (category._id === id) {
-                    category.categoryAmount = category.categoryAmount > 0 ? --category.categoryAmount : category.categoryAmount
-                    return category
-                }
-                return category
-            })
-            return [...state];
-        case types.INCREASE_CATEGORY_AMOUNT_BY_ID:
-            var idIncrease = action.id
-            state = state.map(category => {
-                if (category._id === idIncrease) {
-                    category.categoryAmount = category.categoryAmount > 0 ? ++category.categoryAmount : category.categoryAmount
-                    return category
-                }
-                return category
-            })
-            return [...state];
         case types.CHANGE_OR_ADD_CATEGORY:
             var { category } = action
             var { _id } = category

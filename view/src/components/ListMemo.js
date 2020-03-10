@@ -49,7 +49,6 @@ class ListMemo extends Component {
             var { title, createDate } = memo
             // format create date
             var created = this.formatDate(createDate)
-            console.log(created)
             // end
             title = title.toLowerCase()
             searchValue = searchValue.toLowerCase()
