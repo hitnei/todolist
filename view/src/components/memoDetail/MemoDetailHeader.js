@@ -60,7 +60,7 @@ class MemoDetailHeader extends Component {
             <div className="memoDetailHeader">
                 <div className="actionButtonLeft">
                     <div className={isDisableEditContent ? 'actionButton actionButtonEdit' : 'actionButton actionButtonEdit activeEditDiv'} onClick={this.onChangeIsDisableEditContent}>
-                        <img src="/images/pen-solid.svg" alt="pen" />
+                        <img src={isDisableEditContent? "/images/pen-solid.svg" : "/images/edit-solid.svg"} alt="pen" />
                         <span className={isDisableEditContent ? '' : 'activeEditSpan'}>Edit</span>
                     </div>
                     <div className="actionButton actionButtonSave" onClick={this.onSaveMemo}>
