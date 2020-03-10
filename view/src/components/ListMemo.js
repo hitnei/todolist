@@ -33,6 +33,10 @@ class ListMemo extends Component {
             this.props.disableEditContent()
         }
 
+        if (!listMemoSelect.includes(memoSelected)) {
+            this.props.changeMemoSelected(listMemoSelect[0])
+        }
+
         return listMemoSelect.map((memo, index) => {
             return <ListMemoItem key={memo._id} memoItem={memo} isSelected={memoSelected._id === memo._id ? true : false} />
         })
