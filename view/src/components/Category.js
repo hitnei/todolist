@@ -155,7 +155,7 @@ class Category extends Component {
                         <span>Create New</span>
                         <div className="category-create__form">
                             <div>
-                                <label>Choose or create category:</label>
+                                <label>Choose or Create category:</label>
                                 <input type="text" list="dataCategory" name="categoryName" value={categoryName} onChange={this.onHandleChange} />
                                 <datalist id="dataCategory">
                                     {this.showListCategoryOption(allCategory)}

@@ -42,6 +42,7 @@
     box-sizing: border-box;
     font-size: 36px;
     color: #2B3137;
+    user-select: text;
 }
 
 .memoDetailcontent .memoDetailcontent-content {
@@ -51,6 +52,7 @@
     overflow-y: auto;
     box-sizing: border-box;
     color: #2B3137;
+    user-select: text;
 }
 
 .memoDetailcontent .memoDetailcontent-content::-webkit-scrollbar {
