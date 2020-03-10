@@ -20,7 +20,9 @@ class MemoDetailContent extends Component {
         var { value } = e.target
         var name = e._targetInst.pendingProps.id
         var { memoSelected } = this.props
+        var cateName = ""
         if (e.target.name === 'categoryName') {
+            cateName = value
             var { allCategory } = this.props
             allCategory.forEach((cate) => {
                 if (cate.categoryName === value) {
@@ -32,7 +34,7 @@ class MemoDetailContent extends Component {
         else {
             memoSelected[name] = value
         }
-        this.props.onChangeMemo(memoSelected)
+        this.props.onChangeMemo(memoSelected, cateName)
     }
 
     formatDate = (createDate) => {

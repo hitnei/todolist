@@ -11,28 +11,39 @@ class MemoDetail extends Component {
         super(props)
         this.state = {
             memo: {},
+            cateName: "",
         }
     }
 
     onSaveMemo = () => {
-        var { memo } = this.state
-        if (memo.title) {
-            CALLAPI('post', 'memo/editMemo', { memo: memo }, true)
+        var { memo, cateName } = this.state
+        if (memo.title && cateName !== '') {
+            CALLAPI('post', 'category/createCategory', { categoryName: cateName }, true)
                 .then(data => {
-                    if (data.status === 200) {
-                        var newMemo = data.data.memo
-                        this.props.disableEditContent()
-                        this.props.changeListMemoById(newMemo)
-                        this.setState({memo: {}})
-                    } else {
-                        // failure
+                    if (data.status === 200 || data.status === 201) {
+                        // 200 -> created, 201 -> had category
+                        memo.IDCategory = data.data.category._id
+                        this.props.changeOrAddCategory(data.data.category)
                     }
+                    CALLAPI('post', 'memo/editMemo', { memo: memo }, true)
+                        .then(data => {
+                            if (data.status === 200) {
+                                var newMemo = data.data.memo
+                                this.props.disableEditContent()
+                                this.props.changeListMemoById(newMemo)
+                                this.props.changeMemoSelected(newMemo)
+                                this.setState({ memo: {} })
+                            } else {
+                                // failure
+                            }
+                        })
                 })
+
         }
     }
 
-    onChangeMemo = (memo) => {
-        this.setState({ memo: memo })
+    onChangeMemo = (memo, cateName) => {
+        this.setState({ memo, cateName })
     }
 
     render() {
@@ -40,7 +51,7 @@ class MemoDetail extends Component {
         return (
             <div className="memoDetail">
                 <MemoDetailHeader memoSelected={memoSelected} onSaveMemo={this.onSaveMemo} />
-                <MemoDetailContent onChangeMemo={(memo) => this.onChangeMemo(memo)} onSaveMemo={this.onSaveMemo} />
+                <MemoDetailContent onChangeMemo={(memo, cateName) => this.onChangeMemo(memo, cateName)} onSaveMemo={this.onSaveMemo} />
             </div>
         )
     }
@@ -63,6 +74,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         changeMemoSelected: (memo) => {
             dispatch(Actions.changeMemoSelected(memo))
+        },
+        changeOrAddCategory: (category) => {
+            dispatch(Actions.changeOrAddCategory(category))
         },
     }
 }
