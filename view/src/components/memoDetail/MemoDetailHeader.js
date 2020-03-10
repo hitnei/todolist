@@ -31,11 +31,11 @@ class MemoDetailHeader extends Component {
     }
 
     onDeleteMemo = (event, memo) => {
+        memo.isDelete = !memo.isDelete
         CALLAPI('post', 'memo/editMemo', { memo: memo }, true)
             .then(data => {
                 this.props.disableEditContent()
                 if (data.status === 200) {
-                    memo.isDelete = true
                     this.props.changeListMemoById(memo)
                 } else {
                     // failure
@@ -44,7 +44,7 @@ class MemoDetailHeader extends Component {
     }
 
     render() {
-        var { memoSelected, isDisableEditContent } = this.props
+        var { memoSelected, isDisableEditContent, categorySelect } = this.props
         var {
             // _id,
             // IDCategory,
@@ -54,13 +54,13 @@ class MemoDetailHeader extends Component {
             // createDate,
             // dateDelete,
             isClip,
-            // idDelete,
+            isDelete,
         } = memoSelected
         return (
             <div className="memoDetailHeader">
-                <div className="actionButtonLeft">
+                {!(categorySelect === 'delete')? <div className="actionButtonLeft">
                     <div className={isDisableEditContent ? 'actionButton actionButtonEdit' : 'actionButton actionButtonEdit activeEditDiv'} onClick={this.onChangeIsDisableEditContent}>
-                        <img src={isDisableEditContent? "/images/pen-solid.svg" : "/images/edit-solid.svg"} alt="pen" />
+                        <img src={isDisableEditContent ? "/images/pen-solid.svg" : "/images/edit-solid.svg"} alt="pen" />
                         <span className={isDisableEditContent ? '' : 'activeEditSpan'}>Edit</span>
                     </div>
                     <div className="actionButton actionButtonSave" onClick={this.onSaveMemo}>
@@ -71,10 +71,10 @@ class MemoDetailHeader extends Component {
                         <img src="/images/paperclip-solid-vertical.svg" alt="paperclip orange" />
                         <span>Clip</span>
                     </div>
-                </div>
+                </div> : <div></div> }
                 <div className="actionButton actionButtonRight" onClick={(event, memo) => this.onDeleteMemo(event, memoSelected)}>
                     <img src="/images/trash-solid.svg" alt="trash" />
-                    <span>Delete</span>
+                    <span>{categorySelect === 'delete' && isDelete ? "Undelete" : "Delete"}</span>
                 </div>
             </div>
         )
@@ -83,7 +83,8 @@ class MemoDetailHeader extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isDisableEditContent: state.isDisableEditContent
+        isDisableEditContent: state.isDisableEditContent,
+        categorySelect: state.categorySelect,
     }
 }
 
