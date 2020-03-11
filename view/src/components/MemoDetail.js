@@ -17,28 +17,42 @@ class MemoDetail extends Component {
 
     onSaveMemo = () => {
         var { memo, cateName } = this.state
-        if (memo.title && cateName !== '') {
-            CALLAPI('post', 'category/createCategory', { categoryName: cateName }, true)
-                .then(data => {
-                    if (data.status === 200 || data.status === 201) {
-                        // 200 -> created, 201 -> had category
-                        memo.IDCategory = data.data.category._id
-                        this.props.changeOrAddCategory(data.data.category)
-                    }
-                    CALLAPI('post', 'memo/editMemo', { memo: memo }, true)
-                        .then(data => {
-                            if (data.status === 200) {
-                                var newMemo = data.data.memo
-                                this.props.disableEditContent()
-                                this.props.changeListMemoById(newMemo)
-                                this.props.changeMemoSelected(newMemo)
-                                this.setState({ memo: {} })
-                            } else {
-                                // failure
-                            }
-                        })
-                })
-
+        if (memo.title) {
+            if (cateName !== '') {
+                CALLAPI('post', 'category/createCategory', { categoryName: cateName }, true)
+                    .then(data => {
+                        if (data.status === 200 || data.status === 201) {
+                            // 200 -> created, 201 -> had category
+                            memo.IDCategory = data.data.category._id
+                            this.props.changeOrAddCategory(data.data.category)
+                        }
+                        CALLAPI('post', 'memo/editMemo', { memo: memo }, true)
+                            .then(data => {
+                                if (data.status === 200) {
+                                    var newMemo = data.data.memo
+                                    this.props.disableEditContent()
+                                    this.props.changeListMemoById(newMemo)
+                                    this.props.changeMemoSelected(newMemo)
+                                    this.setState({ memo: {} })
+                                } else {
+                                    // failure
+                                }
+                            })
+                    })
+            } else {
+                CALLAPI('post', 'memo/editMemo', { memo: memo }, true)
+                    .then(data => {
+                        if (data.status === 200) {
+                            var newMemo = data.data.memo
+                            this.props.disableEditContent()
+                            this.props.changeListMemoById(newMemo)
+                            this.props.changeMemoSelected(newMemo)
+                            this.setState({ memo: {} })
+                        } else {
+                            // failure
+                        }
+                    })
+            }
         }
     }
 
