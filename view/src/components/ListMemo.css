@@ -87,14 +87,14 @@
 .listMemo .listMemoShortcut::-webkit-scrollbar-thumb:hover {
     background: rgba(128, 128, 128, 0.8);
 }
-
+/* 
 @media screen and (max-width: 1200px) {
     .listMemo {
         width: 350px;
     }
-}
+} */
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1200px) {
     .listMemo {
         display: none;
     }

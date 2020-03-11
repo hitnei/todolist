@@ -18,6 +18,7 @@ class MemoDetail extends Component {
     onSaveMemo = () => {
         var { memo, cateName } = this.state
         if (memo.title) {
+            this.props.changeLoading()
             if (cateName !== '') {
                 CALLAPI('post', 'category/createCategory', { categoryName: cateName }, true)
                     .then(data => {
@@ -38,6 +39,7 @@ class MemoDetail extends Component {
                                     // failure
                                 }
                             })
+                        this.props.changeLoading()
                     })
             } else {
                 CALLAPI('post', 'memo/editMemo', { memo: memo }, true)
@@ -51,6 +53,7 @@ class MemoDetail extends Component {
                         } else {
                             // failure
                         }
+                        this.props.changeLoading()
                     })
             }
         }
@@ -91,6 +94,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         changeOrAddCategory: (category) => {
             dispatch(Actions.changeOrAddCategory(category))
+        },
+        changeLoading: () => {
+            dispatch(Actions.changeLoading())
         },
     }
 }

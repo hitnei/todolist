@@ -77,3 +77,10 @@ export const disableEditContent = () => {
 
     }
 }
+
+export const changeLoading = () => {
+    return {
+        type: Types.CHANGE_LOADING,
+
+    }
+}

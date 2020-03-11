@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import axios from 'axios';
-import { API_URL } from './../Config';
+import { CALLAPI } from './../Config';
 import * as Actions from '../actions/index';
 import { connect } from "react-redux";
 import './Login.css'
@@ -22,64 +21,49 @@ class Login extends Component {
         })
     }
 
-    getToken = () => {
-        let token = document.cookie.split(";").find(x => x.includes("authorization"));
-        if (token && token.split("=")[1]) {
-            token = token.split("=")[1]
-            return token
-        }
-        return ""
-    }
-
-    callAPIBegin = (token) => {
-        axios.post(
-            `${API_URL}/checkToken`,
-            {},
-            { headers: { Authorization: `bearer ${token}` } }
-        ).then((res) => {
-            if (res.status === 200) {
-                axios.post(
-                    `${API_URL}/category/getAllCategory`,
-                    {},
-                    { headers: { Authorization: `bearer ${token}` } }
-                ).then(dataCategory => {
-                    this.props.changeAllCategory(dataCategory.data)
-                })
-                axios.post(
-                    `${API_URL}/memo/getAllMemo`,
-                    {},
-                    { headers: { Authorization: `bearer ${token}` } }
-                ).then(dataMemo => {
-                    this.props.changeListMemo(dataMemo.data.memos)
-                })
-                this.props.changeIslogin(true)
-            } else {
-                this.props.changeIslogin(false)
-            }
-        })
+    callAPIBegin = () => {
+        CALLAPI('post', 'checkToken')
+            .then((res) => {
+                if (res.status === 200) {
+                    CALLAPI('post', 'category/getAllCategory')
+                        .then(dataCategory => {
+                            this.props.changeAllCategory(dataCategory.data)
+                        })
+                    CALLAPI('post', 'memo/getAllMemo')
+                        .then(dataMemo => {
+                            this.props.changeListMemo(dataMemo.data.memos)
+                        })
+                    this.props.changeIslogin(true)
+                } else {
+                    this.props.changeIslogin(false)
+                }
+            })
     }
 
     submitLogin = (e) => {
         e.preventDefault();
         var { username, password } = this.state;
         this.setState({ isOnSubmit: true });
+        this.props.changeLoading()
         setTimeout(() => {
-            axios.post(`${API_URL}/login`, { username, password })
+            CALLAPI('post', 'login', { username, password }, false)
                 .then(res => {
                     if (res.status === 200) {
                         document.cookie = `authorization=${res.data.token}; path=/`;
                         this.setState({
                             isOnSubmit: false
                         })
-                        this.callAPIBegin(this.getToken())
+                        this.callAPIBegin()
                         this.props.changeIslogin(true)
                     }
+                    this.props.changeLoading()
                 })
                 .catch(error => {
                     this.setState({
                         message: 'error',
                         isOnSubmit: false
                     })
+                    this.props.changeLoading()
                 })
         }, 100)
     }
@@ -151,7 +135,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         changeListMemo: (data) => {
             dispatch(Actions.changeListMemo(data))
-        }
+        },
+        changeLoading: () => {
+            dispatch(Actions.changeLoading())
+        },
     }
 }
 

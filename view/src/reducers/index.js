@@ -5,6 +5,7 @@ import memoSelected from './memoSelected'
 import isLogin from './isLogin'
 import categorySelect from './categorySelect'
 import isDisableEditContent from './isDisableEditContent'
+import loading from './loading'
 
 const Reducers = combineReducers({
     allCategory,
@@ -13,6 +14,7 @@ const Reducers = combineReducers({
     isLogin,
     categorySelect,
     isDisableEditContent,
+    loading,
 });
 
 export default Reducers;

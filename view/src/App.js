@@ -7,6 +7,7 @@ import ListMemo from './components/ListMemo'
 import MemoDetail from './components/MemoDetail'
 import './App.css'
 import Login from './components/Login'
+import AwesomeComponent from './components/AwesomeComponent';
 
 class App extends Component {
   constructor(props) {
@@ -20,8 +21,9 @@ class App extends Component {
   }
 
   checkToken = () => {
+    this.props.changeLoading()
     CALLAPI('post', 'checkToken', {}, true)
-      .then((res) => {
+      .then(async(res) => {
         if (res.status === 200) {
           CALLAPI('post', 'category/getAllCategory', {}, true)
             .then(dataCategory => {
@@ -32,17 +34,23 @@ class App extends Component {
             .then(dataMemo => {
               this.props.changeListMemo(dataMemo.data.memos)
             })
-          this.props.changeIslogin(true)
-        } else {
-          this.props.changeIslogin(false)
-        }
-      })
+            this.props.changeIslogin(true)
+          } else {
+            this.props.changeIslogin(false)
+          }
+          this.props.changeLoading()
+        })
+        .catch(err => {
+          this.props.changeLoading()
+          console.log(err)
+        })
   }
 
   render() {
-    var { isLogin } = this.props
+    var { isLogin, loading } = this.props
     return (
       <div>
+        {loading ? <AwesomeComponent /> : ""}
         {
           isLogin ?
             (
@@ -57,7 +65,7 @@ class App extends Component {
               <Login />
             )
         }
-
+        {loading ? <div className="bgLoading"></div> : ""}
       </div>
     )
   }
@@ -65,7 +73,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isLogin: state.isLogin
+    isLogin: state.isLogin,
+    loading: state.loading,
   }
 }
 
@@ -79,7 +88,10 @@ const mapDispatchToProps = (dispatch) => {
     },
     changeListMemo: (data) => {
       dispatch(Actions.changeListMemo(data))
-    }
+    },
+    changeLoading: () => {
+      dispatch(Actions.changeLoading())
+    },
   }
 }
 

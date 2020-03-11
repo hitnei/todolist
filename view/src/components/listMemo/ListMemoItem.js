@@ -55,7 +55,7 @@ class ListMemoItem extends Component {
                 <div className={isSelected ? "ItemSelected" : "ItemUnselected"}></div>
                 <div className="memoItem">
                     <div>
-                        <span className="memoItemTitle">{this.formatText(title, 15)}</span>
+                        <span className="memoItemTitle">{this.formatText(title, 20)}</span>
                         <div className="memoItemDetail">
                             <div className="memoItemTime">
                                 <img src="/images/clock-regular.svg" alt="clock" />
@@ -63,7 +63,7 @@ class ListMemoItem extends Component {
                             </div>
                             <div className="memoItemCategoty">
                                 <img src="/images/tag-solid.svg" alt="clock" />
-                                <span>{this.formatText(this.getCategoryName())}</span>
+                                <span>{this.formatText(this.getCategoryName(), 15)}</span>
                             </div>
                         </div>
                     </div>

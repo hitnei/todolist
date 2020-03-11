@@ -74,6 +74,7 @@ class Category extends Component {
     onCreateCategory = () => {
         var { categoryName, title, content } = this.state
         if (categoryName !== "" && title !== "" && content !== "") {
+            this.props.changeLoading()
             CALLAPI('post', 'category/createCategory', { categoryName: categoryName }, true)
                 .then(data => {
                     if (data.err) {
@@ -93,6 +94,11 @@ class Category extends Component {
                                 this.onChangeCreate()
                             })
                     }
+                    this.props.changeLoading()
+                })
+                .catch(err => {
+                    console.log(err)
+                    this.props.changeLoading()
                 })
         }
     }
@@ -206,7 +212,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         changeOrAddCategory: (category) => {
             dispatch(Actions.changeOrAddCategory(category))
-        }
+        },
+        changeLoading: () => {
+          dispatch(Actions.changeLoading())
+        },
     }
 }
 

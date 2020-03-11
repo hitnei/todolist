@@ -7,6 +7,7 @@ import './MemoDetailHeader.css'
 class MemoDetailHeader extends Component {
 
     onchangeMemoIsClip = (event, memo) => {
+        this.props.changeLoading()
         CALLAPI('post', 'memo/changeMemoClip', { id: memo._id }, true)
             .then(data => {
                 if (data.status === 200) {
@@ -18,6 +19,7 @@ class MemoDetailHeader extends Component {
                 } else {
                     console.log('err')
                 }
+                this.props.changeLoading()
             })
 
     }
@@ -32,6 +34,7 @@ class MemoDetailHeader extends Component {
 
     onDeleteMemo = (event, memo) => {
         memo.isDelete = !memo.isDelete
+        this.props.changeLoading()
         CALLAPI('post', 'memo/editMemo', { memo: memo }, true)
             .then(data => {
                 this.props.disableEditContent()
@@ -40,6 +43,7 @@ class MemoDetailHeader extends Component {
                 } else {
                     // failure
                 }
+                this.props.changeLoading()
             })
     }
 
@@ -104,6 +108,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         disableEditContent: () => {
             dispatch(Actions.disableEditContent())
+        },
+        changeLoading: () => {
+            dispatch(Actions.changeLoading())
         },
     }
 }
