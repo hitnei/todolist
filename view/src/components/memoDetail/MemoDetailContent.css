@@ -48,7 +48,7 @@
 }
 
 .memoDetailcontent .memoDetailcontent-title::-webkit-scrollbar {
-    height: 4px;
+    height: 0px;
 }
 
 .memoDetailcontent .memoDetailcontent-title::-webkit-scrollbar-thumb {
