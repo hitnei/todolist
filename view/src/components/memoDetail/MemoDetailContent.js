@@ -70,6 +70,10 @@ class MemoDetailContent extends Component {
         console.log(enough ? 'Click released after enough time': 'Click released too soon');            
 	} 
 
+    formatText = (text, limit = 9) => {
+        return text.length > limit ? (text.slice(0, limit) + "...") : text
+    }
+
     render() {
         var { memoSelected, isDisableEditContent, allCategory } = this.props
         var {
@@ -111,7 +115,7 @@ class MemoDetailContent extends Component {
                             <img src="/images/tag-solid-black.svg" alt="clock regular black" />
                             {
                                 isDisableEditContent ?
-                                    <span>{categoryName}</span>
+                                    <span>{this.formatText(categoryName, 12)}</span>
                                     :
                                     <div className="listdata">
                                         <input type="text" list="dataCategory" name="categoryName" defaultValue={categoryName} onChange={this.onHandleChangeMemo} />

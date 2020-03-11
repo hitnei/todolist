@@ -30,9 +30,9 @@ class Category extends Component {
             });
             return (
                 categoryAmount ?
-                    <div className={categorySelect !== 'all' && categorySelect !== 'clip' && categorySelect === category._id ? "category-item category-selected" : "category-item"} key={category._id} onClick={(event, data) => this.onChangeCategorySelect(event, category._id)}>
+                    <div id="categoryItem" className={categorySelect !== 'all' && categorySelect !== 'clip' && categorySelect === category._id ? "category-item category-selected" : "category-item"} key={category._id} onClick={(event, data) => this.onChangeCategorySelect(event, category._id)}>
                         <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid" />
-                        <input className="category-button category-button__categories category-category" type="button" value={category.categoryName} />
+                        <input className="category-button category-button__categories category-category" type="button" value={this.formatText(category.categoryName)} />
                         <span>{categoryAmount}</span>
                     </div>
                     :
@@ -95,6 +95,11 @@ class Category extends Component {
                     }
                 })
         }
+    }
+
+    formatText = (text, limit = 9) => {
+        // return text.length > limit ? (text.slice(0, limit) + "...") : text
+        return text
     }
 
     render() {

@@ -43,6 +43,21 @@
     font-size: 36px;
     color: #2B3137;
     user-select: text;
+    white-space: nowrap;
+    overflow-x: scroll;
+}
+
+.memoDetailcontent .memoDetailcontent-title::-webkit-scrollbar {
+    height: 4px;
+}
+
+.memoDetailcontent .memoDetailcontent-title::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 1);
+    border-radius: 10px;
+}
+
+.memoDetailcontent .memoDetailcontent-title::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 128, 128, 0.8);
 }
 
 .memoDetailcontent .memoDetailcontent-content {
