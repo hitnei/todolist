@@ -1,5 +1,5 @@
 .memoDetailcontent {
-    margin: 0px 33.5px 20px 40px;
+    margin: 0px 33.5px 0px 40px;
     box-sizing: border-box;
 }
 
@@ -35,10 +35,13 @@
 
 .memoDetailcontent .memoDetailcontent-title {
     height: 80px;
+    width: 100%;
+    background-color: unset;
     display: flex;
     align-items: flex-end;
+    border: none;
     border-bottom: 1px solid #F0F0F0;
-    padding: 0px 0px 9.5px 10px;
+    padding: 20px 10px 0px 10px;
     box-sizing: border-box;
     font-size: 36px;
     color: #2B3137;
@@ -63,11 +66,16 @@
 .memoDetailcontent .memoDetailcontent-content {
     height: calc(100vh - 70px - 50px - 80px - 43px);
     padding-right: 41%;
-    margin: 21.5px 0px;
+    margin-top: 21.5px;
     overflow-y: auto;
     box-sizing: border-box;
     color: #2B3137;
     user-select: text;
+    background: none;
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    resize: none;
 }
 
 .memoDetailcontent .memoDetailcontent-content::-webkit-scrollbar {

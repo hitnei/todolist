@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ContentEditable from 'react-contenteditable'
 import { connect } from "react-redux";
 import * as Actions from './../../actions/index';
 import ClickNHold from 'react-click-n-hold';
@@ -17,8 +16,10 @@ class MemoDetailContent extends Component {
     };
 
     onHandleChangeMemo = (e) => {
-        var { value } = e.target
-        var name = e._targetInst.pendingProps.id
+        var { value, name } = e.target
+        if (e._targetInst.pendingProps.id === 'content') {
+            name = 'content'
+        }
         var { memoSelected } = this.props
         var cateName = ""
         if (e.target.name === 'categoryName') {
@@ -54,21 +55,14 @@ class MemoDetailContent extends Component {
         })
     }
 
-    onHandleChange = (e) => {
-        var { name, value } = e.target
-        this.setState({
-            [name]: value
-        })
+    start(e) {
+        console.log('START');
     }
 
-    start(e){
-		console.log('START'); 
-	} 
-    
-	end(e, enough){
-		console.log('END');
-        console.log(enough ? 'Click released after enough time': 'Click released too soon');            
-	} 
+    end(e, enough) {
+        console.log('END');
+        console.log(enough ? 'Click released after enough time' : 'Click released too soon');
+    }
 
     formatText = (text, limit = 9) => {
         return text.length > limit ? (text.slice(0, limit) + "...") : text
@@ -126,7 +120,7 @@ class MemoDetailContent extends Component {
                             }
                         </div>
                     </div>
-                    <ContentEditable
+                    {/* <ContentEditable
                         id="title"
                         className="memoDetailcontent-title"
                         // innerRef={this.contentEditable}
@@ -135,17 +129,20 @@ class MemoDetailContent extends Component {
                         onChange={this.onHandleChangeMemo} // handle innerHTML change
                         tagName='article' // Use a custom HTML tag (uses a div by default)
                         onBlur={''} // when selected (add late)
-                    />
-                    <ContentEditable
-                        id="content"
-                        className="memoDetailcontent-content"
-                        // innerRef={this.contentEditable}
-                        html={content ? content : ''} // innerHTML of the editable div
-                        disabled={isDisableEditContent}       // use true to disable editing
-                        onChange={this.onHandleChangeMemo} // handle innerHTML change
-                        tagName='article' // Use a custom HTML tag (uses a div by default)
-                        onBlur={''} // when selected (add late)
-                    />
+                    /> */}
+                    {isDisableEditContent ?
+                        <input className="memoDetailcontent-title" name="title" value={title ? title : ''} onChange={this.onHandleChangeMemo} disabled />
+                        :
+                        <input className="memoDetailcontent-title" name="title" value={title ? title : ''} onChange={this.onHandleChangeMemo} />
+                    }
+
+                    {isDisableEditContent ?
+                        <textarea className="memoDetailcontent-content" name="content" value={content ? content : ''} onChange={this.onHandleChangeMemo} disabled />
+                        :
+                        <textarea className="memoDetailcontent-content" name="content" value={content ? content : ''} onChange={this.onHandleChangeMemo} />
+                    }
+
+                    
                 </div>
             </ClickNHold>
         )
