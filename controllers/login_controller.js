@@ -21,6 +21,8 @@ exports.login = (req, res) => {
                 res.status(200).json({
                     token: token
                 })
+            } else {
+                res.status(402).json({mess: "err pass"})
             }
         } else {
             res.status(401).json({
