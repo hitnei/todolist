@@ -29,14 +29,14 @@ class Category extends Component {
                 }
             });
             return (
-                categoryAmount ?
+                // categoryAmount ?
                     <div id="categoryItem" className={categorySelect !== 'all' && categorySelect !== 'clip' && categorySelect === category._id ? "category-item category-selected" : "category-item"} key={category._id} onClick={(event, data) => this.onChangeCategorySelect(event, category._id)}>
                         <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid" />
                         <input className="category-button category-button__categories category-category" type="button" value={this.formatText(category.categoryName)} />
                         <span>{categoryAmount}</span>
                     </div>
-                    :
-                    ""
+                    // :
+                    // ""
             )
         })
     }

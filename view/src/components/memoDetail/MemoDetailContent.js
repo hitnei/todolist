@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from "react-redux";
 import * as Actions from './../../actions/index';
 import ClickNHold from 'react-click-n-hold';
+import { CALLAPI } from './../../Config'
 // import * as Actions from './../../actions/index';
 import './MemoDetailContent.css'
 
@@ -11,7 +12,10 @@ class MemoDetailContent extends Component {
         this.contentEditable = React.createRef();
         this.state = {
             memo: this.props.memoSelected,
-            idCategory: null
+            idCategory: null,
+            cateName: "",
+            memoTitle: "",
+            memoContent: "",
         }
     };
 
@@ -68,10 +72,51 @@ class MemoDetailContent extends Component {
         return text.length > limit ? (text.slice(0, limit) + "...") : text
     }
 
+    onChangeCate = (e) => {
+        var { name, value } = e.target
+        this.setState({
+            [name]: value
+        })
+    }
+
+    onCreateMemo = () => {
+        var { cateName, memoTitle, memoContent } = this.state
+        if (cateName !== '' && memoTitle !== '' && memoContent !== '') {
+            this.props.changeLoading()
+            CALLAPI('post', 'category/createCategory', { categoryName: cateName }, true)
+                .then(data => {
+                    if (data.err) {
+                        console.log("err: " + data.err)
+                    } else {
+                        var { category } = data.data
+                        var { _id } = category
+                        this.props.changeOrAddCategory(category)
+                        CALLAPI('post', 'memo/createMemo', { IDCategory: _id, title: memoTitle, content: memoContent }, true)
+                            .then(data => {
+                                this.props.addMemoListMemo(data.data.memo)
+                                this.setState({
+                                    cateName: "",
+                                    title: "",
+                                    content: "",
+                                })
+                            })
+                    }
+                    this.props.changeLoading()
+                })
+                .catch(err => {
+                    console.log(err)
+                    this.props.changeLoading()
+                })
+        } else {
+            console.log("show caution")
+        }
+    }
+
     render() {
         var { memoSelected, isDisableEditContent, allCategory } = this.props
+        var { cateName, memoTitle, memoContent } = this.state
         var {
-            // _id,
+            _id,
             // IDCategory,
             // IDUser,
             title,
@@ -100,49 +145,51 @@ class MemoDetailContent extends Component {
                 onEnd={this.end} // Click release callback
             >
                 <div className="memoDetailcontent">
-                    <div className="memoDetailcontent-header">
-                        <div className="memoDetailcontent-time">
-                            <img src="/images/clock-regular-black.svg" alt="clock regular black" />
-                            <span>{created}</span>
-                        </div>
-                        <div className="memoDetailcontent-category">
-                            <img src="/images/tag-solid-black.svg" alt="clock regular black" />
-                            {
-                                isDisableEditContent ?
-                                    <span>{this.formatText(categoryName, 12)}</span>
-                                    :
-                                    <div className="listdata">
-                                        <input type="text" list="dataCategory" name="categoryName" defaultValue={categoryName} onChange={this.onHandleChangeMemo} />
-                                        <datalist id="dataCategory">
-                                            {this.showListCategoryOption(allCategory)}
-                                        </datalist>
+                    {
+                        _id ?
+                            <div>
+                                <div className="memoDetailcontent-header">
+                                    <div className="memoDetailcontent-time">
+                                        <img src="/images/clock-regular-black.svg" alt="clock regular black" />
+                                        <span>{created}</span>
                                     </div>
-                            }
-                        </div>
-                    </div>
-                    {/* <ContentEditable
-                        id="title"
-                        className="memoDetailcontent-title"
-                        // innerRef={this.contentEditable}
-                        html={title ? title : ''} // innerHTML of the editable div
-                        disabled={isDisableEditContent}       // use true to disable editing
-                        onChange={this.onHandleChangeMemo} // handle innerHTML change
-                        tagName='article' // Use a custom HTML tag (uses a div by default)
-                        onBlur={''} // when selected (add late)
-                    /> */}
-                    {isDisableEditContent ?
-                        <input className="memoDetailcontent-title" name="title" value={title ? title : ''} onChange={this.onHandleChangeMemo} disabled />
-                        :
-                        <input className="memoDetailcontent-title" name="title" value={title ? title : ''} onChange={this.onHandleChangeMemo} />
-                    }
+                                    <div className="memoDetailcontent-category">
+                                        <img src="/images/tag-solid-black.svg" alt="clock regular black" />
+                                        {isDisableEditContent ?
+                                            <span>{this.formatText(categoryName, 12)}</span>
+                                            :
+                                            <div className="listdata">
+                                                <input type="text" list="dataCategory" name="categoryName" defaultValue={categoryName} onChange={this.onHandleChangeMemo} />
+                                                <datalist id="dataCategory">
+                                                    {this.showListCategoryOption(allCategory)}
+                                                </datalist>
+                                            </div>}
+                                    </div>
+                                </div>
+                                {(isDisableEditContent) ?
+                                    <input className="memoDetailcontent-title" name="title" value={title ? title : ''} onChange={this.onHandleChangeMemo} placeholder="Enter Title" disabled />
+                                    :
+                                    <input className="memoDetailcontent-title" name="title" value={title ? title : ''} onChange={this.onHandleChangeMemo} placeholder="Enter Title" />
+                                }
 
-                    {isDisableEditContent ?
-                        <textarea className="memoDetailcontent-content" name="content" value={content ? content : ''} onChange={this.onHandleChangeMemo} disabled />
-                        :
-                        <textarea className="memoDetailcontent-content" name="content" value={content ? content : ''} onChange={this.onHandleChangeMemo} />
+                                {(isDisableEditContent) ?
+                                    <textarea className="memoDetailcontent-content" name="content" value={content ? content : ''} onChange={this.onHandleChangeMemo} placeholder="Enter Content" disabled />
+                                    :
+                                    <textarea className="memoDetailcontent-content" name="content" value={content ? content : ''} onChange={this.onHandleChangeMemo} placeholder="Enter Content" />
+                                }
+                            </div>
+                            :
+                            (
+                                <div className="noMemo">
+                                    <input className="memoDetailcontent-title" name="cateName" value={cateName ? cateName : ''} onChange={this.onChangeCate} placeholder="Enter Category" />
+                                    <input className="memoDetailcontent-title memoDetailcontent-noTitle" name="memoTitle" value={memoTitle ? memoTitle : ''} onChange={this.onChangeCate} placeholder="Enter Title" />
+                                    <textarea className="memoDetailcontent-content memoDetailcontent-noContent" name="memoContent" value={memoContent ? memoContent : ''} onChange={this.onChangeCate} placeholder="Enter Content" />
+                                    <div className="btn">
+                                        <input type='button' value='Create' onClick={this.onCreateMemo} />
+                                    </div>
+                                </div>
+                            )
                     }
-
-                    
                 </div>
             </ClickNHold>
         )
@@ -161,6 +208,15 @@ const mapDispatchToProps = (dispatch) => {
     return {
         changeMemoSelected: (memo) => {
             dispatch(Actions.changeMemoSelected(memo))
+        },
+        changeLoading: () => {
+            dispatch(Actions.changeLoading())
+        },
+        changeOrAddCategory: (category) => {
+            dispatch(Actions.changeOrAddCategory(category))
+        },
+        addMemoListMemo: (memo) => {
+            dispatch(Actions.addMemoListMemo(memo))
         },
     }
 }

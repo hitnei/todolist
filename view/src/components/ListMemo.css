@@ -15,6 +15,29 @@
     box-sizing: border-box;
 }
 
+.listMemo .listMemoShortcut_none {
+    display: flex;
+    align-items: center;
+}
+
+.listMemo .listMemoNone {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.listMemo .listMemoNone img {
+    width: 50%;
+    opacity: 0.5;
+}
+
+.listMemo .listMemoNone span {
+    margin-top: 30px;
+    opacity: 0.6;
+    font-size: 25px;
+}
+
 .listMemo>div {
     width: 100%;
 }

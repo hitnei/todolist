@@ -62,24 +62,33 @@ class MemoDetailHeader extends Component {
         } = memoSelected
         return (
             <div className="memoDetailHeader">
-                {!(categorySelect === 'delete')? <div className="actionButtonLeft">
-                    <div className={isDisableEditContent ? 'actionButton actionButtonEdit' : 'actionButton actionButtonEdit activeEditDiv'} onClick={this.onChangeIsDisableEditContent}>
-                        <img src={isDisableEditContent ? "/images/pen-solid.svg" : "/images/edit-solid.svg"} alt="pen" />
-                        <span className={isDisableEditContent ? '' : 'activeEditSpan'}>Edit</span>
+                {(categorySelect !== 'delete' && memoSelected._id) ?
+                    <div className="actionButtonLeft">
+                        <div className={isDisableEditContent ? 'actionButton actionButtonEdit' : 'actionButton actionButtonEdit activeEditDiv'} onClick={this.onChangeIsDisableEditContent}>
+                            <img src={isDisableEditContent ? "/images/pen-solid.svg" : "/images/edit-solid.svg"} alt="pen" />
+                            <span className={isDisableEditContent ? '' : 'activeEditSpan'}>Edit</span>
+                        </div>
+                        <div className="actionButton actionButtonSave" onClick={this.onSaveMemo}>
+                            <img src="/images/save-solid.svg" alt="save" />
+                            <span>Save</span>
+                        </div>
+                        <div className={isClip ? "actionButton isClip" : "actionButton"} onClick={(event, memo) => this.onchangeMemoIsClip(event, memoSelected)}>
+                            <img src="/images/paperclip-solid-vertical.svg" alt="paperclip orange" />
+                            <span>Clip</span>
+                        </div>
                     </div>
-                    <div className="actionButton actionButtonSave" onClick={this.onSaveMemo}>
-                        <img src="/images/save-solid.svg" alt="save" />
-                        <span>Save</span>
+                    :
+                    <div></div>
+                }
+                {
+                    memoSelected._id?
+                    <div className="actionButton actionButtonRight" onClick={(event, memo) => this.onDeleteMemo(event, memoSelected)}>
+                        <img src="/images/trash-solid.svg" alt="trash" />
+                        <span>{categorySelect === 'delete' && isDelete ? "Undelete" : "Delete"}</span>
                     </div>
-                    <div className={isClip ? "actionButton isClip" : "actionButton"} onClick={(event, memo) => this.onchangeMemoIsClip(event, memoSelected)}>
-                        <img src="/images/paperclip-solid-vertical.svg" alt="paperclip orange" />
-                        <span>Clip</span>
-                    </div>
-                </div> : <div></div> }
-                <div className="actionButton actionButtonRight" onClick={(event, memo) => this.onDeleteMemo(event, memoSelected)}>
-                    <img src="/images/trash-solid.svg" alt="trash" />
-                    <span>{categorySelect === 'delete' && isDelete ? "Undelete" : "Delete"}</span>
-                </div>
+                    :
+                    <div></div>
+                }
             </div>
         )
     }

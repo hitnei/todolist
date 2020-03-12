@@ -33,6 +33,10 @@
     font-size: 14px;
 }
 
+.memoDetailcontent .memoDetailcontent-noTitle[value] {
+    font-size: 26px;
+}
+
 .memoDetailcontent .memoDetailcontent-title {
     height: 80px;
     width: 100%;
@@ -76,6 +80,30 @@
     width: 100%;
     font-size: 16px;
     resize: none;
+}
+
+.memoDetailcontent .memoDetailcontent-noContent {
+    height: calc(100vh - 70px - 50px - 80px - 43px - 120px);
+}
+
+.memoDetailcontent .noMemo .btn {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px;
+}
+
+.memoDetailcontent .noMemo .btn input {
+    width: 100px;
+    height: 40px;
+    max-width: 410px;
+    max-height: 40px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #CDD6DD;
+    box-sizing: border-box;
+    background-color: #2B3137;
+    color: #ffffff;
+    float: right;
 }
 
 .memoDetailcontent .memoDetailcontent-content::-webkit-scrollbar {

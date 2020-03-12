@@ -13,6 +13,20 @@ class ListMemo extends Component {
         }
     }
 
+    getListMemoSelect = (listMemo, categorySelect, isDelete = false) => {
+        if (!isDelete) {
+            return categorySelect === 'all' ? listMemo.filter(memo => !memo.isDelete)
+                : categorySelect === 'clip' ? listMemo.filter(memo => memo.isClip && !memo.isDelete)
+                    : categorySelect === 'delete' ? listMemo.filter(memo => memo.isDelete)
+                        : listMemo.filter(memo => memo.IDCategory === categorySelect && !memo.isDelete)
+        } else {
+             return categorySelect === 'all' ? listMemo.filter(memo => !memo.isDelete)
+                : categorySelect === 'clip' ? listMemo.filter(memo => !memo.isClip && memo.isDelete)
+                    : categorySelect === 'delete' ? listMemo.filter(memo => memo.isDelete)
+                        : listMemo.filter(memo => memo.IDCategory === categorySelect && !memo.isDelete)
+        }
+    }
+
     showListMemo = (listMemo) => {
         var { categorySelect, memoSelected } = this.props
 
@@ -22,10 +36,7 @@ class ListMemo extends Component {
         listMemo = this.listMemoSort(listMemo)
         //end
 
-        var listMemoSelect = categorySelect === 'all' ? listMemo.filter(memo => !memo.isDelete)
-            : categorySelect === 'clip' ? listMemo.filter(memo => memo.isClip && !memo.isDelete)
-                : categorySelect === 'delete' ? listMemo.filter(memo => memo.isDelete)
-                    : listMemo.filter(memo => memo.IDCategory === categorySelect && !memo.isDelete)
+        var listMemoSelect = this.getListMemoSelect(listMemo, categorySelect)
 
         //set memo selected default
         if (!memoSelected._id) {
@@ -95,10 +106,11 @@ class ListMemo extends Component {
     }
 
     render() {
-        var { listMemo } = this.props
+        var { listMemo, categorySelect } = this.props
         var { searchValue } = this.state
+        var isNoMemo = this.getListMemoSelect(listMemo, categorySelect, true).length === 0 ? true : false
         return (
-            <div className="listMemo">
+            <div className="listMemo listMemo_none">
                 <div className="listMemoSearch">
                     <input type="text" placeholder="キーワードを入力" name="searchValue" onChange={this.onHandleChange} value={searchValue} />
                     <img src="/images/search-solid.svg" alt="search" />
@@ -107,8 +119,16 @@ class ListMemo extends Component {
                     <span>Title</span>
                     <img src="/images/sort-amount-up-alt-solid.svg" alt="sort" onClick={this.onChangeDesort} />
                 </div>
-                <div className="listMemoShortcut">
-                    {this.showListMemo(listMemo)}
+                <div className={isNoMemo ? "listMemoShortcut listMemoShortcut_none" : "listMemoShortcut"}>
+                    {
+                        isNoMemo ?
+                            <div className="listMemoNone">
+                                <img src="/images/noMemo.png" alt="no memo" />
+                                <span>No Memo</span>
+                            </div>
+                            :
+                            this.showListMemo(listMemo)
+                    }
                 </div>
             </div>
         )
