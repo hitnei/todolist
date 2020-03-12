@@ -23,7 +23,7 @@ class App extends Component {
   checkToken = () => {
     this.props.changeLoading()
     CALLAPI('post', 'checkToken', {}, true)
-      .then(async(res) => {
+      .then(async (res) => {
         if (res.status === 200) {
           CALLAPI('post', 'category/getAllCategory', {}, true)
             .then(dataCategory => {
@@ -33,17 +33,19 @@ class App extends Component {
           CALLAPI('post', 'memo/getAllMemo', {}, true)
             .then(dataMemo => {
               this.props.changeListMemo(dataMemo.data.memos)
+              this.props.changeLoading()
             })
-            this.props.changeIslogin(true)
-          } else {
-            this.props.changeIslogin(false)
-          }
+          this.props.changeIslogin(true)
+        } else {
           this.props.changeLoading()
-        })
-        .catch(err => {
-          this.props.changeLoading()
-          console.log(err)
-        })
+          this.props.changeIslogin(false)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+        document.cookie = 'authorization=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        this.props.changeLoading()
+      })
   }
 
   render() {

@@ -32,10 +32,12 @@ class Login extends Component {
                     CALLAPI('post', 'memo/getAllMemo')
                         .then(dataMemo => {
                             this.props.changeListMemo(dataMemo.data.memos)
+                            this.props.changeLoading()
                         })
                     this.props.changeIslogin(true)
                 } else {
                     this.props.changeIslogin(false)
+                    this.props.changeLoading()
                 }
             })
     }
@@ -44,8 +46,8 @@ class Login extends Component {
         e.preventDefault();
         var { username, password } = this.state;
         this.setState({ isOnSubmit: true });
-        this.props.changeLoading()
         setTimeout(() => {
+            this.props.changeLoading()
             CALLAPI('post', 'login', { username, password }, false)
                 .then(res => {
                     if (res.status === 200) {
@@ -56,7 +58,6 @@ class Login extends Component {
                         this.callAPIBegin()
                         this.props.changeIslogin(true)
                     }
-                    this.props.changeLoading()
                 })
                 .catch(error => {
                     this.setState({
