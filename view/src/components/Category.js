@@ -51,6 +51,7 @@ class Category extends Component {
         if (data === 'category')
             this.setState({ showListCategory: !this.state.showListCategory })
         else this.props.changeCategorySelect(data)
+        this.props.changeIsDisableEditContent(true)
     }
 
     onChangeCreate = () => {
@@ -215,6 +216,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         changeLoading: () => {
           dispatch(Actions.changeLoading())
+        },
+        changeIsDisableEditContent: (value) => {
+            dispatch(Actions.changeIsDisableEditContent(value))
         },
     }
 }

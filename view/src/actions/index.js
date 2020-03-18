@@ -64,10 +64,10 @@ export const changeMemoIsClip = (id) => {
     }
 }
 
-export const changeIsDisableEditContent = () => {
+export const changeIsDisableEditContent = (value) => {
     return {
         type: Types.CHANGE_IS_DISABLE_EDIT_CONTENT,
-
+        value
     }
 }
 
