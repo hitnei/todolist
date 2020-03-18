@@ -13,34 +13,8 @@ class MemoDetailContent extends Component {
         this.state = {
             memo: this.props.memoSelected,
             idCategory: null,
-            cateName: "",
-            memoTitle: "",
-            memoContent: "",
         }
     };
-
-    onHandleChangeMemo = (e) => {
-        var { value, name } = e.target
-        if (e._targetInst.pendingProps.id === 'content') {
-            name = 'content'
-        }
-        var { memoSelected } = this.props
-        var cateName = ""
-        if (e.target.name === 'categoryName') {
-            cateName = value
-            var { allCategory } = this.props
-            allCategory.forEach((cate) => {
-                if (cate.categoryName === value) {
-                    memoSelected['IDCategory'] = cate._id
-                    return;
-                }
-            })
-        }
-        else {
-            memoSelected[name] = value
-        }
-        this.props.onChangeMemo(memoSelected, cateName)
-    }
 
     formatDate = (createDate) => {
         var created = new Date(createDate)
@@ -73,10 +47,7 @@ class MemoDetailContent extends Component {
     }
 
     onChangeCate = (e) => {
-        var { name, value } = e.target
-        this.setState({
-            [name]: value
-        })
+        this.props.onChangeCate(e)
     }
 
     onCreateMemo = () => {
@@ -113,14 +84,13 @@ class MemoDetailContent extends Component {
     }
 
     render() {
-        var { memoSelected, isDisableEditContent, allCategory } = this.props
-        var { cateName, memoTitle, memoContent } = this.state
+        var { memoSelected, isDisableEditContent, allCategory, memoTitle, memoContent, cateName } = this.props
         var {
             _id,
             // IDCategory,
             // IDUser,
-            title,
-            content,
+            // title,
+            // content,
             createDate,
             // dateDelete,
             // isClip,
@@ -129,20 +99,12 @@ class MemoDetailContent extends Component {
         // create date
         var created = this.formatDate(createDate)
 
-        var categoryName = ""
-        allCategory.map((category, index) => {
-            if (category._id === memoSelected.IDCategory) {
-                return categoryName = category.categoryName
-            }
-            return ""
-        })
-
         return (
             <ClickNHold
                 time={1} // Time to keep pressing. Default is 2
-                onStart={this.start} // Start callback
+                // onStart={this.start} // Start callback
                 onClickNHold={() => this.props.onSaveMemo()} //Timeout callback
-                onEnd={this.end} // Click release callback
+            // onEnd={this.end} // Click release callback
             >
                 <div className="memoDetailcontent">
                     {
@@ -156,10 +118,10 @@ class MemoDetailContent extends Component {
                                     <div className="memoDetailcontent-category">
                                         <img src="/images/tag-solid-black.svg" alt="clock regular black" />
                                         {isDisableEditContent ?
-                                            <span>{this.formatText(categoryName, 12)}</span>
+                                            <span>{this.formatText(cateName, 12)}</span>
                                             :
                                             <div className="listdata">
-                                                <input type="text" list="dataCategory" name="categoryName" defaultValue={categoryName} onChange={this.onHandleChangeMemo} />
+                                                <input type="text" list="dataCategory" name="cateName" value={cateName} onChange={this.onChangeCate} />
                                                 <datalist id="dataCategory">
                                                     {this.showListCategoryOption(allCategory)}
                                                 </datalist>
@@ -167,15 +129,15 @@ class MemoDetailContent extends Component {
                                     </div>
                                 </div>
                                 {(isDisableEditContent) ?
-                                    <input className="memoDetailcontent-title" name="title" value={title ? title : ''} onChange={this.onHandleChangeMemo} placeholder="Enter Title" disabled />
+                                    <input className="memoDetailcontent-title" name="memoTitle" value={memoTitle ? memoTitle : ''} onChange={this.onChangeCate} placeholder="Enter Title" disabled />
                                     :
-                                    <input className="memoDetailcontent-title" name="title" value={title ? title : ''} onChange={this.onHandleChangeMemo} placeholder="Enter Title" />
+                                    <input className="memoDetailcontent-title" name="memoTitle" value={memoTitle ? memoTitle : ''} onChange={this.onChangeCate} placeholder="Enter Title" />
                                 }
 
                                 {(isDisableEditContent) ?
-                                    <textarea className="memoDetailcontent-content" name="content" value={content ? content : ''} onChange={this.onHandleChangeMemo} placeholder="Enter Content" disabled />
+                                    <textarea className="memoDetailcontent-content" name="memoContent" value={memoContent ? memoContent : ''} onChange={this.onChangeCate} placeholder="Enter Content" disabled />
                                     :
-                                    <textarea className="memoDetailcontent-content" name="content" value={content ? content : ''} onChange={this.onHandleChangeMemo} placeholder="Enter Content" />
+                                    <textarea className="memoDetailcontent-content" name="memoContent" value={memoContent ? memoContent : ''} onChange={this.onChangeCate} placeholder="Enter Content" />
                                 }
                             </div>
                             :

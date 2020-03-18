@@ -14,17 +14,19 @@ class ListMemo extends Component {
     }
 
     getListMemoSelect = (listMemo, categorySelect, isDelete = false) => {
+        var list = []
         if (!isDelete) {
-            return categorySelect === 'all' ? listMemo.filter(memo => !memo.isDelete)
+            list = categorySelect === 'all' ? listMemo.filter(memo => !memo.isDelete)
                 : categorySelect === 'clip' ? listMemo.filter(memo => memo.isClip && !memo.isDelete)
                     : categorySelect === 'delete' ? listMemo.filter(memo => memo.isDelete)
                         : listMemo.filter(memo => memo.IDCategory === categorySelect && !memo.isDelete)
         } else {
-             return categorySelect === 'all' ? listMemo.filter(memo => !memo.isDelete)
+            list = categorySelect === 'all' ? listMemo.filter(memo => !memo.isDelete)
                 : categorySelect === 'clip' ? listMemo.filter(memo => !memo.isClip && memo.isDelete)
                     : categorySelect === 'delete' ? listMemo.filter(memo => memo.isDelete)
                         : listMemo.filter(memo => memo.IDCategory === categorySelect && !memo.isDelete)
         }
+        return list
     }
 
     showListMemo = (listMemo) => {
