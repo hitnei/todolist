@@ -14,6 +14,10 @@
     display: flex;
 }
 
+.memoDetailcontent .memoDetailcontent-header .memoDetailcontent-category {
+    width: 200px;
+}
+
 .memoDetailcontent .memoDetailcontent-header div img {
     margin-right: 7px;
     width: 14px;
@@ -22,6 +26,11 @@
 .memoDetailcontent .memoDetailcontent-header div span {
     color: #2B3137;
     font-size: 14px;
+}
+
+.memoDetailcontent .memoDetailcontent-header .memoDetailcontent-category span {
+    white-space: nowrap;
+    overflow-x: hidden;
 }
 
 .memoDetailcontent .memoDetailcontent-header div .listdata input {

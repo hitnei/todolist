@@ -25,7 +25,7 @@
     max-height: 80px;
     height: 80px;
     max-width: 450px;
-    width: 450px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -47,6 +47,10 @@
     font-size: 20px;
     letter-spacing: 0;
     color: #2B3137;
+    white-space: nowrap;
+    overflow-x: hidden;
+    width: 306px;
+    display: block;
 }
 
 .listMemo .memoItemCategoty img {
@@ -54,8 +58,17 @@
     opacity: 0.5;
 }
 
+.listMemo .memoItemCategoty span {
+    width: 150px;
+}
+
 .listMemo .memoItemDetail {
     display: flex;
+}
+
+.listMemo .memoItemDetail span {
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .listMemo .memoItemDetail img {
@@ -71,4 +84,13 @@
     font-size: 14px;
     color: #313F46;
     opacity: 0.5;
+}
+
+@media screen and (max-width: 1200px) {
+    .listMemo .memoItemCategoty span {
+        width: 70px;
+    }
+    .listMemo .memoItem .memoItemTitle {
+        width: 200px;
+    }
 }

@@ -32,10 +32,6 @@ class ListMemoItem extends Component {
         return created
     }
 
-    formatText = (text, limit = 9) => {
-        return text.length > limit ? (text.slice(0, limit) + "...") : text
-    }
-
     render() {
         var { isSelected, memoItem } = this.props
         var {
@@ -55,7 +51,7 @@ class ListMemoItem extends Component {
                 <div className={isSelected ? "ItemSelected" : "ItemUnselected"}></div>
                 <div className="memoItem">
                     <div>
-                        <span className="memoItemTitle">{this.formatText(title, 20)}</span>
+                        <span className="memoItemTitle">{title}</span>
                         <div className="memoItemDetail">
                             <div className="memoItemTime">
                                 <img src="/images/clock-regular.svg" alt="clock" />
@@ -63,7 +59,7 @@ class ListMemoItem extends Component {
                             </div>
                             <div className="memoItemCategoty">
                                 <img src="/images/tag-solid.svg" alt="clock" />
-                                <span>{this.formatText(this.getCategoryName(), 15)}</span>
+                                <span>{this.getCategoryName()}</span>
                             </div>
                         </div>
                     </div>

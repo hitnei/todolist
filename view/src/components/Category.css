@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    max-width: 300px;
+    max-width: 400px;
     width: 300px;
     max-height: 100vh;
     height: 100vh;
@@ -16,7 +16,7 @@
 }
 
 .category .category-list {
-    overflow-y: overlay;
+    overflow-y: auto;
     max-height: calc(100vh - 300px);
 }
 
@@ -233,4 +233,22 @@
     padding: 0px;
     font-weight: bold;
     color: #313F46;
+}
+
+@media screen and (max-width: 1200px) {
+    .disableCategory {
+        display: none;
+    }
+    .category {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .category {
+        display: none;
+    }
+    .category-create {
+        display: none;
+    }
 }

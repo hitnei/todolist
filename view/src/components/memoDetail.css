@@ -6,12 +6,18 @@
 
 @media screen and (max-width: 1200px) {
     .memoDetail {
-        width: calc(100vw - 300px - 350px);
+        width: calc(100vw - 300px - 350px + 550px);
     }
 }
 
 @media screen and (max-width: 1100px) {
     .memoDetail {
         width: calc(100vw - 300px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .memoDetail {
+        width: 100%;
     }
 }

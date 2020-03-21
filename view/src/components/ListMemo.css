@@ -110,15 +110,33 @@
 .listMemo .listMemoShortcut::-webkit-scrollbar-thumb:hover {
     background: rgba(128, 128, 128, 0.8);
 }
-/* 
-@media screen and (max-width: 1200px) {
-    .listMemo {
-        width: 350px;
-    }
-} */
 
 @media screen and (max-width: 1200px) {
+    .disableListMemo {
+        display: none;
+    }
     .listMemo {
+        width: 300px;
+    }
+    .listMemo .listMemoTitle .btnBack {
+        display: flex;
+        align-items: flex-end;
+        border: 1px solid #CDD6DD;
+        background-color: #FFFFFF;
+        padding: 8px;
+        border-radius: 42px;
+        justify-content: center;
+    }
+    .listMemo .listMemoTitle .btnBack input {
+        border: none;
+        background: no-repeat;
+        color: #313F46;
+        font-weight: 600;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .disableBack {
         display: none;
     }
 }

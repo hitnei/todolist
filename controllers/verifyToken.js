@@ -13,7 +13,7 @@ exports.checkToken = (req, res, next) => {
             userModel.findOne({ username: user.username, password: user.password }, (err, doc) => {
                 if (err) res.status(402).json({ err: err })
                 req.token = bearerToken
-                res.status(200).json({ mess: "seccess" })
+                return res.status(200).json({ mess: "seccess" })
             })
         })
     } else {

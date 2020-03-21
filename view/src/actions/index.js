@@ -29,7 +29,7 @@ export const changeListMemo = (data) => {
 }
 
 export const changeListMemoById = (memo) => {
-    memo = memo? memo : null
+    memo = memo ? memo : null
     return {
         type: Types.CHANGE_LISTMEMO_BY_ID,
         memo
@@ -82,5 +82,12 @@ export const changeLoading = () => {
     return {
         type: Types.CHANGE_LOADING,
 
+    }
+}
+
+export const changeIsShowCategory = (value) => {
+    return {
+        type: Types.CHANGE_IS_SHOW_CATEGORY,
+        value
     }
 }

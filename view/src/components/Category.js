@@ -13,7 +13,8 @@ class Category extends Component {
             onCreate: false,
             categoryName: "",
             title: "",
-            content: ""
+            content: "",
+            isShowCategory: true,
         }
     }
 
@@ -30,13 +31,13 @@ class Category extends Component {
             });
             return (
                 // categoryAmount ?
-                    <div id="categoryItem" className={categorySelect !== 'all' && categorySelect !== 'clip' && categorySelect === category._id ? "category-item category-selected" : "category-item"} key={category._id} onClick={(event, data) => this.onChangeCategorySelect(event, category._id)}>
-                        <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid" />
-                        <input className="category-button category-button__categories category-category" type="button" value={this.formatText(category.categoryName)} />
-                        <span>{categoryAmount}</span>
-                    </div>
-                    // :
-                    // ""
+                <div id="categoryItem" className={categorySelect !== 'all' && categorySelect !== 'clip' && categorySelect === category._id ? "category-item category-selected" : "category-item"} key={category._id} onClick={(event, data) => this.onChangeCategorySelect(event, category._id)}>
+                    <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid" />
+                    <input className="category-button category-button__categories category-category" type="button" value={category.categoryName} />
+                    <span>{categoryAmount}</span>
+                </div>
+                // :
+                // ""
             )
         })
     }
@@ -50,8 +51,11 @@ class Category extends Component {
     onChangeCategorySelect = (event, data) => {
         if (data === 'category')
             this.setState({ showListCategory: !this.state.showListCategory })
-        else this.props.changeCategorySelect(data)
-        this.props.changeIsDisableEditContent(true)
+        else {
+            this.props.changeCategorySelect(data)
+            this.props.changeIsDisableEditContent(true)
+            this.props.changeIsShowCategory(false)
+        }
     }
 
     onChangeCreate = () => {
@@ -104,13 +108,8 @@ class Category extends Component {
         }
     }
 
-    formatText = (text, limit = 9) => {
-        // return text.length > limit ? (text.slice(0, limit) + "...") : text
-        return text
-    }
-
     render() {
-        var { allCategory, listMemo, categorySelect } = this.props
+        var { allCategory, listMemo, categorySelect, isShowCategory } = this.props
         var { onCreate, categoryName, title, content } = this.state
         var numberAllCategory = 0
         listMemo.forEach(memo => {
@@ -127,9 +126,9 @@ class Category extends Component {
             return memo.isDelete ? numberDeleted++ : numberDeleted
         })
         return (
-            <div>
+            <div className={isShowCategory ? "" : "disableCategory"}>
                 {!onCreate ?
-                    <div className="category">
+                    <div className="category" ref="category">
                         <div className="category-top">
                             <div className="category-item__top" onClick={this.onChangeCreate}>
                                 <img className="category-image" src="/images/plus-solid.svg" alt="plus" />
@@ -162,8 +161,9 @@ class Category extends Component {
                                 {numberDeleted ? <span>{numberDeleted <= 0 ? "" : numberDeleted}</span> : ''}
                             </div>
                         </div>
-                    </div> :
-                    <div className="category-create">
+                    </div>
+                    :
+                    <div className="category-create" ref="category">
                         <span>Create New</span>
                         <div className="category-create__form">
                             <div>
@@ -200,6 +200,7 @@ const mapStateToProps = (state) => {
         allCategory: state.allCategory,
         listMemo: state.listMemo,
         categorySelect: state.categorySelect,
+        isShowCategory: state.isShowCategory,
     }
 }
 
@@ -215,10 +216,13 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(Actions.changeOrAddCategory(category))
         },
         changeLoading: () => {
-          dispatch(Actions.changeLoading())
+            dispatch(Actions.changeLoading())
         },
         changeIsDisableEditContent: (value) => {
             dispatch(Actions.changeIsDisableEditContent(value))
+        },
+        changeIsShowCategory: (value) => {
+            dispatch(Actions.changeIsShowCategory(value))
         },
     }
 }

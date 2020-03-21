@@ -16,7 +16,7 @@ class MemoDetail extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         var { allCategory, memoSelected } = nextProps
         var categoryName = ""
         allCategory.forEach((category, index) => {
