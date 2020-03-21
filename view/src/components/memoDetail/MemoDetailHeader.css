@@ -40,6 +40,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #313F46;
 }
 
 .memoDetailHeader .actionButton span {

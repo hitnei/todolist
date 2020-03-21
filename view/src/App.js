@@ -8,6 +8,7 @@ import MemoDetail from './components/MemoDetail'
 import './App.css'
 import Login from './components/Login'
 import AwesomeComponent from './components/AwesomeComponent';
+import MenuCircle from './components/MenuCircle';
 
 class App extends Component {
   constructor(props) {
@@ -57,6 +58,7 @@ class App extends Component {
           isLogin ?
             (
               <div className="wrapper">
+                <MenuCircle />
                 <Category />
                 <ListMemo />
                 <MemoDetail />

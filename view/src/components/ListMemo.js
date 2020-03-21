@@ -109,14 +109,15 @@ class ListMemo extends Component {
 
     onShowCategory = () => {
         this.props.changeIsShowCategory(true)
+        this.props.changeIsShowListMemo(false)
     }
 
     render() {
-        var { listMemo, categorySelect, isShowCategory } = this.props
+        var { listMemo, categorySelect, isShowListMemo } = this.props
         var { searchValue } = this.state
         var isNoMemo = this.getListMemoSelect(listMemo, categorySelect, true).length === 0 ? true : false
         return (
-            <div className={!isShowCategory ? "listMemo" : "listMemo disableListMemo"}>
+            <div className={isShowListMemo ? "listMemo" : "listMemo disableListMemo"}>
                 <div className="listMemoSearch">
                     <input type="text" placeholder="キーワードを入力" name="searchValue" onChange={this.onHandleChange} value={searchValue} />
                     <img src="/images/search-solid.svg" alt="search" />
@@ -150,7 +151,7 @@ const mapStateToProps = (state) => {
         listMemo: state.listMemo,
         memoSelected: state.memoSelected,
         categorySelect: state.categorySelect,
-        isShowCategory: state.isShowCategory,
+        isShowListMemo: state.isShowListMemo,
     }
 }
 
@@ -161,6 +162,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         disableEditContent: () => {
             dispatch(Actions.disableEditContent())
+        },
+        changeIsShowListMemo: (value) => {
+            dispatch(Actions.changeIsShowListMemo(value))
         },
         changeIsShowCategory: (value) => {
             dispatch(Actions.changeIsShowCategory(value))

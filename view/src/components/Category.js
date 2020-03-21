@@ -10,7 +10,6 @@ class Category extends Component {
         this.state = {
             selected: "all",
             showListCategory: true,
-            onCreate: false,
             categoryName: "",
             title: "",
             content: "",
@@ -55,13 +54,13 @@ class Category extends Component {
             this.props.changeCategorySelect(data)
             this.props.changeIsDisableEditContent(true)
             this.props.changeIsShowCategory(false)
+            this.props.changeIsShowListMemo(true)
         }
     }
 
     onChangeCreate = () => {
-        var { onCreate } = this.state
+        this.props.changeOnCreate()
         this.setState({
-            onCreate: !onCreate,
             categoryName: "",
             title: "",
             content: ""
@@ -109,8 +108,8 @@ class Category extends Component {
     }
 
     render() {
-        var { allCategory, listMemo, categorySelect, isShowCategory } = this.props
-        var { onCreate, categoryName, title, content } = this.state
+        var { allCategory, listMemo, categorySelect, isShowCategory, onCreate } = this.props
+        var { categoryName, title, content } = this.state
         var numberAllCategory = 0
         listMemo.forEach(memo => {
             if (!memo.isDelete) {
@@ -201,6 +200,7 @@ const mapStateToProps = (state) => {
         listMemo: state.listMemo,
         categorySelect: state.categorySelect,
         isShowCategory: state.isShowCategory,
+        onCreate: state.onCreate,
     }
 }
 
@@ -223,6 +223,12 @@ const mapDispatchToProps = (dispatch) => {
         },
         changeIsShowCategory: (value) => {
             dispatch(Actions.changeIsShowCategory(value))
+        },
+        changeIsShowListMemo: (value) => {
+            dispatch(Actions.changeIsShowListMemo(value))
+        },
+        changeOnCreate: () => {
+            dispatch(Actions.changeOnCreate())
         },
     }
 }

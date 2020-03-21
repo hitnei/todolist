@@ -91,3 +91,17 @@ export const changeIsShowCategory = (value) => {
         value
     }
 }
+
+export const changeIsShowListMemo = (value) => {
+    return {
+        type: Types.CHANGE_IS_SHOW_LISTMEMO,
+        value
+    }
+}
+
+export const changeOnCreate = (value) => {
+    return {
+        type: Types.CHANGE_IS_ON_CREATE,
+        value
+    }
+}

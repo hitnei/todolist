@@ -96,6 +96,7 @@
     overflow-y: auto;
     scrollbar-width: thin;
     height: calc(100vh - 120px);
+    background-color: #FFFFFF;
 }
 
 .listMemo .listMemoShortcut::-webkit-scrollbar {
@@ -138,5 +139,12 @@
 @media screen and (min-width: 1200px) {
     .disableBack {
         display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .listMemo {
+        position: absolute;
+        z-index: 99;
     }
 }
