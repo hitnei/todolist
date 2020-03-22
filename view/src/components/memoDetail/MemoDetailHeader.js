@@ -61,7 +61,7 @@ class MemoDetailHeader extends Component {
             isDelete,
         } = memoSelected
         return (
-            <div className="memoDetailHeader">
+            <div className="memoDetailHeader disableMemoDetailHeader">
                 {(categorySelect !== 'delete' && memoSelected._id) ?
                     <div className="actionButtonLeft">
                         <div className={isDisableEditContent ? 'actionButton actionButtonEdit' : 'actionButton actionButtonEdit activeEditDiv'} onClick={this.onChangeIsDisableEditContent}>
@@ -81,13 +81,13 @@ class MemoDetailHeader extends Component {
                     <div></div>
                 }
                 {
-                    memoSelected._id?
-                    <div className="actionButton actionButtonRight" onClick={(event, memo) => this.onDeleteMemo(event, memoSelected)}>
-                        <img src="/images/trash-solid.svg" alt="trash" />
-                        <span>{categorySelect === 'delete' && isDelete ? "Undelete" : "Delete"}</span>
-                    </div>
-                    :
-                    <div></div>
+                    memoSelected._id ?
+                        <div className="actionButton actionButtonRight" onClick={(event, memo) => this.onDeleteMemo(event, memoSelected)}>
+                            <img src="/images/trash-solid.svg" alt="trash" />
+                            <span>{categorySelect === 'delete' && isDelete ? "Undelete" : "Delete"}</span>
+                        </div>
+                        :
+                        <div></div>
                 }
             </div>
         )

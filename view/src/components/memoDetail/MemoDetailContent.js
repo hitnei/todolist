@@ -79,6 +79,11 @@ class MemoDetailContent extends Component {
         }
     }
 
+    start = () => {
+        this.props.changeIsShowCategory(false)
+        this.props.changeIsShowListMemo(false)
+    }
+
     render() {
         var { memoSelected, isDisableEditContent, allCategory, memoTitle, memoContent, cateName } = this.props
         var {
@@ -98,7 +103,7 @@ class MemoDetailContent extends Component {
         return (
             <ClickNHold
                 time={1} // Time to keep pressing. Default is 2
-                // onStart={this.start} // Start callback
+                onStart={this.start} // Start callback
                 onClickNHold={() => this.props.onSaveMemo()} //Timeout callback
             // onEnd={this.end} // Click release callback
             >
@@ -175,6 +180,12 @@ const mapDispatchToProps = (dispatch) => {
         },
         addMemoListMemo: (memo) => {
             dispatch(Actions.addMemoListMemo(memo))
+        },
+        changeIsShowCategory: (value) => {
+            dispatch(Actions.changeIsShowCategory(value))
+        },
+        changeIsShowListMemo: (value) => {
+            dispatch(Actions.changeIsShowListMemo(value))
         },
     }
 }

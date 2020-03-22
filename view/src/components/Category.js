@@ -59,7 +59,8 @@ class Category extends Component {
     }
 
     onChangeCreate = () => {
-        this.props.changeOnCreate()
+        this.props.changeIsShowCategory(true)
+        this.props.changeOnCreate(false)
         this.setState({
             categoryName: "",
             title: "",
@@ -227,8 +228,8 @@ const mapDispatchToProps = (dispatch) => {
         changeIsShowListMemo: (value) => {
             dispatch(Actions.changeIsShowListMemo(value))
         },
-        changeOnCreate: () => {
-            dispatch(Actions.changeOnCreate())
+        changeOnCreate: (value) => {
+            dispatch(Actions.changeOnCreate(value))
         },
     }
 }
