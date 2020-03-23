@@ -22,7 +22,7 @@ class ListMemo extends Component {
                         : listMemo.filter(memo => memo.IDCategory === categorySelect && !memo.isDelete)
         } else {
             list = categorySelect === 'all' ? listMemo.filter(memo => !memo.isDelete)
-                : categorySelect === 'clip' ? listMemo.filter(memo => !memo.isClip && memo.isDelete)
+                : categorySelect === 'clip' ? listMemo.filter(memo => memo.isClip && !memo.isDelete)
                     : categorySelect === 'delete' ? listMemo.filter(memo => memo.isDelete)
                         : listMemo.filter(memo => memo.IDCategory === categorySelect && !memo.isDelete)
         }
@@ -38,7 +38,7 @@ class ListMemo extends Component {
         listMemo = this.listMemoSort(listMemo)
         //end
 
-        var listMemoSelect = this.getListMemoSelect(listMemo, categorySelect)
+        var listMemoSelect = this.getListMemoSelect(listMemo, categorySelect, false)
 
         //set memo selected default
         if (!memoSelected._id) {
