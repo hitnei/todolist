@@ -235,10 +235,11 @@
     color: #313F46;
 }
 
+.disableCategory {
+    display: none;
+}
+
 @media screen and (max-width: 1200px) {
-    .disableCategory {
-        display: none;
-    }
     .category {
         width: 300px;
     }
@@ -247,5 +248,13 @@
 @media screen and (max-width: 768px) {
     .category {
         position: absolute;
+        box-shadow: 3px 0px 2px 0px #313F46;
+        /* position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); */
+    }
+    .category-create {
+        box-shadow: 3px 0px 2px 0px #313F46;
     }
 }

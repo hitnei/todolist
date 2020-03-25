@@ -133,3 +133,18 @@
         padding-right: 20%;
     }
 }
+
+@media screen and (max-width: 768px) {
+    .memoDetailcontent .memoDetailcontent-header .memoDetailcontent-category {
+        width: 100px;
+    }
+    .memoDetailcontent {
+        margin: 0px 60px 0px 80px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .memoDetailcontent {
+        margin: 0px 40px 0px 40px;
+    }
+}

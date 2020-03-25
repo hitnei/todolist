@@ -61,7 +61,7 @@ class MemoDetailHeader extends Component {
             isDelete,
         } = memoSelected
         return (
-            <div className="memoDetailHeader disableMemoDetailHeader">
+            <div className="memoDetailHeader">
                 {(categorySelect !== 'delete' && memoSelected._id) ?
                     <div className="actionButtonLeft">
                         <div className={isDisableEditContent ? 'actionButton actionButtonEdit' : 'actionButton actionButtonEdit activeEditDiv'} onClick={this.onChangeIsDisableEditContent}>
