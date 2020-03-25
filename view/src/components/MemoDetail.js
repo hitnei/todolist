@@ -35,16 +35,6 @@ class MemoDetail extends Component {
         var { cateName, memoTitle, memoContent } = this.state
         var { memoSelected } = this.props
         var memo = memoSelected
-        // memo.title = memoTitle
-        // memo.content = memoContent
-
-        // var idCate = ''
-        // allCategory.forEach(cate => {
-        //     if (cate.categoryName === cateName) {
-        //         idCate = cate._id
-        //         return
-        //     }
-        // })
 
         if (memoTitle && memoContent) {
             this.props.changeLoading()
