@@ -58,9 +58,9 @@ class Category extends Component {
         }
     }
 
-    onChangeCreate = () => {
+    onChangeCreate = (value) => {
+        this.props.changeOnCreate(value)
         this.props.changeIsShowCategory(true)
-        this.props.changeOnCreate(false)
         this.setState({
             categoryName: "",
             title: "",
@@ -96,7 +96,7 @@ class Category extends Component {
                                     title: "",
                                     content: "",
                                 })
-                                this.onChangeCreate()
+                                this.onChangeCreate(false)
                             })
                     }
                     this.props.changeLoading()
@@ -130,7 +130,7 @@ class Category extends Component {
                 {!onCreate ?
                     <div className="category" ref="category">
                         <div className="category-top">
-                            <div className="category-item__top" onClick={this.onChangeCreate}>
+                            <div className="category-item__top" onClick={(value) => this.onChangeCreate(true)}>
                                 <img className="category-image" src="/images/plus-solid.svg" alt="plus" />
                                 <input className="category-button category-create__new" type="button" value='Create New' />
                             </div>
@@ -185,7 +185,7 @@ class Category extends Component {
                             </div>
                             <div className="category-btn__back">
                                 <input type="button" value="Create" onClick={this.onCreateCategory} />
-                                <input type="button" value="Back" onClick={this.onChangeCreate} />
+                                <input type="button" value="Back" onClick={(value) => this.onChangeCreate(false)} />
                             </div>
                         </div>
                     </div>
