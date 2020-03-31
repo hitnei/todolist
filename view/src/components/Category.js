@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { CALLAPI } from './../Config'
 import { connect } from "react-redux";
 import * as Actions from './../actions/index';
+import ReactTooltip from 'react-tooltip'
 import './Category.css'
 
 class Category extends Component {
@@ -14,6 +15,7 @@ class Category extends Component {
             title: "",
             content: "",
             isShowCategory: true,
+            isHoverCategory: false,
         }
     }
 
@@ -108,9 +110,21 @@ class Category extends Component {
         }
     }
 
+    onMouseEnterCategory = () => {
+        this.setState({
+            isHoverCategory: true
+        })
+    }
+
+    onMouseLeaveCategory = () => {
+        this.setState({
+            isHoverCategory: false
+        })
+    }
+
     render() {
         var { allCategory, listMemo, categorySelect, isShowCategory, onCreate } = this.props
-        var { categoryName, title, content } = this.state
+        var { categoryName, title, content, isHoverCategory } = this.state
         var numberAllCategory = 0
         listMemo.forEach(memo => {
             if (!memo.isDelete) {
@@ -139,8 +153,14 @@ class Category extends Component {
                                 <input className="category-button category-all__note" type="button" value='All Notes' />
                                 <span>{numberAllCategory}</span>
                             </div>
-                            <div onClick={(event, name) => this.onChangeCategorySelect(event, "category")}>
+                            <div className="category-menu" onClick={(event, name) => this.onChangeCategorySelect(event, "category")} onMouseEnter={this.onMouseEnterCategory} onMouseLeave={this.onMouseLeaveCategory}>
                                 <img className="category-image" src="/images/tags-solid.svg" alt="tags-solid" />
+                                <>
+                                <img data-tip="React-tooltip" className={isHoverCategory ? "category-image category-image__create" : "displayNone"} src="/images/createCategory.svg" alt="create category" />
+                                <ReactTooltip  place="top" type="dark" effect="float">
+                                    <span>Show</span>
+                                </ReactTooltip>
+                                </>
                                 <input className="category-button category-category" type="button" value='Category' />
                             </div>
                             {/*  */}
