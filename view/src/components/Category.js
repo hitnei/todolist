@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { CALLAPI } from './../Config'
 import { connect } from "react-redux";
 import * as Actions from './../actions/index';
-import ReactTooltip from 'react-tooltip'
+import Swal from 'sweetalert2'
 import './Category.css'
 
 class Category extends Component {
@@ -16,6 +16,8 @@ class Category extends Component {
             content: "",
             isShowCategory: true,
             isHoverCategory: false,
+            isCreateCategory: false,
+            cateName: "",
         }
     }
 
@@ -122,9 +124,65 @@ class Category extends Component {
         })
     }
 
+    onClickCreate = () => {
+        this.setState({
+            isCreateCategory: !this.state.isCreateCategory
+        })
+    }
+
+    onCreateCategoryNotMemo = () => {
+        var { cateName } = this.state
+        var { allCategory } = this.props
+        // same category
+        var isSubmit = true
+        allCategory.forEach((cate) => {
+            if (cate.categoryName === cateName) {
+                isSubmit = false
+            }
+        })
+
+        if (isSubmit) {
+            this.props.changeLoading()
+            CALLAPI('post', 'category/createCategory', { categoryName: cateName }, true)
+                .then(data => {
+                    if (data.err) {
+                        console.log("err: " + data.err)
+                    } else {
+                        var { category } = data.data
+                        this.props.changeOrAddCategory(category)
+                        this.setState({
+                            cateName: ""
+                        })
+                        this.props.changeCategorySelect(category._id)
+                    }
+                    this.props.changeLoading()
+                })
+                .catch(err => {
+                    console.log(err)
+                    this.props.changeLoading()
+                })
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: "Can't create category",
+                text: "same category name",
+                showConfirmButton: true,
+                confirmButtonText: "OK",
+                timer: 3000
+            })
+        }
+
+    }
+
+    onEnterPress = (event) => {
+        if (event.key === 'Enter') {
+            this.onCreateCategoryNotMemo()
+        }
+    }
+
     render() {
         var { allCategory, listMemo, categorySelect, isShowCategory, onCreate } = this.props
-        var { categoryName, title, content, isHoverCategory } = this.state
+        var { categoryName, title, content, isHoverCategory, cateName, isCreateCategory } = this.state
         var numberAllCategory = 0
         listMemo.forEach(memo => {
             if (!memo.isDelete) {
@@ -153,18 +211,22 @@ class Category extends Component {
                                 <input className="category-button category-all__note" type="button" value='All Notes' />
                                 <span>{numberAllCategory}</span>
                             </div>
+                            <img className={isHoverCategory ? "category-image category-image__create" : "displayNone"} src="/images/createCategory.svg" alt="create category" onClick={this.onClickCreate} onMouseEnter={this.onMouseEnterCategory} onMouseLeave={this.onMouseLeaveCategory} />
                             <div className="category-menu" onClick={(event, name) => this.onChangeCategorySelect(event, "category")} onMouseEnter={this.onMouseEnterCategory} onMouseLeave={this.onMouseLeaveCategory}>
                                 <img className="category-image" src="/images/tags-solid.svg" alt="tags-solid" />
-                                <>
-                                <img data-tip="React-tooltip" className={isHoverCategory ? "category-image category-image__create" : "displayNone"} src="/images/createCategory.svg" alt="create category" />
-                                <ReactTooltip  place="top" type="dark" effect="float">
-                                    <span>Show</span>
-                                </ReactTooltip>
-                                </>
                                 <input className="category-button category-category" type="button" value='Category' />
                             </div>
                             {/*  */}
                             <div className="category-list">
+                                {
+                                    isCreateCategory ?
+                                        <div className="category-createCategory" >
+                                            <input name="cateName" type="text" placeholder="Enter category name" value={cateName} onChange={this.onHandleChange} onKeyPress={this.onEnterPress} />
+                                            <img src="/images/arrowBack.svg" width="20px" alt="enter arrow" onClick={this.onCreateCategoryNotMemo} />
+                                        </div>
+                                        :
+                                        ""
+                                }
                                 {this.showListCategory(allCategory)}
                             </div>
                             {/*  */}
