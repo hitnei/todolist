@@ -154,6 +154,13 @@ class Category extends Component {
                             cateName: ""
                         })
                         this.props.changeCategorySelect(category._id)
+                        Swal.fire({
+                            icon: 'success',
+                            title: "Created category",
+                            showConfirmButton: true,
+                            confirmButtonText: "OK",
+                            timer: 1000
+                        })
                     }
                     this.props.changeLoading()
                 })
