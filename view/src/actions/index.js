@@ -105,3 +105,10 @@ export const changeOnCreate = (value) => {
         value
     }
 }
+
+export const deleteCategoryById = (id) => {
+    return {
+        type: Types.DELETE_CATEORY_BY_ID,
+        id
+    }
+}

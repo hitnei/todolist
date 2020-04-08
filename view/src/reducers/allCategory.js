@@ -31,6 +31,13 @@ const allCategory = (state = InitialState, action) => {
                 state[index].categoryAmount = ++state[index].categoryAmount
             }
             return sortList([...state]);
+        case types.DELETE_CATEORY_BY_ID: 
+            var { id } = action
+            state = state.filter(cate => {
+                return (cate._id !== id)
+            })
+            console.log(state)
+            return sortList([...state])
         default:
             return sortList(state);
     }

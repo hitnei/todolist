@@ -17,13 +17,14 @@ class Category extends Component {
             isShowCategory: true,
             isHoverCategory: false,
             isCreateCategory: false,
+            idCategoryAmountHover: "",
             cateName: "",
         }
     }
 
     showListCategory = (listCategory) => {
         var { categorySelect, listMemo } = this.props
-        var { showListCategory } = this.state
+        var { showListCategory, idCategoryAmountHover } = this.state
         if (!showListCategory) return ""
         return listCategory.map((category, index) => {
             var categoryAmount = 0;
@@ -37,7 +38,7 @@ class Category extends Component {
                 <div id="categoryItem" className={categorySelect !== 'all' && categorySelect !== 'clip' && categorySelect === category._id ? "category-item category-selected" : "category-item"} key={category._id} onClick={(event, data) => this.onChangeCategorySelect(event, category._id)}>
                     <img className="category-image__categories" src="/images/tag-category.svg" alt="tags-solid" />
                     <input className="category-button category-button__categories category-category" type="button" value={category.categoryName} />
-                    <span>{categoryAmount}</span>
+                    <span onMouseEnter={(id) => this.onMouseEnterCategoryAmount(category._id)} onMouseLeave={this.onMouseLeaveCategoryAmount} onClick={(id) => this.onDeleteCategory(category._id)}>{idCategoryAmountHover === category._id ? 'X' : categoryAmount}</span>
                 </div>
                 // :
                 // ""
@@ -187,6 +188,25 @@ class Category extends Component {
         }
     }
 
+    onMouseEnterCategoryAmount = (id) => {
+        this.setState({
+            idCategoryAmountHover: id
+        })
+    }
+
+    onMouseLeaveCategoryAmount = () => {
+        this.setState({
+            idCategoryAmountHover: ""
+        })
+    }
+
+    onDeleteCategory = (id) => {
+        var { idCategoryAmountHover } = this.state
+        if (idCategoryAmountHover === id) {
+            this.props.deleteCategoryById(id)
+        }
+    }
+
     render() {
         var { allCategory, listMemo, categorySelect, isShowCategory, onCreate } = this.props
         var { categoryName, title, content, isHoverCategory, cateName, isCreateCategory } = this.state
@@ -247,7 +267,7 @@ class Category extends Component {
                             <div className={categorySelect === 'delete' ? "category-item category-selected" : "category-item"} onClick={(event, data) => this.onChangeCategorySelect(event, 'delete')}>
                                 <img className="category-image__delete" src="/images/delete.svg" alt="delete" />
                                 <input className="category-button category-clip" type="button" value='Delete' />
-                                {numberDeleted ? <span>{numberDeleted <= 0 ? "" : numberDeleted}</span> : ''}
+                                <span>{numberDeleted <= 0 ? "" : numberDeleted}</span>
                             </div>
                         </div>
                     </div>
@@ -319,6 +339,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         changeOnCreate: (value) => {
             dispatch(Actions.changeOnCreate(value))
+        },
+        deleteCategoryById: (id) => {
+            dispatch(Actions.deleteCategoryById(id))
         },
     }
 }
