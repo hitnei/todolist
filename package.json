@@ -8,7 +8,8 @@
     "server": "nodemon index.js",
     "client": "npm run start --prefix view",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "start": "concurrently \"npm run server\" \"npm run client\""
+    "start": "node index.js",
+    "heroku-postbuild": "cd view && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "keywords": [
     "example",
