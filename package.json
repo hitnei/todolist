@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon index.js",
-    "client": "cd client && npm start",
-    "dev": "concurrently --kill-others-on-fail \"npm server\" \"npm client\"",
+    "client": "cd view && npm start",
+    "dev": "concurrently \"npm server\" \"npm client\"",
     "start": "node index.js",
     "heroku-postbuild": "cd view && npm install && npm run client"
   },
