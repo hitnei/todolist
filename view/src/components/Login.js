@@ -46,7 +46,7 @@ class Login extends Component {
         e.preventDefault();
         var { username, password } = this.state;
         this.setState({ isOnSubmit: true });
-        setTimeout(() => {
+        // setTimeout(() => {
             this.props.changeLoading()
             CALLAPI('post', 'login', { username, password }, false)
                 .then(res => {
@@ -66,7 +66,7 @@ class Login extends Component {
                     })
                     this.props.changeLoading()
                 })
-        }, 100)
+        // }, 100)
     }
 
     render() {

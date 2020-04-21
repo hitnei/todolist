@@ -112,6 +112,30 @@ class ListMemo extends Component {
         this.props.changeIsShowListMemo(false)
     }
 
+    formatDate = (createDate) => {
+        var created = new Date(createDate)
+        var createYear = created.getFullYear()
+        var createMonth = created.getMonth() + 1
+        createMonth = (createMonth<10)? ("0" + createMonth) : (createMonth)
+        var createDay = created.getDate()
+        created = createYear + "/" + createMonth + "/" + createDay
+        return created
+    }
+
+    onHandleChange = (event) => {
+        var target = event.target;
+        var name = target.name;
+        var value = target.value;
+        this.setState({
+          [name]: value,
+        });
+    }
+
+    onChangeDesort = () => {
+        var {desort} = this.state
+        this.setState({desort: -desort})
+    }
+
     render() {
         var { listMemo, categorySelect, isShowListMemo } = this.props
         var { searchValue } = this.state
@@ -122,7 +146,7 @@ class ListMemo extends Component {
                     <input type="text" placeholder="キーワードを入力" name="searchValue" onChange={this.onHandleChange} value={searchValue} />
                     <img src="/images/search-solid.svg" alt="search" />
                 </div>
-                <div className="listMemoTitle">
+                <div className="listMemoTitle" onClick={this.onChangeDesort}>
                     <span>Title</span>
                     <div className="disableBack btnBack">
                         <img src="/images/arrowBack.svg" width="20px" alt="arrow back" />
