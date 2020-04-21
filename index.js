@@ -48,12 +48,17 @@ app.use('/user', user);
 app.use('/category', category);
 app.use('/memo', memo);
 
+app.get('/', (req, res) => {
+  res.json({sayHi: 'hello from server, nice to meet you!'})
+})
+
 app.get('/a', (req, res) => {
   res.json({sayHi: 'hello from server, nice to meet you!'})
 })
 
 app.post('/checkToken', verifyToken.checkToken)
 
-app.listen(5000, () => {
-   console.log('App listening on port 5000')
+var port = process.env.PORT
+app.listen(port, () => {
+   console.log('App listening on port ' + port)
 })

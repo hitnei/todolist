@@ -7,8 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon index.js",
     "client": "npm run start --prefix view",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "start": "concurrently \"npm run server\" \"npm run client\""
   },
+  "keywords": [
+    "example",
+    "heroku"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
